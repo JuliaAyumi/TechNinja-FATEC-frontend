@@ -1,0 +1,97 @@
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 0 0 0;
+  margin: 0 1em;
+}
+
+.cadastrar-left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5em 0 5em 8em;
+  margin: 0;
+}
+
+.form-cadastrar {
+  display: contents;
+}
+
+div > form > div {
+  color: #bf3f3f;
+}
+
+/* Lado direito */
+.cadastrar-right-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em 4em 2em 2em;
+}
+
+.cadastrar-input {
+  margin: 0.4em;
+  padding: 0.5em 1em;
+  height: 2em;
+  width: 32em;
+  border: 1px solid #000;
+  border-radius: 0.6em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .9em;
+}
+
+/* Botão */
+.button-cadastrar {
+  margin: 0.5em;
+  height: 2.7em;
+  width: 18em;
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 0.6em;
+  background-color: black;
+  color: white;
+  font-size: 1em;
+}
+
+.button-cadastrar:hover {
+  cursor: pointer;
+  background-color: #03a65a;
+  color: white;
+}
+
+.main-image {
+  height: 28em;
+  justify-content: center;
+  margin: 0 3em 0 0 ;
+}
+
+@media only screen and (max-width: 700px) {
+  .main-cadastrar {
+    flex-direction: column;
+    padding: 8em 0 0 0;
+    margin: 0em 0em;
+  }
+
+  .main-image {
+    height: 20em;
+  }
+
+  .cadastrar-input {
+    width: 20em;
+  }
+
+  .right-column,
+  .cadastrar-left-column {
+    padding: 3em;
+  }
+}

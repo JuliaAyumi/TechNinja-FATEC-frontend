@@ -1,0 +1,109 @@
+.esqueceu {
+  text-decoration: none;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 0 0 0;
+  margin: 0 5em;
+}
+
+.form-login {
+  display: contents;
+}
+
+/* Lado esquerdo */
+.left-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-main-image {
+  height: 28em;
+  margin: 3em 0 0 0;
+}
+
+#img-header {
+  height: 0;
+}
+
+/* Lado direito */
+.right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.8em 0;
+  margin: 3em 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-input {
+  margin: 0.4em;
+  padding: 0.5em 1em;
+  height: 2em;
+  width: 25em;
+  border: 1px solid #000;
+  border-radius: 0.6em;
+  font-size: .95em;
+}
+
+.esqueceu-text {
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.esqueceu-text:hover {
+  cursor: pointer;
+  color: #03a65a;
+}
+
+
+.button-entrar {
+  margin: 0.3em;
+  height: 2.5em;
+  font-size: 1.0em;
+}
+
+div > form > div {
+  color: #bf3f3f;
+}
+
+@media only screen and (max-width: 700px) {
+  h1{
+    padding: 2em 0 0 0;
+  }
+
+  .main-login {
+    flex-direction: column;
+    padding: 8em;
+    margin: 0em 0em;
+  }
+
+  .login-main-image {
+    height: 0em;
+  }
+
+  .login-input {
+    width: 18em;
+  }
+
+  #img-header {
+    height: 0em;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    right: 0;
+  }
+
+  .right-column{
+    margin: 0;
+  }
+}

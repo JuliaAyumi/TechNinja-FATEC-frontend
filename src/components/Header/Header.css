@@ -1,0 +1,13 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0em;
+  font-size: 1.8em;
+  font-family: "KARASHA", sans-serif;
+  margin: 1em;
+}
+
+#img-header {
+  height: 0;
+}

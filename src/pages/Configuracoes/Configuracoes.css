@@ -1,0 +1,201 @@
+:root {
+  --false: #bf3f3f;
+  --true: #03a65a;
+  --true-daltonico: #0000ff;
+  --texto-baixa-visao: 1.7em;
+}
+
+.configuracoes-header-options {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.configuracoes-header-options img {
+  height: 2.5em;
+  filter: invert(1);
+}
+
+.header-options img:hover {
+  transform: scale(1.1);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  height: 2rem;
+  width: 1.75rem;
+  background-color: #fff;
+  position: relative;
+  border-radius: 0.1em;
+  cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  display: block;
+  height: 1.5em;
+  width: 1.5em;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: calc(1.9em / 2 + 0.3em);
+  background-color: var(--false);
+  border-radius: 0.2em;
+  transition: 0.3s ease;
+}
+
+input[type="checkbox"]:checked::before {
+  background-color: var(--true);
+  left: calc(100% - (1.9em / 2 + 0.3em));
+}
+
+.link-option {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.main-configuracoes {
+  display: flex;
+}
+
+form {
+  display: block;
+}
+
+.opcoes {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5em;
+  width: 7.5em;
+  height: 23em;
+  padding: 1em;
+  background-color: #f0f0f0;
+}
+
+.opcoes li:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.opcoes ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.opcoes ul li {
+  margin-bottom: 1em;
+}
+
+.opcoes ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.campos-perfil {
+  width: 50em;
+  padding: 4em 7em;
+}
+
+.campos-perfil {
+  width: 50em;
+  padding: 2em 4em;
+}
+
+.campos-acessibilidade {
+  flex: 1;
+  padding: 1em;
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.form-group label {
+  display: inline;
+  margin-bottom: 0.5em;
+}
+
+.form-group input {
+  width: 70%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+
+.form-group input[type="checkbox"] {
+  width: 5.4%;
+  text-align: right;
+  margin: 1em 30%;
+}
+
+button {
+  margin: 0.5em 20%;
+  height: 2.5em;
+  width: 18em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.6em;
+  background-color: black;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #03a65a;
+}
+
+@media only screen and (max-width: 700px) {
+  .opcoes {
+    font-size: 1.3em;
+    width: 5.5em;
+    height: 23em;
+    background-color: #f0f0f0;
+  }
+
+  .configuracoes-header-options img {
+    height: 1.5em;
+  }
+
+  .campos-perfil {
+    display: flex;
+    padding: 2em;
+  }
+
+  button {
+    margin: 0em;
+  }
+
+  .form-group input[type="checkbox"] {
+    width: 19%;
+    margin: 0em;
+  }
+
+  .form-group label {
+    margin: 0;
+  }
+}
+
+body.baixa-visao {
+  font-size: var(--texto-baixa-visao);
+}
+
+header.baixa-visao {
+  height: 5em;
+}
+
+input[type="checkbox"].daltonico:checked::before {
+  background-color: var(--true-daltonico);
+}
+
+#buttonSalvar:hover.daltonico {
+  background-color: var(--true-daltonico);
+}
+
+#buttonSalvar.baixa-visao {
+  width: 30em;
+}

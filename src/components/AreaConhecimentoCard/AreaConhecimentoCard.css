@@ -1,0 +1,35 @@
+.area-conhecimento {
+  width: calc(33.33% - 30px);
+  height: 25em;
+  margin: 2em 2em;
+  background-color: #a1ff8e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+  border-radius: 0.3em;
+  flex: 1;
+  text-align: center;
+}
+
+.area-conhecimento img {
+  height: 2.5em;
+}
+
+.area-conhecimento:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.area-conhecimento.dark-mode {
+  background-color: #03a65a;
+}
+
+@media only screen and (max-width: 700px) {
+  .area-conhecimento {
+    width: 25em;
+    margin: 1em 5em;
+    padding: 1.5em;
+  }
+}
