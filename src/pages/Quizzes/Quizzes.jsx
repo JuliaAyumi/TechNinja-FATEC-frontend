@@ -1,7 +1,25 @@
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Quizzes.css";
 
 const Quizzes = () => {
+  const { area } = useParams();
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/quiz/${area}`);
+        const data = await response.json();
+        setTopics(data);
+      } catch (error) {
+        console.error("Erro ao buscar tópicos:", error);
+      }
+    };
+
+    fetchTopics();
+  }, [area]);
+
   return (
     <div>
       <header className="header-quizzes">
@@ -18,41 +36,19 @@ const Quizzes = () => {
 
       <main className="main-quizzes">
         <div className="quizzes-area">
-          <Link
-            to="/quiz"
-            className="quiz"
-            onClick="window.location.href='../Quiz/quizBloco.html'"
-          >
-            <h1>01 - O que é Programação?</h1>
-          </Link>
-
-          <div
-            className="quiz"
-            onClick="window.location.href='../Quiz/quizBloco.html'"
-          >
-            <h1>02 - Primeiros Passos com Python</h1>
-          </div>
-
-          <div
-            className="quiz"
-            onClick="window.location.href='../Quiz/quizBloco.html'"
-          >
-            <h1>03 - Tipos de Dados</h1>
-          </div>
-
-          <div
-            className="quiz"
-            onClick="window.location.href='../Quiz/quizBloco.html'"
-          >
-            <h1>04 - Tipos de Coleções</h1>
-          </div>
-
-          <div
-            className="quiz"
-            onClick="window.location.href='../Quiz/quizBloco.html'"
-          >
-            <h1>05 - Estrutura de Condição e Repetição</h1>
-          </div>
+          {topics.length > 0 ? (
+            topics.map((topic) => (
+              <Link
+                key={topic}
+                to={`/${area}/${topic}`} // A URL fica /nome-area/nome-topico
+                className="quiz"
+              >
+                <h1>{topic}</h1>
+              </Link>
+            ))
+          ) : (
+            <p>Nenhum tópico encontrado</p>
+          )}
         </div>
       </main>
     </div>
