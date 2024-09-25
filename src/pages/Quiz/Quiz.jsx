@@ -1,12 +1,88 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/AuthContext";
 import "./Quiz.css";
 
 const Quiz = () => {
+  const [perguntas, setPerguntas] = useState([]);
+  const [respostasUsuario, setRespostasUsuario] = useState({});
+  const { area, topico } = useParams();
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchQuiz = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/quiz/${area}/${topico}`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setPerguntas(data);
+        } else {
+          console.error("Erro ao buscar o quiz");
+        }
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+      }
+    };
+
+    fetchQuiz();
+  }, [area, topico]);
+
+  // Função para lidar com a seleção de uma resposta
+  const handleRespostaChange = (indexPergunta, opcaoSelecionada) => {
+    setRespostasUsuario({
+      ...respostasUsuario,
+      [indexPergunta]: opcaoSelecionada,
+    });
+  };
+
+  // Função para calcular o número de acertos e atualizar a pontuação
+  const finalizarQuiz = async () => {
+    let acertos = 0;
+
+    perguntas.forEach((pergunta, index) => {
+      if (respostasUsuario[index] === pergunta.resposta) {
+        acertos += 1;
+      }
+    });
+
+    alert(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
+
+    const points = acertos * 10;
+
+    try {
+      const response = await fetch("http://localhost:5000/api/update-score", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user}`,
+        },
+        body: JSON.stringify({ points }), // Enviar os pontos para o backend
+      });
+
+      const resData = await response.json();
+
+      if (response.ok) {
+        alert(`Pontuação atualizada! Nova pontuação: ${resData.newScore}`);
+      } else {
+        alert(resData.message || "Erro ao atualizar a pontuação");
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar a pontuação:", error);
+    }
+
+    navigate(`/quizzes/${area}`);
+  };
+
   return (
     <div>
       <header className="quiz-header">
         <div className="quiz-header-options">
-          <Link to="/quizzes">
+          <Link to={`/quizzes/${area}`}>
             <img
               src="src/assets/icons/icon-back.png"
               title="Voltar"
@@ -17,128 +93,37 @@ const Quiz = () => {
       </header>
 
       <main className="quiz-main">
-        <div className="area-pergunta">
-          <div className="question-block">
-            <h2 className="question-title">
-              Qual é o operador lógico que representa a negação em muitas
-              linguagens de programação?
-            </h2>
-          </div>
-
-          <div className="answers-block">
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta1"
-              name="resposta1"
-            />
-            <label htmlFor="resposta1">A) &&</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta2"
-              name="resposta2"
-            />
-            <label htmlFor="resposta2">B) ||</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta3"
-              name="resposta3"
-            />
-            <label htmlFor="resposta3">C) !</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta4"
-              name="resposta4"
-            />
-            <label htmlFor="resposta4">D) ==</label>
-          </div>
-        </div>
-
-        <div className="area-pergunta">
-          <div className="question-block">
-            <h2 className="question-title">
-              Em qual linguagem de programação a função print() é utilizada para
-              exibir mensagens na tela?
-            </h2>
-          </div>
-
-          <div className="answers-block">
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta5"
-              name="resposta5"
-            />
-            <label htmlFor="resposta5">A) Python</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta6"
-              name="resposta6"
-            />
-            <label htmlFor="resposta6">D) JavaScript</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta7"
-              name="resposta7"
-            />
-            <label htmlFor="resposta7">C) C#</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta8"
-              name="resposta8"
-            />
-            <label htmlFor="resposta8">D) JavaScript</label>
-          </div>
-        </div>
-
-        <div className="area-pergunta">
-          <div className="question-block">
-            <h2 className="question-title">
-              Qual linguagem de estilização é utilizada para definir a
-              apresentação visual de uma página web?
-            </h2>
-          </div>
-
-          <div className="answers-block">
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta9"
-              name="resposta9"
-            />
-            <label htmlFor="resposta9">A) HTML</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta10"
-              name="resposta10"
-            />
-            <label htmlFor="resposta10">B) CSS</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta11"
-              name="resposta11"
-            />
-            <label htmlFor="resposta11">C) JavaScript</label>
-            <input
-              type="radio"
-              className="resposta-item"
-              id="resposta12"
-              name="resposta12"
-            />
-            <label htmlFor="resposta12">D) SQL</label>
-          </div>
-        </div>
+        {perguntas.length > 0 ? (
+          perguntas.map((pergunta, index) => (
+            <div key={index} className="area-pergunta">
+              <div className="question-block">
+                <h2 className="question-title">{pergunta.pergunta}</h2>
+              </div>
+              <div className="answers-block">
+                {pergunta.alternativas.map((alt, idx) => (
+                  <div key={idx}>
+                    <input
+                      type="radio"
+                      className="resposta-item"
+                      id={`resposta${index}-${idx}`}
+                      name={`pergunta${index}`}
+                      value={alt.opcao}
+                      onChange={() => handleRespostaChange(index, alt.opcao)}
+                    />
+                    <label htmlFor={`resposta${index}-${idx}`}>
+                      {alt.opcao}) {alt.textoOpcao}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>Carregando perguntas...</p>
+        )}
 
         <div className="botoes">
-          <button className="finalizar-button" id="button2">
+          <button className="finalizar-button" onClick={finalizarQuiz}>
             Finalizar
           </button>
         </div>
