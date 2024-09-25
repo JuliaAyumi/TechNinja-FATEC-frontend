@@ -40,7 +40,7 @@ const App = () => {
       ),
     },
     {
-      path: "/quizzes",
+      path: "/quizzes/:area",
       element: (
         <ProtectedRoute>
           <Quizzes />
@@ -48,7 +48,7 @@ const App = () => {
       ),
     },
     {
-      path: "/quiz",
+      path: "/:area/:topico",
       element: (
         <ProtectedRoute>
           <Quiz />
