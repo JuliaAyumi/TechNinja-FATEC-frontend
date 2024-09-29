@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import iconBack from "../../assets/icons/icon-back.png";
 import "./Quizzes.css";
 
 const Quizzes = () => {
@@ -25,11 +26,7 @@ const Quizzes = () => {
       <header className="header-quizzes">
         <div className="header-quizzes-options">
           <Link to="/home">
-            <img
-              src="src/assets/icons/icon-back.png"
-              title="Voltar"
-              alt="Icone Voltar"
-            />
+            <img src={iconBack} title="Voltar" alt="Icone Voltar" />
           </Link>
         </div>
       </header>

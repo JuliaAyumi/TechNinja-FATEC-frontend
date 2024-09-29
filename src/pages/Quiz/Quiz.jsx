@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
+import iconBack from "../../assets/icons/icon-back.png";
 import "./Quiz.css";
 
 const Quiz = () => {
@@ -83,11 +84,7 @@ const Quiz = () => {
       <header className="quiz-header">
         <div className="quiz-header-options">
           <Link to={`/quizzes/${area}`}>
-            <img
-              src="src/assets/icons/icon-back.png"
-              title="Voltar"
-              alt="Icone Voltar"
-            />
+            <img src={iconBack} title="Voltar" alt="Icone Voltar" />
           </Link>
         </div>
       </header>
