@@ -5,25 +5,6 @@
   --texto-baixa-visao: 1.7em;
 }
 
-.configuracoes-header-options {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.configuracoes-header-options img {
-  height: 2.5em;
-  filter: invert(1);
-}
-
-.header-options img:hover {
-  transform: scale(1.1);
-}
-
 input[type="checkbox"] {
   appearance: none;
   height: 2rem;
@@ -157,10 +138,6 @@ button:hover {
     background-color: #f0f0f0;
   }
 
-  .configuracoes-header-options img {
-    height: 1.5em;
-  }
-
   .campos-perfil {
     display: flex;
     padding: 2em;
@@ -184,9 +161,6 @@ body.baixa-visao {
   font-size: var(--texto-baixa-visao);
 }
 
-header.baixa-visao {
-  height: 5em;
-}
 
 input[type="checkbox"].daltonico:checked::before {
   background-color: var(--true-daltonico);

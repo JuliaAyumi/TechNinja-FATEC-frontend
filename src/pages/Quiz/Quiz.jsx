@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
 import iconBack from "../../assets/icons/icon-back.png";
 import "./Quiz.css";
+import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
@@ -81,13 +82,7 @@ const Quiz = () => {
 
   return (
     <div>
-      <header className="quiz-header">
-        <div className="quiz-header-options">
-          <Link to={`/quizzes/${area}`}>
-            <img src={iconBack} title="Voltar" alt="Icone Voltar" />
-          </Link>
-        </div>
-      </header>
+      <HeaderArrowBack />
 
       <main className="quiz-main">
         {perguntas.length > 0 ? (

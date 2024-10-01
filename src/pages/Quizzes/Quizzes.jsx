@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import iconBack from "../../assets/icons/icon-back.png";
 import "./Quizzes.css";
+import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
 const Quizzes = () => {
   const { area } = useParams();
@@ -23,16 +24,9 @@ const Quizzes = () => {
 
   return (
     <div>
-      <header className="header-quizzes">
-        <div className="header-quizzes-options">
-          <Link to="/home">
-            <img src={iconBack} title="Voltar" alt="Icone Voltar" />
-          </Link>
-        </div>
-      </header>
+    <HeaderArrowBack />
 
       <main className="main-quizzes">
-        <div className="quizzes-area">
           {topics.length > 0 ? (
             topics.map((topic) => (
               <Link
@@ -46,7 +40,6 @@ const Quizzes = () => {
           ) : (
             <p>Nenhum tópico encontrado</p>
           )}
-        </div>
       </main>
     </div>
   );

@@ -53,29 +53,11 @@ body.dark-mode {
     flex-direction: column;
   }
 
-  header {
-    height: 5em;
-  }
-
-  header img.baixa-visao {
-    height: 3em;
-  }
-
   .area-conhecimento {
     width: 25em;
     margin: 1em 5em;
     padding: 1.5em;
   }
-}
-
-header h3.baixa-visao {
-  font-size: 3em;
-  padding: 0;
-  margin: 0.4em;
-}
-
-header img.baixa-visao {
-  height: 4em;
 }
 
 h1.baixa-visao {

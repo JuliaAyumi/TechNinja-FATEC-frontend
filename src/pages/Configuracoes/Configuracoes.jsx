@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./configuracoes.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
+import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
 const Configuracoes = () => {
   const [modoDaltonico, setModoDaltonico] = useState(false);
@@ -61,17 +62,7 @@ const Configuracoes = () => {
 
   return (
     <div>
-      <header
-        className={`configuracoes-header-options ${modoBaixaVisao ? "baixa-visao" : ""}`}
-      >
-        <Link to="/home">
-          <img
-            src="src/assets/icons/icon-back.png"
-            title="Voltar"
-            alt="Icone Voltar para Home"
-          />
-        </Link>
-      </header>
+      <HeaderArrowBack />
 
       <main className="main-configuracoes">
         <div className="opcoes">

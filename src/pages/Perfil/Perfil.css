@@ -1,24 +1,3 @@
-.header-arrow-back {
-  width: 100%;
-    height: 1.6em;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-arrow-back img {
-    height: 2.5em;
-    filter: invert(1);
-}
-
-.header-options img:hover {
-    transform: scale(1.1)
-}
-
 .main-perfil {
   padding: 4em;
   display: flex;
@@ -93,10 +72,6 @@ h2 {
 }
 
 @media only screen and (max-width: 700px) {
-  header img {
-    height: 1.5em;
-  }
-
   .stats-info {
     margin: 0;
   }
@@ -109,10 +84,6 @@ h2 {
   .awards-info {
     gap: 1.3em;
   }
-}
-
-header.baixa-visao {
-  font-size: 2em;
 }
 
 .user-info img.daltonico {

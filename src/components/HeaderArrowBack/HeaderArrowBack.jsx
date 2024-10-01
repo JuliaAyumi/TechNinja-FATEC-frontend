@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import iconBack from "../../assets/icons/icon-back.png";
 import "./HeaderArrowBack.css";
 
 const HeaderArrowBack = () => {
   return (
-    <header>
-      <div className="header-options">
-        <Link href="../Home/Home.html">
+    <header id = "headerArrowBack">
+      <div className="headerArrowBack-options">
+        <Link to="/home">
           <img
-            src="src//assets/icons/icon-back.png"
+            src={iconBack}
             title="Voltar"
             alt="Icone Voltar para Home"
           />

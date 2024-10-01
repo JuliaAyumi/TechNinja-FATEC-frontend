@@ -1,21 +1,12 @@
 // import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import { Link } from "react-router-dom";
 import "./Perfil.css";
+import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
 const Perfil = () => {
   return (
     <div>
-      <header className="header-arrow-back">
-        <div className="header-options">
-          <Link to="/home">
-            <img
-              src="src/assets/icons/icon-back.png"
-              title="Voltar"
-              alt="Icone Voltar para Home"
-            />
-          </Link>
-        </div>
-      </header>
+      <HeaderArrowBack />
 
       <main className="main-perfil">
         <div className="user-info">
