@@ -58,7 +58,7 @@ const Login = () => {
             <button type="submit" className="button-entrar">
               Entrar
             </button>
-            <Link href="../Esqueceu/esqueceu.html" className="esqueceu">
+            <Link to="/esqueceu" className="esqueceu">
               <p className="esqueceu-text">Esqueceu a senha?</p>
             </Link>
           </form>

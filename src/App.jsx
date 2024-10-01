@@ -8,6 +8,7 @@ import Perfil from "./pages/Perfil/Perfil";
 import Quiz from "./pages/Quiz/Quiz";
 import Quizzes from "./pages/Quizzes/Quizzes";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Esqueceu from "./pages/Esqueceu/Esqueceu";
 
 const App = () => {
   const routes = useRoutes([
@@ -22,6 +23,10 @@ const App = () => {
     {
       path: "/cadastrar",
       element: <Cadastrar />,
+    },
+    {
+      path: "/esqueceu",
+      element: <Esqueceu />,
     },
     {
       path: "/home",

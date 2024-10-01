@@ -51,10 +51,10 @@
   font-size: .95em;
 }
 
-.esqueceu-text {
+/* .esqueceu-text {
   margin: 0;
   font-size: 0.95em;
-}
+} */
 
 .esqueceu-text:hover {
   cursor: pointer;
