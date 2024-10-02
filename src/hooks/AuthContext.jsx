@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "./UseLocalStorage";
+import { useLocalStorage } from "./UseLocalStorage";
 const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
