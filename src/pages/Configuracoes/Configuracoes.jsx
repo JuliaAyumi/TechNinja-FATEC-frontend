@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./configuracoes.css";
+import "./Configuracoes.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
