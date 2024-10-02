@@ -50,25 +50,6 @@ div > form > div {
   font-size: .9em;
 }
 
-/* Botão */
-.button-cadastrar {
-  margin: 0.5em;
-  height: 2.7em;
-  width: 18em;
-  padding: 0.4em 1em;
-  border: none;
-  border-radius: 0.6em;
-  background-color: black;
-  color: white;
-  font-size: 1em;
-}
-
-.button-cadastrar:hover {
-  cursor: pointer;
-  background-color: #03a65a;
-  color: white;
-}
-
 .main-image {
   height: 28em;
   justify-content: center;

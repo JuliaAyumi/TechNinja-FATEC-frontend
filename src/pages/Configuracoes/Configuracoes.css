@@ -113,24 +113,6 @@ form {
   margin: 1em 30%;
 }
 
-/* componente de botão 1 */
-.button-config {
-  margin: 0.5em 20%;
-  height: 2.5em;
-  width: 18em;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 0.6em;
-  background-color: black;
-  color: #fff;
-  cursor: pointer;
-}
-
-button:hover {
-  cursor: pointer;
-  background-color: #03a65a;
-}
-
 @media only screen and (max-width: 700px) {
   .opcoes {
     font-size: 1.3em;

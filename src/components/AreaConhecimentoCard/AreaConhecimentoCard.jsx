@@ -10,7 +10,7 @@ const AreaConhecimentoCard = ({ title, icon }) => {
             <h1>{title}</h1>
             <img
               src={icon}
-              alt="Ícone de uma computador para ir para a área de conhecimento de {title}"
+            alt={`Ícone de um computador para ir para a área de conhecimento de ${title}`}
             />
           </div>
         </Link>

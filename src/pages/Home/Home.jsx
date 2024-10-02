@@ -6,7 +6,7 @@ const Home = () => {
   const areas = [
     {
       name: "historia-tecnologia",
-      title: "Sistemas Operacionais",
+      title: "História da Tecnologia",
       icon: "icon-sistemas-operacionais.svg",
     },
     {
