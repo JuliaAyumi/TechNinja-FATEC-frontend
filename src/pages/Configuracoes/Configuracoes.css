@@ -113,7 +113,8 @@ form {
   margin: 1em 30%;
 }
 
-button {
+/* componente de botão 1 */
+.button-config {
   margin: 0.5em 20%;
   height: 2.5em;
   width: 18em;

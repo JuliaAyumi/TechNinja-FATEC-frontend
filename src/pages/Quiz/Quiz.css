@@ -5,16 +5,19 @@
     --texto-baixa-visao: 1.8em;
 }
 
-.question-title {
-    margin: 0;
-}
+*{  text-decoration: none;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
 
 .quiz-main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5em 0;
+    padding: 3em 0;
+    margin: 0;
     background-color: #FAFAFA;
 }
 
@@ -23,23 +26,20 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 7em;
-    width: em;
 }
 
 .question-block {
     text-align: center;
-    border-radius: 0.5em;
     padding: 0.5em;
-    width: 50%;
-    font-size: 1.8em;
+    width: 60%;
+    font-size: 1.5em;
+    margin: 0 0 0.4em 0;
 }
 
 .answers-block {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 40%;
-    gap: 40px;
 }
 
 .answers-block input[type="radio"] {
@@ -49,16 +49,19 @@
 .answers-block label {
     margin: 0.5em 0;
     padding: 10px;
-    width: 100%;
+    width: 30em;
     text-align: center;
-    border: 2px solid #000;
+    border: 1px solid #000;
     border-radius: 0.9em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .answers-block label:hover {
     cursor: pointer;
     background-color: #ddd;
-    border: 2px solid #000;
+    transform: scale(1.03);
 }
 
 .resposta-item:checked+label {
@@ -66,12 +69,20 @@
     font-weight: bold;
     border: none;
 }
+/* componente de botão 1 */
+.button-quiz {
+    height: 3.5em;
+    width: 20em;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.6em;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    margin: 0 0 4em 0;
+  }
 
-.botoes {
-    width: 62.5%;
-    text-align: center;
-}
-
+/*
 button {
     margin: 0.3em 1% 0.3em 0;
     height: 2.5em;
@@ -80,6 +91,11 @@ button {
     border-radius: 0.6em;
     background-color: black;
     color: white;
+}
+
+ .botoes {
+    width: 62.5%;
+    text-align: center;
 }
 
 #button1 {
@@ -95,10 +111,10 @@ button {
 button:hover {
     cursor: pointer;
     background-color: #03A65A;
-}
+} */
 
 @media only screen and (max-width: 700px) {
-    .area-questao {
+/*     .area-questao {
         font-size: 1.5em;
         width: 75%;
     }
@@ -109,6 +125,13 @@ button:hover {
 
     .botoes {
         width: 79%;
+    } */
+
+    .question-block {
+        width: 80%;
+    }
+    .answers-block {
+        width: 60%;
     }
 }
 

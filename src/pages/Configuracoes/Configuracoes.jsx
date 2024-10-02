@@ -115,7 +115,7 @@ const Configuracoes = () => {
                 <input type="text" />
               </div>
 
-              <button type="submit">Salvar Mudanças</button>
+              <button type="submit" class = "button-config">Salvar Mudanças</button>
             </form>
           </div>
         ) : (
@@ -143,7 +143,7 @@ const Configuracoes = () => {
                   />
                 </label>
               </div>
-              <button type="submit" id="buttonSalvar">
+              <button type="submit" class = "button-config" id="buttonSalvar">
                 Salvar Mudanças
               </button>
             </form>

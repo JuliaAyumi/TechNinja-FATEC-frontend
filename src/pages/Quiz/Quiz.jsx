@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
-import iconBack from "../../assets/icons/icon-back.png";
 import "./Quiz.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
@@ -115,7 +114,7 @@ const Quiz = () => {
         )}
 
         <div className="botoes">
-          <button className="finalizar-button" onClick={finalizarQuiz}>
+          <button className="button-quiz" onClick={finalizarQuiz}>
             Finalizar
           </button>
         </div>

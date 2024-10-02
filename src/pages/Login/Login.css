@@ -61,11 +61,18 @@
   color: #03a65a;
 }
 
-
+/* componente de botão 1 */
 .button-entrar {
   margin: 0.3em;
   height: 2.5em;
   font-size: 1.0em;
+  width: 20em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.6em;
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 div > form > div {
@@ -73,9 +80,9 @@ div > form > div {
 }
 
 @media only screen and (max-width: 700px) {
-  h1{
+  /* h1{
     padding: 2em 0 0 0;
-  }
+  } */
 
   .main-login {
     flex-direction: column;
