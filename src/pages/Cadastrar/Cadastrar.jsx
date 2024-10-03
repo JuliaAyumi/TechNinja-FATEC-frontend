@@ -1,5 +1,6 @@
 import "./Cadastrar.css";
 import Header from "../../components/Header/Header";
+import Button from "../../components/Button/Button";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 
@@ -86,7 +87,7 @@ const Cadastrar = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            <button type="submit" className="button-cadastrar">
+            <button type="submit" className="button1">
               Cadastrar
             </button>
           </form>

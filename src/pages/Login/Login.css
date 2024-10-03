@@ -61,20 +61,6 @@
   color: #03a65a;
 }
 
-/* componente de botão 1 */
-.button-entrar {
-  margin: 0.3em;
-  height: 2.5em;
-  font-size: 1.0em;
-  width: 20em;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 0.6em;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
-
 div > form > div {
   color: #bf3f3f;
 }

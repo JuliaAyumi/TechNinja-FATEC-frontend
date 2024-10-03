@@ -126,10 +126,6 @@ form {
     padding: 2em;
   }
 
-  button {
-    margin: 0em;
-  }
-
   .form-group input[type="checkbox"] {
     width: 19%;
     margin: 0em;
@@ -139,7 +135,7 @@ form {
     margin: 0;
   }
 }
-
+/* 
 body.baixa-visao {
   font-size: var(--texto-baixa-visao);
 }
@@ -155,4 +151,4 @@ input[type="checkbox"].daltonico:checked::before {
 
 #buttonSalvar.baixa-visao {
   width: 30em;
-}
+} */

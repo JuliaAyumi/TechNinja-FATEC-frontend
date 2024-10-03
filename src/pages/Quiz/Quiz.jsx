@@ -114,7 +114,7 @@ const Quiz = () => {
         )}
 
         <div className="botoes">
-          <button className="button-quiz" onClick={finalizarQuiz}>
+          <button className="button1" onClick={finalizarQuiz}>
             Finalizar
           </button>
         </div>

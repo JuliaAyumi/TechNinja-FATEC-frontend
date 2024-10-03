@@ -44,22 +44,6 @@
     font-size: 1.2em;
 }
 
-#mainEsqueceu .button {
-    margin: 0.5em;
-    height: 2.5em;
-    width: 18em;
-    padding: 0.5em 1em;
-    border: none;
-    border-radius: 0.6em;
-    background-color: black;
-    color: white;
-}
-
-#mainEsqueceu .button:hover {
-    cursor: pointer;
-    background-color: #03A65A;
-}
-
 .mainEsqueceu-image {
     height: 28em;
     margin: 3em 0 0 0;

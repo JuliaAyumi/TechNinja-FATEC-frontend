@@ -16,11 +16,11 @@ const Inicial = () => {
           </h1>
 
           <Link to="/login">
-            <Button option={"Entrar"} />
+            <Button className="button1" option={"Entrar"} />
           </Link>
 
           <Link to="/cadastrar">
-            <Button option={"Cadastrar"} />
+            <Button className="button1" option={"Cadastrar"} />
           </Link>
         </div>
 

@@ -1,19 +1,19 @@
-.button {
+.button1 {
   margin: 0.3em;
   height: 2.3em;
   width: 19em;
-  font-size: 1.1em;
+  font-size: 1em;
   border: none;
   border-radius: 0.6em;
   background-color: black;
   color: white;
 }
 
-.button:hover {
+.button1:hover {
   cursor: pointer;
   background-color: #03a65a;
 }
 
-.button > a {
+.button1 > a {
   color: white;
 }

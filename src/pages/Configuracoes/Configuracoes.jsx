@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./Configuracoes.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
+import Button from "../../components/Button/Button";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
 const Configuracoes = () => {
@@ -115,7 +116,7 @@ const Configuracoes = () => {
                 <input type="text" />
               </div>
 
-              <button type="submit" class = "button-config">Salvar Mudanças</button>
+              <button type="submit" className="button1">Salvar Mudanças</button>
             </form>
           </div>
         ) : (
@@ -143,7 +144,7 @@ const Configuracoes = () => {
                   />
                 </label>
               </div>
-              <button type="submit" class = "button-config" id="buttonSalvar">
+              <button type="submit" className="button1">
                 Salvar Mudanças
               </button>
             </form>
