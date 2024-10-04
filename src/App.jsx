@@ -9,6 +9,7 @@ import Quiz from "./pages/Quiz/Quiz";
 import Quizzes from "./pages/Quizzes/Quizzes";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Esqueceu from "./pages/Esqueceu/Esqueceu";
+import Recuperar from "./pages/Recuperar/Recuperar";
 
 const App = () => {
   const routes = useRoutes([
@@ -27,6 +28,10 @@ const App = () => {
     {
       path: "/esqueceu",
       element: <Esqueceu />,
+    },
+    {
+      path: "/recuperar",
+      element: <Recuperar />,
     },
     {
       path: "/home",
