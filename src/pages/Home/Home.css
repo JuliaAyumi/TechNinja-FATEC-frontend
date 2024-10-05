@@ -1,14 +1,3 @@
-:root {
-  --false: #bf3f3f;
-  --true: #03a65a;
-  --true-daltonico: #0000ff;
-  --texto-baixa-visao: 3em;
-}
-
-body.dark-mode {
-  background-color: rgb(65, 64, 66);
-}
-
 .main-home {
   display: flex;
   justify-content: center;
@@ -60,10 +49,14 @@ body.dark-mode {
   }
 }
 
-h1.baixa-visao {
+body.dark-mode {
+  background-color: rgb(65, 64, 66);
+}
+
+body.baixa-visao h1.baixa-visao {
   font-size: var(--texto-baixa-visao);
 }
 
-.area-conhecimento.daltonico {
+body.daltonico .area-conhecimento {
   background-color: var(--true-daltonico);
 }

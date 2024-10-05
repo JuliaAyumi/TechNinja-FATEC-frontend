@@ -1,23 +1,14 @@
-:root {
-  --false: #bf3f3f;
-  --true: #03a65a;
-  --true-daltonico: #0000ff;
-  --texto-baixa-visao: 3em;
-}
-
-*{
+* {
   padding: 0;
   margin: 0;
 }
 
-.main-quizzes {
+.body-quizzes {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #f9f9f9;
   margin: 0;
   padding: 0;
- 
 }
 
 .quiz {
@@ -50,6 +41,15 @@
   }
 }
 
-h1.baixa-visao {
+body.dark-mode {
+  background-color: rgb(65, 64, 66);
+}
+
+body.dark-mode .quiz {
+  color: white;
+  background-color: #333;
+}
+
+body.baixa-visao h1 {
   font-size: 2.8em;
 }

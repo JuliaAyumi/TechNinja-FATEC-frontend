@@ -20,10 +20,6 @@
   width: 10em;
 }
 
-/* h2 {
-  margin: 1.5em 0 0.2em 0;
-} */
-
 .user-name {
   margin: 0;
 }
@@ -86,23 +82,23 @@
   }
 }
 
-.user-info img.daltonico {
+body.daltonico .user-info img {
   background-color: var(--true-daltonico);
 }
 
-h2.baixa-visao {
+body.baixa-visao h2 {
   font-size: var(--texto-baixa-visao);
 }
 
-p.baixa-visao {
+body.baixa-visao p {
   font-size: 2em;
 }
 
-main.dark-mode {
+body.dark-mode .main-perfil {
   background-color: #000;
 }
 
-.user-info.dark-mode {
+body.dark-mode .user-info {
   border: 1px solid white;
   background-color: #333;
 }

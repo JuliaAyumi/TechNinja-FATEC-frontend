@@ -1,53 +1,76 @@
 import { useState, useEffect } from "react";
 import "./Configuracoes.css";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
-import Button from "../../components/Button/Button";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
+import { useLocation } from "react-router-dom";
 
 const Configuracoes = () => {
-  const [modoDaltonico, setModoDaltonico] = useState(false);
-  const [modoBaixaVisao, setModoBaixaVisao] = useState(false);
-  const [exibirPerfil, setExibirPerfil] = useState(true);
   const { logout } = useAuth();
+  const location = useLocation();
 
-  useEffect(() => {
-    const isModoBaixaVisaoAtivado =
-      sessionStorage.getItem("baixa-visao") === "true";
-    const isModoDaltonicoAtivado =
-      sessionStorage.getItem("daltonico") === "true";
+  const [modoEscuro, setModoEscuro] = useState(
+    localStorage.getItem("accessibilityMode") === "dark-mode"
+  );
+  const [modoDaltonico, setModoDaltonico] = useState(
+    localStorage.getItem("daltonicoMode") === "daltonico"
+  );
+  const [modoBaixaVisao, setModoBaixaVisao] = useState(
+    localStorage.getItem("baixaVisaoMode") === "baixa-visao"
+  );
 
-    setModoBaixaVisao(isModoBaixaVisaoAtivado);
-    setModoDaltonico(isModoDaltonicoAtivado);
-  }, []);
+  const applyAccessibilityMode = () => {
+    const accessibilityMode = localStorage.getItem("accessibilityMode");
+    const daltonicoMode = localStorage.getItem("daltonicoMode");
+    const baixaVisaoMode = localStorage.getItem("baixaVisaoMode");
 
-  useEffect(() => {
-    document.body.classList.toggle("baixa-visao", modoBaixaVisao);
-    sessionStorage.setItem("baixa-visao", modoBaixaVisao);
-  }, [modoBaixaVisao]);
+    if (
+      ["/", "/login", "/cadastrar", "/esqueceu"].includes(location.pathname)
+    ) {
+      document.body.classList.remove("dark-mode", "daltonico", "baixa-visao");
+    } else {
+      if (accessibilityMode === "dark-mode") {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
 
-  useEffect(() => {
-    document.body.classList.toggle("daltonico", modoDaltonico);
-    sessionStorage.setItem("daltonico", modoDaltonico);
-  }, [modoDaltonico]);
+      if (daltonicoMode === "daltonico") {
+        document.body.classList.add("daltonico");
+      } else {
+        document.body.classList.remove("daltonico");
+      }
 
-  const handlePerfilClick = () => {
-    setExibirPerfil(true);
-  };
-
-  const handleAcessibilidadeClick = () => {
-    setExibirPerfil(false);
-  };
-
-  const handleSalvarPerfil = (event) => {
-    event.preventDefault();
-    if ("Notification" in window) {
-      Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          new Notification("Configurações salvas!");
-        }
-      });
+      if (baixaVisaoMode === "baixa-visao") {
+        document.body.classList.add("baixa-visao");
+      } else {
+        document.body.classList.remove("baixa-visao");
+      }
     }
+  };
+
+  useEffect(() => {
+    applyAccessibilityMode();
+  }, [location]);
+
+  const toggleDarkMode = () => {
+    const newMode = modoEscuro ? "light-mode" : "dark-mode";
+    setModoEscuro(!modoEscuro);
+    localStorage.setItem("accessibilityMode", newMode);
+    applyAccessibilityMode();
+  };
+
+  const toggleDaltonicoMode = () => {
+    const newMode = modoDaltonico ? "light-mode" : "daltonico";
+    setModoDaltonico(!modoDaltonico);
+    localStorage.setItem("daltonicoMode", newMode);
+    applyAccessibilityMode();
+  };
+
+  const toggleBaixaVisaoMode = () => {
+    const newMode = modoBaixaVisao ? "light-mode" : "baixa-visao";
+    setModoBaixaVisao(!modoBaixaVisao);
+    localStorage.setItem("baixaVisaoMode", newMode);
+    applyAccessibilityMode();
   };
 
   const handleSalvarAcessibilidade = (event) => {
@@ -69,87 +92,68 @@ const Configuracoes = () => {
         <div className="opcoes">
           <ul>
             <li>
-              <a href="#" className="link-option" id="perfil-link" onClick={handlePerfilClick}>
+              <a href="#" className="link-option">
                 Perfil
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                id="acessibilidade-link"
-                onClick={handleAcessibilidadeClick}
-              >
+              <a href="#acessibilidade" className="link-option">
                 Acessibilidade
               </a>
             </li>
             <li>
-              <a href="#" className="link-option">Tema Escuro</a>
+              <a onClick={toggleDarkMode} className="link-option">
+                Tema Escuro
+              </a>
             </li>
             <li>
-              <a onClick={logout} className="link-option">Sair</a>
+              <a onClick={logout} className="link-option">
+                Sair
+              </a>
             </li>
           </ul>
         </div>
 
-        {exibirPerfil ? (
-          <div className="campos-perfil" id="perfil">
-            <form id="profile-form" onSubmit={handleSalvarPerfil}>
-              <div className="form-group">
-                <label htmlFor="avatar">Alterar Avatar</label>
-                <br />
-                <input type="image" />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="username">Alterar Nome</label>
-                <br />
-                <input type="text" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Alterar Email</label>
-                <br />
-                <input type="email" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Alterar Senha</label>
-                <br />
-                <input type="text" />
-              </div>
-
-              <button type="submit" className="button1">Salvar Mudanças</button>
-            </form>
-          </div>
-        ) : (
-          <div className="campos-acessibilidade" id="acessibilidade">
-            <form id="accessibility-form" onSubmit={handleSalvarAcessibilidade}>
-              <div className="form-group">
-                <label htmlFor="daltonico">Modo Daltônico</label>
-                <label className="switch">
-                  <input
-                    type="checkbox"
-                    id="daltonico"
-                    checked={modoDaltonico}
-                    onChange={() => setModoDaltonico(!modoDaltonico)}
-                  />
-                </label>
-              </div>
-              <div className="form-group">
-                <label htmlFor="baixa-visao">Modo Baixa Visão</label>
-                <label className="switch">
-                  <input
-                    type="checkbox"
-                    id="baixa-visao"
-                    checked={modoBaixaVisao}
-                    onChange={() => setModoBaixaVisao(!modoBaixaVisao)}
-                  />
-                </label>
-              </div>
-              <button type="submit" className="button1">
-                Salvar Mudanças
-              </button>
-            </form>
-          </div>
-        )}
+        <div className="campos-acessibilidade" id="acessibilidade">
+          <form id="accessibility-form" onSubmit={handleSalvarAcessibilidade}>
+            <div className="form-group">
+              <label htmlFor="escuro">Modo Escuro</label>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  id="escuro"
+                  checked={modoEscuro}
+                  onChange={toggleDarkMode}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label htmlFor="daltonico">Modo Daltônico</label>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  id="daltonico"
+                  checked={modoDaltonico}
+                  onChange={toggleDaltonicoMode}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label htmlFor="baixa-visao">Modo Baixa Visão</label>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  id="baixa-visao"
+                  checked={modoBaixaVisao}
+                  onChange={toggleBaixaVisaoMode}
+                />
+              </label>
+            </div>
+            <button type="submit" className="button1">
+              Salvar Mudanças
+            </button>
+          </form>
+        </div>
       </main>
     </div>
   );

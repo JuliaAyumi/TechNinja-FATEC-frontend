@@ -33,3 +33,11 @@
 .header-home-options img:hover {
   transform: scale(1.1);
 }
+
+body.baixa-visao .header-home {
+  font-size: 50px;
+}
+
+body.baixa-visao .header-home img {
+  height: 100px;
+}

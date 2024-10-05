@@ -20,3 +20,11 @@
 .headerArrowBack-options img:hover {
   transform: scale(1.1);
 }
+
+.baixa-visao #headerArrowBack {
+  font-size: 50px;
+}
+
+.baixa-visao #headerArrowBack img {
+  height: 100px;
+}

@@ -2,6 +2,17 @@ import { Link } from "react-router-dom";
 import "./HeaderHome.css";
 
 const HeaderHome = () => {
+  const toggleDarkMode = () => {
+    const currentMode = localStorage.getItem("accessibilityMode");
+    if (currentMode === "dark-mode") {
+      localStorage.setItem("accessibilityMode", "light-mode");
+      document.body.classList.remove("dark-mode");
+    } else {
+      localStorage.setItem("accessibilityMode", "dark-mode");
+      document.body.classList.add("dark-mode");
+    }
+  };
+  
   return (
     <header className="header-home">
       <h3>TECHNINJA</h3>
@@ -23,12 +34,13 @@ const HeaderHome = () => {
               alt="Icone Meu Perfil"
             />
           </Link>
-          
+
           <img
             src="src/assets/icons/icon-darkmode-white.png"
             title="Modo escuro"
             alt="Icone de uma lua para ativar modo escuro"
             id="modoescuro"
+            onClick={toggleDarkMode}
           />
           <Link to="/configuracoes">
             <img

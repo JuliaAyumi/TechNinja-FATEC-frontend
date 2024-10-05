@@ -1,12 +1,5 @@
-:root {
-    --false: #BF3F3F;
-    --true: #03A65A;
-    --true-daltonico: #0000FF;
-    --texto-baixa-visao: 1.8em;
-}
-
 *{  text-decoration: none;
-    color: #000;
+    /* color: #000; */
     font-family: Arial, Helvetica, sans-serif;
   }
 
@@ -18,7 +11,6 @@
     justify-content: center;
     padding: 3em 0;
     margin: 0;
-    background-color: #FAFAFA;
 }
 
 .area-pergunta {
@@ -88,21 +80,45 @@
     }
 }
 
-h2.baixa-visao {
+body.dark-mode {
+    background-color: rgb(65, 64, 66);
+    color: white;
+  }
+  
+body.dark-mode .answers-block label {
+    color: white;
+    background-color: rgb(65, 64, 66);
+    border-color: white;
+}
+
+body.dark-mode .resposta-item:checked+label {
+    background-color: #03A65A;
+    font-weight: bold;
+    border: none;
+}
+
+body.baixa-visao .question-title {
     font-size: var(--texto-baixa-visao);
 }
 
-.question-block.baixa-visao {
+body.baixa-visao .question-block {
     padding: 0.5em;
     width: 70%;
-    font-size: var(--texto-baixa-visao);
 }
 
-.answers-block.baixa-visao {
+body.baixa-visao .answers-block {
     width: 60%;
     font-size: var(--texto-baixa-visao);
 }
 
-.resposta-item:checked+label.baixa-visao {
+body.baixa-visao .button1 {
+    font-size: 50px
+}
+
+body.daltonico .resposta-item:checked+label {
+    background-color: var(--true-daltonico);
+}
+
+body.daltonico button:hover {
     background-color: var(--true-daltonico);
 }

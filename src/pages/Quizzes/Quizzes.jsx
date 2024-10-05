@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import iconBack from "../../assets/icons/icon-back.png";
 import "./Quizzes.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 
@@ -26,7 +25,7 @@ const Quizzes = () => {
     <div>
     <HeaderArrowBack />
 
-      <main className="main-quizzes">
+      <main className="body-quizzes">
           {topics.length > 0 ? (
             topics.map((topic) => (
               <Link

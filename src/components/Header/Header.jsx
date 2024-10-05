@@ -3,7 +3,7 @@ import "./Header.css";
 
 const Header = () => {
   return (
-    <header id = "headerInicial">
+    <header id="headerInicial">
       <Link to="/">
         <p>
           TECHNINJA
