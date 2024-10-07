@@ -1,6 +1,5 @@
 import "./Login.css";
 import Header from "../../components/Header/Header";
-import Button from "../../components/Button/Button";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -56,10 +55,10 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="button1">
+            <button type="submit" className="button-entrar">
               Entrar
             </button>
-            <Link to="/esqueceu" className="esqueceu">
+            <Link to="/request-password-reset" className="esqueceu">
               <p className="esqueceu-text">Esqueceu a senha?</p>
             </Link>
           </form>

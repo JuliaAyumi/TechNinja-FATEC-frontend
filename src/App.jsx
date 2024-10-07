@@ -1,4 +1,4 @@
-import { useRoutes, useLocation } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import Cadastrar from "./pages/Cadastrar/Cadastrar";
 import Configuracoes from "./pages/Configuracoes/Configuracoes";
 import Home from "./pages/Home/Home";
@@ -9,47 +9,8 @@ import Quiz from "./pages/Quiz/Quiz";
 import Quizzes from "./pages/Quizzes/Quizzes";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Esqueceu from "./pages/Esqueceu/Esqueceu";
-import Recuperar from "./pages/Recuperar/Recuperar";
-import { useEffect } from "react";
-import "./variables.css";
 
 const App = () => {
-  const location = useLocation();
-
-  const applyAccessibilityMode = () => {
-    const accessibilityMode = localStorage.getItem("accessibilityMode");
-    const daltonico = localStorage.getItem("daltonicoMode");
-    const baixaVisao = localStorage.getItem("baixaVisaoMode");
-
-    if (
-      ["/", "/login", "/cadastrar", "/esqueceu"].includes(location.pathname)
-    ) {
-      document.body.classList.remove("dark-mode", "daltonico", "baixa-visao");
-    } else {
-      if (accessibilityMode === "dark-mode") {
-        document.body.classList.add("dark-mode");
-      } else {
-        document.body.classList.remove("dark-mode");
-      }
-
-      if (daltonico === "daltonico") {
-        document.body.classList.add("daltonico");
-      } else {
-        document.body.classList.remove("daltonico");
-      }
-
-      if (baixaVisao === "baixa-visao") {
-        document.body.classList.add("baixa-visao");
-      } else {
-        document.body.classList.remove("baixa-visao");
-      }
-    }
-  };
-
-  useEffect(() => {
-    applyAccessibilityMode();
-  }, [location]);
-
   const routes = useRoutes([
     {
       path: "/",
@@ -64,12 +25,8 @@ const App = () => {
       element: <Cadastrar />,
     },
     {
-      path: "/esqueceu",
+      path: "/request-password-reset",
       element: <Esqueceu />,
-    },
-    {
-      path: "/recuperar",
-      element: <Recuperar />,
     },
     {
       path: "/home",
