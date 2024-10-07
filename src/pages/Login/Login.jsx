@@ -55,7 +55,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="button-entrar">
+            <button type="submit" className="button1">
               Entrar
             </button>
             <Link to="/request-password-reset" className="esqueceu">
