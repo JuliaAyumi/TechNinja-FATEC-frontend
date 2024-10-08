@@ -58,7 +58,7 @@ const Login = () => {
             <button type="submit" className="button1">
               Entrar
             </button>
-            <Link to="/request-password-reset" className="esqueceu">
+            <Link to="/esqueceu" className="esqueceu">
               <p className="esqueceu-text">Esqueceu a senha?</p>
             </Link>
           </form>

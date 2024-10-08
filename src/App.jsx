@@ -59,7 +59,7 @@ const App = () => {
       element: <Cadastrar />,
     },
     {
-      path: "/request-password-reset",
+      path: "/esqueceu",
       element: <Esqueceu />,
     },
     {
