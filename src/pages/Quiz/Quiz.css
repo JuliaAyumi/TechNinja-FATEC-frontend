@@ -79,22 +79,15 @@
         width: 60%;
     }
 }
-
-body.dark-mode {
-    background-color: rgb(65, 64, 66);
-    color: white;
-  }
   
 body.dark-mode .answers-block label {
     color: white;
-    background-color: rgb(65, 64, 66);
-    border-color: white;
+    background-color: #3d444d;
 }
 
 body.dark-mode .resposta-item:checked+label {
     background-color: #03A65A;
     font-weight: bold;
-    border: none;
 }
 
 body.baixa-visao .question-title {
@@ -117,6 +110,7 @@ body.baixa-visao .button1 {
 
 body.daltonico .resposta-item:checked+label {
     background-color: var(--true-daltonico);
+    color: white;
 }
 
 body.daltonico button:hover {

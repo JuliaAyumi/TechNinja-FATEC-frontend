@@ -3,8 +3,7 @@
   justify-content: center;
   align-items: center;
   padding: 0.5em;
-  margin: auto 2em;
-  min-height: calc(100vh - 4em);
+  margin: 0 2em;
   font-family: Arial, sans-serif;
 }
 
@@ -33,10 +32,6 @@
   transform: scale(1.05);
 }
 
-.area-conhecimento.dark-mode {
-  background-color: #03a65a;
-}
-
 @media only screen and (max-width: 700px) {
   .main-home {
     flex-direction: column;
@@ -49,14 +44,23 @@
   }
 }
 
-body.dark-mode {
-  background-color: rgb(65, 64, 66);
+body.dark-mode  {
+  background-color: #0d1117;
+  color: white;
 }
-
-body.baixa-visao h1.baixa-visao {
-  font-size: var(--texto-baixa-visao);
+body.dark-mode .area-conhecimento{
+  background-color: #03a65a;
 }
 
 body.daltonico .area-conhecimento {
   background-color: var(--true-daltonico);
+  color: white;
+}
+
+body.daltonico .area-conhecimento img {
+  filter: invert(1)
+}
+
+body.baixa-visao h1.baixa-visao {
+  font-size: var(--texto-baixa-visao);
 }

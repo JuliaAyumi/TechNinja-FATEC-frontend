@@ -1,6 +1,5 @@
 .header-home {
-  width: 100%;
-  height: 3em;
+  height: 3.4em;
   padding: 0.2em 1em;
   font-size: 1.45em;
   font-family: "KARASHA", sans-serif;
@@ -27,11 +26,17 @@
   display: flex;
   gap: 2rem;
   filter: invert(1);
-  padding: 2em;
 }
 
 .header-home-options img:hover {
   transform: scale(1.1);
+}
+
+body.dark-mode .header-home{
+  border-bottom: 0.08em;
+  border-style: none none solid none;
+  border-color:#656c76;
+  background-color: #010409;
 }
 
 body.baixa-visao .header-home {

@@ -1,9 +1,11 @@
 .main-inicial {
   font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top: 3em 0 0 0 ;
+  padding: 3em 0 0 0;
+  margin: 0 1em;
 }
 
 .inicial-left-column {
@@ -12,8 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 2em 0 3em;
-  margin: 0 0em 0 3em;
+  padding: 5em 0 5em 8em;
+  margin: 0;
 }
 
 .inicial-left-column h1{
@@ -25,13 +27,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2em;
-  margin: 0 3em;
+  padding: 2em 4em 2em 2em;
 }
 
 .main-image {
   height: 28em;
   justify-content: center;
+  margin: 0 3em 0 0;
 }
 
 @media only screen and (max-width: 700px) {

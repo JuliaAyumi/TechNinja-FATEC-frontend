@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import './Recuperar.css';
-import useResetPassword from '../../hooks/UsePasswordReset';
+import useResetPassword from '../../hooks/UsePasswordReset2';
 
 const Recuperar = () => {
     const location = useLocation();

@@ -41,13 +41,9 @@
   }
 }
 
-body.dark-mode {
-  background-color: rgb(65, 64, 66);
-}
-
 body.dark-mode .quiz {
   color: white;
-  background-color: #333;
+  background-color:#3d444d;
 }
 
 body.baixa-visao h1 {

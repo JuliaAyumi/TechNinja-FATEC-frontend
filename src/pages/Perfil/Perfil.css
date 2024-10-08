@@ -1,6 +1,8 @@
 .main-perfil {
   padding: 4em;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .user-info {
@@ -94,11 +96,12 @@ body.baixa-visao p {
   font-size: 2em;
 }
 
-body.dark-mode .main-perfil {
+/* body.dark-mode .main-perfil {
   background-color: #000;
-}
+} */
 
 body.dark-mode .user-info {
   border: 1px solid white;
-  background-color: #333;
+  background-color: #3d444d;
+  border: none;
 }
