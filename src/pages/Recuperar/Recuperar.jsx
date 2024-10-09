@@ -1,12 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import './Recuperar.css';
 import useResetPassword from '../../hooks/UsePasswordReset2';
 
 const Recuperar = () => {
-    const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const token = query.get('token'); // Obtém o token da URL
+    const {token} = useParams(); // Obtém o token da URL
 
     const {
         senha,
