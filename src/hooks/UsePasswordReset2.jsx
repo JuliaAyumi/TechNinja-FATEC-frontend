@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const useResetPassword = (token) => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const [senha, setSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [erro, setErro] = useState('');
@@ -26,7 +26,7 @@ const useResetPassword = (token) => {
 
             if (response.ok) {
                 alert('Senha redefinida com sucesso!');
-                history.push('/login'); // Redireciona para a página de login após sucesso
+                navigate('/login'); // Redireciona para a página de login após sucesso
             } else {
                 const data = await response.json();
                 setErro(data.message || 'Erro ao redefinir a senha');
