@@ -63,7 +63,7 @@ const App = () => {
       element: <Esqueceu />,
     },
     {
-      path: "/recuperar",
+      path: "/recuperar/:token",
       element: <Recuperar />,
     },
     {

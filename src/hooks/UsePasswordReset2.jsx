@@ -32,7 +32,7 @@ const useResetPassword = (token) => {
                 setErro(data.message || 'Erro ao redefinir a senha');
             }
         } catch (error) {
-            setErro('Erro ao conectar ao servidor');
+            setErro('Erro ao conectar ao servidor', error);
         }
     };
 
