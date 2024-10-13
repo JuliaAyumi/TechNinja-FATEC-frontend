@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthContext";
 import "./Quiz.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
+import { toast, Toaster } from "react-hot-toast";
 
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
   const { area, topico } = useParams();
   const { user } = useAuth();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +18,6 @@ const Quiz = () => {
         const response = await fetch(
           `http://localhost:5000/api/quiz/${area}/${topico}`
         );
-
         if (response.ok) {
           const data = await response.json();
           setPerguntas(data);
@@ -41,18 +40,31 @@ const Quiz = () => {
     });
   };
 
-  // Função para calcular o número de acertos e atualizar a pontuação
-  const finalizarQuiz = async () => {
-    let acertos = 0;
+  // Verificar se todas as perguntas foram respondidas
+  const todasRespondidas = () => {
+    return (
+      perguntas.length > 0 &&
+      perguntas.every((_, index) => respostasUsuario[index])
+    );
+  };
 
+  // Função para finalizar o quiz
+  const finalizarQuiz = async () => {
+    if (!todasRespondidas()) {
+      toast.error(
+        "Por favor, responda todas as perguntas antes de finalizar o quiz."
+      );
+      return;
+    }
+
+    let acertos = 0;
     perguntas.forEach((pergunta, index) => {
       if (respostasUsuario[index] === pergunta.resposta) {
         acertos += 1;
       }
     });
 
-    alert(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
-
+    toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
     const points = acertos * 10;
 
     try {
@@ -62,22 +74,44 @@ const Quiz = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user}`,
         },
-        body: JSON.stringify({ points }), // Enviar os pontos para o backend
+        body: JSON.stringify({ points }),
       });
 
       const resData = await response.json();
 
       if (response.ok) {
-        alert(`Pontuação atualizada! Nova pontuação: ${resData.newScore}`);
+        setTimeout(() => {
+          toast.success(
+            `Pontuação atualizada! Nova pontuação: ${resData.newScore}`
+          );
+        }, 2500);
       } else {
-        alert(resData.message || "Erro ao atualizar a pontuação");
+        console.log(response);
+        toast.error(resData.message || "Erro ao atualizar a pontuação");
       }
     } catch (error) {
       console.error("Erro ao atualizar a pontuação:", error);
     }
 
-    navigate(`/quizzes/${area}`);
+    setTimeout(() => {
+      navigate(`/quizzes/${area}`);
+    }, 5000);
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (!todasRespondidas()) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [perguntas, respostasUsuario]);
 
   return (
     <div>
@@ -119,6 +153,7 @@ const Quiz = () => {
           </button>
         </div>
       </main>
+      <Toaster />
     </div>
   );
 };
