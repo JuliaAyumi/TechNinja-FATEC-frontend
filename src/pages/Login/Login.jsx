@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -64,6 +65,7 @@ const Login = () => {
           </form>
         </div>
       </main>
+      <Toaster />
     </div>
   );
 };

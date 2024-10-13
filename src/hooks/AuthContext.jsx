@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./UseLocalStorage";
+import { toast } from "react-hot-toast";
 const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
@@ -8,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
   const navigate = useNavigate();
 
-  // Função de Login
   const login = async (data) => {
     try {
       const response = await fetch("http://localhost:5000/api/login", {
@@ -22,18 +22,20 @@ export const AuthProvider = ({ children }) => {
       const resData = await response.json();
 
       if (response.ok) {
+        toast.success("Logado com sucesso!");
         setUser(resData.token);
-        navigate("/home");
+
+        setTimeout(() => {
+          navigate("/home");
+        }, 1500);
       } else {
-        alert(resData.message || "Erro ao fazer login");
+        toast.error(resData.message || "Erro ao fazer login");
       }
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      alert("Erro ao fazer login");
+      toast.error("Erro ao fazer login", error);
     }
   };
 
-  // Função de Registrar
   const register = async (userData) => {
     try {
       const response = await fetch("http://localhost:5000/api/register", {
@@ -45,20 +47,21 @@ export const AuthProvider = ({ children }) => {
       });
 
       const resData = await response.json();
-
       if (response.ok) {
+        toast.success("Usuário registrado com sucesso!");
         setUser(resData.token);
-        navigate("/home");
+
+        setTimeout(() => {
+          navigate("/home");
+        }, 1500);
       } else {
-        alert(resData.message || "Erro ao registrar");
+        toast.error(resData.message || "Erro ao registrar");
       }
     } catch (error) {
-      console.error("Erro ao registrar:", error);
-      alert("Erro ao registrar");
+      console.log(error);
     }
   };
 
-  // Função de Logout
   const logout = () => {
     setUser(null);
     navigate("/", { replace: true });

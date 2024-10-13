@@ -1,8 +1,8 @@
 import "./Cadastrar.css";
 import Header from "../../components/Header/Header";
-import Button from "../../components/Button/Button";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 const Cadastrar = () => {
   const { register } = useAuth();
@@ -10,7 +10,6 @@ const Cadastrar = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleCadastrar = async (e) => {
     e.preventDefault();
@@ -21,17 +20,10 @@ const Cadastrar = () => {
       senha: password,
     };
 
-    if (password !== confirmPassword) {
-      setErrorMessage("As senhas não coincidem");
-      return;
-    }
-
     try {
       await register(userData);
-      alert("Usuário cadastrado!");
     } catch (error) {
       console.error("Erro no cadastro:", error);
-      setErrorMessage("Erro ao cadastrar");
     }
   };
 
@@ -46,11 +38,6 @@ const Cadastrar = () => {
             className="form-cadastrar"
             onSubmit={handleCadastrar}
           >
-            {errorMessage && (
-              <div className="error-message" id="error-message">
-                {errorMessage}
-              </div>
-            )}
             <input
               className="cadastrar-input"
               type="text"
@@ -101,6 +88,7 @@ const Cadastrar = () => {
           />
         </div>
       </main>
+      <Toaster />
     </div>
   );
 };
