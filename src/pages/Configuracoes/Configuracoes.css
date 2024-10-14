@@ -79,8 +79,15 @@ form {
   padding: 1em;
 }
 
+.form-perfil {
+  padding: 20px;
+}
+
 .form-group {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1em;
+  padding: 15px;
 }
 
 .form-group label {
@@ -96,7 +103,7 @@ form {
 }
 
 .form-group input[type="checkbox"] {
-  width: 5.4%;
+  width: 5.4rem;
   text-align: right;
   margin: 1em 30% 0;
 }

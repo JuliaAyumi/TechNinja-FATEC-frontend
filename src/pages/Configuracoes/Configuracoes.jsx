@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 const Configuracoes = () => {
   const { logout } = useAuth();
   const location = useLocation();
+  const [activeTab, setActiveTab] = useState("perfil");
 
   const [modoEscuro, setModoEscuro] = useState(
     localStorage.getItem("accessibilityMode") === "dark-mode"
@@ -84,6 +85,95 @@ const Configuracoes = () => {
     }
   };
 
+  const renderContent = () => {
+    if (activeTab === "perfil") {
+      return (
+        <form className="form-perfil">
+          <div className="form-group">
+            <label htmlFor="imagem">Alterar Imagem</label>
+            <input
+              type="file"
+              id="imagem"
+              name="imagem"
+              className="configuracoes-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="nome">Nome</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              className="configuracoes-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="configuracoes-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              className="configuracoes-input"
+            />
+          </div>
+          <button type="submit" className="button1">
+            Confirmar
+          </button>
+        </form>
+      );
+    } else if (activeTab === "acessibilidade") {
+      return (
+        <form id="accessibility-form" onSubmit={handleSalvarAcessibilidade}>
+          <div className="form-group">
+            <label htmlFor="escuro">Modo Escuro</label>
+            <label className="switch">
+              <input
+                type="checkbox"
+                id="escuro"
+                className="configuracoes-switch"
+                checked={modoEscuro}
+                onChange={toggleDarkMode}
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="daltonico">Modo Daltônico</label>
+            <label className="switch">
+              <input
+                type="checkbox"
+                id="daltonico"
+                className="configuracoes-switch"
+                checked={modoDaltonico}
+                onChange={toggleDaltonicoMode}
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="baixa-visao">Modo Baixa Visão</label>
+            <label className="switch">
+              <input
+                type="checkbox"
+                id="baixa-visao"
+                className="configuracoes-switch"
+                checked={modoBaixaVisao}
+                onChange={toggleBaixaVisaoMode}
+              />
+            </label>
+          </div>
+        </form>
+      );
+    }
+  };
+
   return (
     <div>
       <HeaderArrowBack />
@@ -92,18 +182,21 @@ const Configuracoes = () => {
         <div className="opcoes">
           <ul>
             <li>
-              <a href="#" className="link-option">
+              <a
+                href="#"
+                className="link-option"
+                onClick={() => setActiveTab("perfil")}
+              >
                 Perfil
               </a>
             </li>
             <li>
-              <a href="#acessibilidade" className="link-option">
+              <a
+                href="#"
+                className="link-option"
+                onClick={() => setActiveTab("acessibilidade")}
+              >
                 Acessibilidade
-              </a>
-            </li>
-            <li>
-              <a onClick={toggleDarkMode} className="link-option">
-                Tema Escuro
               </a>
             </li>
             <li>
@@ -114,46 +207,7 @@ const Configuracoes = () => {
           </ul>
         </div>
 
-        <div className="campos-acessibilidade" id="acessibilidade">
-          <form id="accessibility-form" onSubmit={handleSalvarAcessibilidade}>
-            <div className="form-group">
-              <label htmlFor="escuro">Modo Escuro</label>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  id="escuro"
-                  checked={modoEscuro}
-                  onChange={toggleDarkMode}
-                />
-              </label>
-            </div>
-            <div className="form-group">
-              <label htmlFor="daltonico">Modo Daltônico</label>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  id="daltonico"
-                  checked={modoDaltonico}
-                  onChange={toggleDaltonicoMode}
-                />
-              </label>
-            </div>
-            <div className="form-group">
-              <label htmlFor="baixa-visao">Modo Baixa Visão</label>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  id="baixa-visao"
-                  checked={modoBaixaVisao}
-                  onChange={toggleBaixaVisaoMode}
-                />
-              </label>
-            </div>
-            <button type="submit" className="button1">
-              Salvar Mudanças
-            </button>
-          </form>
-        </div>
+        <div className="conteudo">{renderContent()}</div>
       </main>
     </div>
   );
