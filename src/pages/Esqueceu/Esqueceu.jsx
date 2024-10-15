@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Header from "../../components/Header/Header"
 import usePasswordReset from "../../hooks/UsePasswordReset"
+import logo from "../../assets/images/logoDark.png";
 import './Esqueceu.css'
 
 const Esqueceu = () => {
@@ -25,7 +26,7 @@ const Esqueceu = () => {
 
             <main id = "mainEsqueceu">
                 <div className="left-column">
-                    <img src="src/assets/images/logoDark.png" alt="TechNinja logo" className="mainEsqueceu-image" />
+                    <img src={logo} alt="TechNinja logo" className="mainEsqueceu-image" />
                 </div>
 
                 <div className="right-column">

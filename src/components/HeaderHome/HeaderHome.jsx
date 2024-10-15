@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import "./HeaderHome.css";
+import iconTutorial from "../../assets/icons/icon-tutorial.png";
+import iconPerfil from "../../assets/icons/icon-profile-white.png";
+import iconDarkmode from "../../assets/icons/icon-darkmode-white.png";
+import iconConfig from "../../assets/icons/icon-configuracoes.png"
 
 const HeaderHome = () => {
   const toggleDarkMode = () => {
@@ -20,7 +24,7 @@ const HeaderHome = () => {
         <div className="header-home-options">
           <a href="">
             <img
-              src="src/assets/icons/icon-tutorial.png"
+              src={iconTutorial}
               title="Tutorial"
               alt="Icone tutorial"
               id="tutorial"
@@ -29,14 +33,14 @@ const HeaderHome = () => {
 
           <Link to="/perfil">
             <img
-              src="src/assets/icons/icon-profile-white.png"
+              src={iconPerfil}
               title="Perfil"
               alt="Icone Meu Perfil"
             />
           </Link>
 
           <img
-            src="src/assets/icons/icon-darkmode-white.png"
+            src={iconDarkmode}
             title="Modo escuro"
             alt="Icone de uma lua para ativar modo escuro"
             id="modoescuro"
@@ -44,7 +48,7 @@ const HeaderHome = () => {
           />
           <Link to="/configuracoes">
             <img
-              src="src/assets/icons/icon-configuracoes.png"
+              src={iconConfig}
               title="Configurações"
               alt="Icone de engrenagem para ir para Configurações"
             />

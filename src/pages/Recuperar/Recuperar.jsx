@@ -2,6 +2,7 @@ import {useParams } from 'react-router-dom';
 import Header from "../../components/Header/Header";
 import './Recuperar.css';
 import useResetPassword from '../../hooks/UsePasswordReset2';
+import logo from "../../assets/images/logoDark.png";
 
 const Recuperar = () => {
     const {token} = useParams(); // Obtém o token da URL
@@ -20,7 +21,7 @@ const Recuperar = () => {
             <Header />
             <main id="mainRecuperar">
                 <div className="left-column">
-                    <img src="src/assets/images/logoDark.png" alt="TechNinja logo" className="mainRecuperar-image" />
+                    <img src={logo} alt="TechNinja logo" className="mainRecuperar-image" />
                 </div>
 
                 <div className="right-column">

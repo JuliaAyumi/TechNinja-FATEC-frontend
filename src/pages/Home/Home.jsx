@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import HeaderHome from "../../components/HeaderHome/HeaderHome";
+// import iconArea from `../../assets/icons/${area.icon}`
 import "./Home.css";
 
 const Home = () => {

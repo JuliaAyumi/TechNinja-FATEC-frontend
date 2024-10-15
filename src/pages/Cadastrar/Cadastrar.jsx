@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import logo from "../../assets/images/logoDark.png";
 
 const Cadastrar = () => {
   const { register } = useAuth();
@@ -87,7 +88,7 @@ const Cadastrar = () => {
 
         <div className="cadastrar-right-column">
           <img
-            src="src/assets/images/logoDark.png"
+            src={logo}
             alt="TechNinja logo"
             className="main-image"
           />

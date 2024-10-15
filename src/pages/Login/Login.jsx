@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import logo from "../../assets/images/logoDark.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ const Login = () => {
       <main className="main-login">
         <div className="left-column">
           <img
-            src="src/assets/images/logoDark.png"
+            src={logo}
             alt="TechNinja logo"
             className="login-main-image"
           />
