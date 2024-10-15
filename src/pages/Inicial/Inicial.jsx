@@ -26,7 +26,7 @@ const Inicial = () => {
 
         <div className="inicial-right-column">
           <img
-            src="./src/assets/images/logoDark.png"
+            src="src/assets/images/logoDark.png"
             alt="TechNinja logo"
             className="main-image"
           />
