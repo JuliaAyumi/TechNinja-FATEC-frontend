@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
+import logo from "../../assets/images/logoDark.png";
 import "./Inicial.css";
 
 const Inicial = () => {
@@ -26,7 +27,7 @@ const Inicial = () => {
 
         <div className="inicial-right-column">
           <img
-            src="src/assets/images/logoDark.png"
+            src={logo}
             alt="TechNinja logo"
             className="main-image"
           />
