@@ -25,6 +25,11 @@
   transition: transform 0.2s;
 }
 
+.completed {
+  background-color: green;
+  color: white;
+}
+
 .quiz:hover {
   cursor: pointer;
   transform: scale(1.05);
@@ -43,7 +48,7 @@
 
 body.dark-mode .quiz {
   color: white;
-  background-color:#3d444d;
+  background-color: #3d444d;
 }
 
 body.baixa-visao h1 {

@@ -1,11 +1,17 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Quizzes.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
+import { useAuth } from "../../hooks/AuthContext";
+import { showToast } from "../../components/ConfirmToast";
+import { Toaster } from "react-hot-toast";
 
 const Quizzes = () => {
   const { area } = useParams();
+  const { user } = useAuth();
   const [topics, setTopics] = useState([]);
+  const [quizzesCompletados, setQuizzesCompletados] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopics = async () => {
@@ -18,28 +24,62 @@ const Quizzes = () => {
       }
     };
 
+    const fetchQuizzesCompletados = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/user-quizzes-completed",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setQuizzesCompletados(data.quizzesCompletados);
+      } catch (error) {
+        console.error("Erro ao buscar quizzes completados:", error);
+      }
+    };
+
     fetchTopics();
-  }, [area]);
+    fetchQuizzesCompletados();
+  }, [area, user]);
+
+  const handleQuizClick = (event, isCompleted, topic) => {
+    if (isCompleted) {
+      event.preventDefault();
+
+      showToast(topic, () => navigate(`/${area}/${topic}`));
+    } else {
+      navigate(`/${area}/${topic}`);
+    }
+  };
 
   return (
     <div>
-    <HeaderArrowBack />
-
+      <HeaderArrowBack />
       <main className="body-quizzes">
-          {topics.length > 0 ? (
-            topics.map((topic) => (
+        {topics.length > 0 ? (
+          topics.map((topic) => {
+            const quizId = `${area}-${topic}`;
+            const isCompleted = quizzesCompletados.includes(quizId);
+            return (
               <Link
                 key={topic}
-                to={`/${area}/${topic}`} // A URL fica /nome-area/nome-topico
-                className="quiz"
+                to={`/${area}/${topic}`}
+                className={`quiz ${isCompleted ? "completed" : ""}`}
+                onClick={(event) => handleQuizClick(event, isCompleted, topic)}
               >
                 <h1>{topic}</h1>
               </Link>
-            ))
-          ) : (
-            <p>Nenhum tópico encontrado</p>
-          )}
+            );
+          })
+        ) : (
+          <p>Nenhum tópico encontrado</p>
+        )}
       </main>
+      <Toaster />
     </div>
   );
 };
