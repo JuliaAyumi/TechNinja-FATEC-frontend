@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         setUser(resData.token);
 
         setTimeout(() => {
-          navigate("/home");
+          navigate("/login");
         }, 1500);
       } else {
         toast.error(resData.message || "Erro ao registrar");

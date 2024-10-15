@@ -2,7 +2,7 @@ import "./Cadastrar.css";
 import Header from "../../components/Header/Header";
 import { useAuth } from "../../hooks/AuthContext";
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const Cadastrar = () => {
   const { register } = useAuth();
@@ -13,6 +13,11 @@ const Cadastrar = () => {
 
   const handleCadastrar = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("As senhas não coincidem!");
+      return;
+    }
 
     const userData = {
       nome: name,
