@@ -78,7 +78,6 @@ const Quiz = () => {
       });
 
       const resData = await response.json();
-
       if (response.ok) {
         setTimeout(() => {
           toast.success(
@@ -86,11 +85,24 @@ const Quiz = () => {
           );
         }, 2500);
       } else {
-        console.log(response);
         toast.error(resData.message || "Erro ao atualizar a pontuação");
       }
     } catch (error) {
       console.error("Erro ao atualizar a pontuação:", error);
+    }
+
+    // Marcar o quiz como completado
+    try {
+      await fetch("http://localhost:5000/api/mark-quiz-completed", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user}`,
+        },
+        body: JSON.stringify({ area, topico }),
+      });
+    } catch (error) {
+      console.error("Erro ao marcar o quiz como completado:", error);
     }
 
     setTimeout(() => {
