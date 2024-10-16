@@ -5,6 +5,7 @@ import "./Quiz.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import { toast, Toaster } from "react-hot-toast";
 
+
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
@@ -16,7 +17,7 @@ const Quiz = () => {
     const fetchQuiz = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/quiz/${area}/${topico}`
+          `${import.meta.env.VITE_HEROKU_LINK}/api/quiz/${area}/${topico}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -68,7 +69,7 @@ const Quiz = () => {
     const points = acertos * 10;
 
     try {
-      const response = await fetch("http://localhost:5000/api/update-score", {
+      const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/update-score`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +94,7 @@ const Quiz = () => {
 
     // Marcar o quiz como completado
     try {
-      await fetch("http://localhost:5000/api/mark-quiz-completed", {
+      await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/mark-quiz-completed`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

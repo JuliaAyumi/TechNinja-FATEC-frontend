@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./UseLocalStorage";
 import { toast } from "react-hot-toast";
+
 const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
@@ -11,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (data) => {
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

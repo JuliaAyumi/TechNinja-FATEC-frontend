@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 const usePasswordReset = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ const usePasswordReset = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch('http://localhost:5000/api/users/esqueceu', {
+    const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/esqueceu`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

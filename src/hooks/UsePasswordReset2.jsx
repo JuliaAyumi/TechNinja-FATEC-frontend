@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+
 const useResetPassword = (token) => {
     const navigate = useNavigate();
     const [senha, setSenha] = useState('');
@@ -16,7 +17,7 @@ const useResetPassword = (token) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/users/recuperar/:${token}`, { // Ajuste a URL conforme necessário
+            const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/recuperar/:${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
