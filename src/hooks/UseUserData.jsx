@@ -14,11 +14,13 @@ const useUserData = (token) => {
   const fetchUserData = async () => {
       if (!token) return;
 
-      const decodedToken = JwtDecode(token);
-      const userId = decodedToken.id;
+      const decodedToken = new JwtDecode(token);
+      const userId = decodedToken.payload.id;
+
+      console.log(decodedToken)
 
       try {
-          const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/user/:${userId}`, {
+          const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/user/${userId}`, {
               method: 'GET',
               headers: {
                   'Authorization': `Bearer ${token}`,
@@ -41,6 +43,7 @@ const useUserData = (token) => {
 
   useEffect(() => {
       fetchUserData();
+      setUserData(userData);
   }, [token]);
 
   return { userData, loading, error };

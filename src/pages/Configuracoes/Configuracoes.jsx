@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/AuthContext";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import { useLocation } from "react-router-dom";
 import useUserData from "../../hooks/UseUserData";
+import useUserUpdate from "../../hooks/UseUserUpdate";
 
 const Configuracoes = () => {
   const { logout } = useAuth();
@@ -11,8 +12,15 @@ const Configuracoes = () => {
   const [activeTab, setActiveTab] = useState("perfil");
 
   //Obtendo o token e dados do usuario via hook
-  const token = localStorage.getItem("jwt");
+  const tokenString = localStorage.getItem("user");
+
+  //Parse do JSON para extrair o token
+  const tokenArray = JSON.parse(tokenString);
+  const token = tokenArray[0];
+
   const {userData, loading} = useUserData(token);
+
+  const { nome, setNome, email, setEmail, senha, setSenha, handleSubmit } = useUserUpdate(userData, token);
 
   const [modoEscuro, setModoEscuro] = useState(
     localStorage.getItem("accessibilityMode") === "dark-mode"
@@ -79,24 +87,6 @@ const Configuracoes = () => {
     applyAccessibilityMode();
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`/api/user/${userData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) throw new Error('Erro ao atualizar dados do usuário');
-      alert("Dados atualizados com sucesso!");
-    } catch (error) {
-      console.error("Erro ao atualizar dados do usuário", error);
-    }
-  };
-
   const handleSalvarAcessibilidade = (event) => {
     event.preventDefault();
     if ("Notification" in window) {
@@ -128,8 +118,8 @@ const Configuracoes = () => {
               id="nome"
               name="nome"
               className="configuracoes-input"
-              value={userData.nome}
-              onChange={(e) => setUserData({...userData, nome: e.target.value})}
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -139,8 +129,8 @@ const Configuracoes = () => {
               id="email"
               name="email"
               className="configuracoes-input"
-              value={userData.email}
-              onChange={(e) => setUserData({...userData, email: e.target.value})}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -150,8 +140,8 @@ const Configuracoes = () => {
               id="senha"
               name="senha"
               className="configuracoes-input"
-              value={userData.senha}
-              onChange={(e) => setUserData({...userData, senha: e.target.value})}
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
             />
           </div>
           <button type="submit" className="button1">
