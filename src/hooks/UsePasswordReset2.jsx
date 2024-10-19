@@ -17,7 +17,11 @@ const useResetPassword = (token) => {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/recuperar/:${token}`, {
+            const response = await fetch(`${
+                import.meta.env.MODE === "development"
+                  ? `http://localhost:${import.meta.env.VITE_PORT}`
+                  : import.meta.env.VITE_HEROKU_LINK
+              }/api/users/recuperar/:${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

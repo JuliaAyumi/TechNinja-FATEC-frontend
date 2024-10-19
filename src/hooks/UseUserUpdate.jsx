@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { JwtDecode } from "jwt-js-decode";
 
 const useUserUpdate = (userData, token) => {
@@ -27,16 +27,23 @@ const useUserUpdate = (userData, token) => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/update/${updatedUserData.userId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(updatedUserData),
-      });
+      const response = await fetch(
+        `${
+          import.meta.env.MODE === "development"
+            ? `http://localhost:${import.meta.env.VITE_PORT}`
+            : import.meta.env.VITE_HEROKU_LINK
+        }/api/users/update/${updatedUserData.userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(updatedUserData),
+        }
+      );
 
-      if (!response.ok) throw new Error('Erro ao atualizar dados do usuário');
+      if (!response.ok) throw new Error("Erro ao atualizar dados do usuário");
       alert("Dados atualizados com sucesso!");
     } catch (error) {
       console.error("Erro ao atualizar dados do usuário", error);

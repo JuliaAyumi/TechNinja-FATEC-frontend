@@ -6,7 +6,6 @@ import { useAuth } from "../../hooks/AuthContext";
 import { showToast } from "../../components/ConfirmToast";
 import { Toaster } from "react-hot-toast";
 
-
 const Quizzes = () => {
   const { area } = useParams();
   const { user } = useAuth();
@@ -17,7 +16,13 @@ const Quizzes = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/quiz/${area}`);
+        const response = await fetch(
+          `${
+            import.meta.env.MODE === "development"
+              ? `http://localhost:${import.meta.env.VITE_PORT}`
+              : import.meta.env.VITE_HEROKU_LINK
+          }/api/quiz/${area}`
+        );
         const data = await response.json();
         setTopics(data);
       } catch (error) {
@@ -28,7 +33,11 @@ const Quizzes = () => {
     const fetchQuizzesCompletados = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_HEROKU_LINK}/api/user-quizzes-completed`,
+          `${
+            import.meta.env.MODE === "development"
+              ? `http://localhost:${import.meta.env.VITE_PORT}`
+              : import.meta.env.VITE_HEROKU_LINK
+          }/api/user-quizzes-completed`,
           {
             method: "GET",
             headers: {

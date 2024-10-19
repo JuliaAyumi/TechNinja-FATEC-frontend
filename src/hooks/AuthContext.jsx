@@ -12,13 +12,22 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (data) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${
+          import.meta.env.MODE === "development"
+            ? `http://localhost:${import.meta.env.VITE_PORT}`
+            : import.meta.env.VITE_HEROKU_LINK
+        }/api/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      console.log(response);
 
       const resData = await response.json();
 
@@ -39,13 +48,20 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        `${
+          import.meta.env.MODE === "development"
+            ? `http://localhost:${import.meta.env.VITE_PORT}`
+            : import.meta.env.VITE_HEROKU_LINK
+        }/api/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       const resData = await response.json();
       if (response.ok) {

@@ -20,7 +20,11 @@ const useUserData = (token) => {
       console.log(decodedToken)
 
       try {
-          const response = await fetch(`${import.meta.env.VITE_HEROKU_LINK}/api/users/user/${userId}`, {
+          const response = await fetch(`${
+            import.meta.env.MODE === "development"
+              ? `http://localhost:${import.meta.env.VITE_PORT}`
+              : import.meta.env.VITE_HEROKU_LINK
+          }/api/users/user/${userId}`, {
               method: 'GET',
               headers: {
                   'Authorization': `Bearer ${token}`,
