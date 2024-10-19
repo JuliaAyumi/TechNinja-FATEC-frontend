@@ -195,7 +195,7 @@ const Configuracoes = () => {
 
   return (
     <div>
-      <HeaderArrowBack />
+      <HeaderArrowBack to={`/home`} />
 
       <main className="main-configuracoes">
         <div className="opcoes">

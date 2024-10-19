@@ -29,7 +29,7 @@ const Subtemas = () => {
 
   return (
     <div>
-      <HeaderArrowBack />
+      <HeaderArrowBack to={`/home`} />
       <main className="body-quizzes">
         {subtemas.length > 0 ? (
           subtemas.map((subtema) => (

@@ -124,7 +124,7 @@ const Quiz = () => {
     }
 
     setTimeout(() => {
-      navigate(`/quizzes/${area}`);
+      navigate(`/quizzes/${area}/${subtema}`);
     }, 5000);
   };
 
