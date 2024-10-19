@@ -7,86 +7,51 @@ import { showToast } from "../../components/ConfirmToast";
 import { Toaster } from "react-hot-toast";
 
 const Quizzes = () => {
-  const { area } = useParams();
+  const { area, subtema } = useParams();
   const { user } = useAuth();
-  const [topics, setTopics] = useState([]);
+  const [dificuldades, setDificuldades] = useState([]); // Alterado para capturar dificuldades
   const [quizzesCompletados, setQuizzesCompletados] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchTopics = async () => {
+    const fetchDificuldades = async () => {
       try {
         const response = await fetch(
           `${
             import.meta.env.MODE === "development"
               ? `http://localhost:${import.meta.env.VITE_PORT}`
               : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}`
+          }/api/quiz/${area}/${subtema}/dificuldades`
         );
         const data = await response.json();
-        setTopics(data);
+        setDificuldades(data);
       } catch (error) {
-        console.error("Erro ao buscar tópicos:", error);
+        console.error("Erro ao buscar dificuldades:", error);
       }
     };
 
-    const fetchQuizzesCompletados = async () => {
-      try {
-        const response = await fetch(
-          `${
-            import.meta.env.MODE === "development"
-              ? `http://localhost:${import.meta.env.VITE_PORT}`
-              : import.meta.env.VITE_HEROKU_LINK
-          }/api/user-quizzes-completed`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${user}`,
-            },
-          }
-        );
-        const data = await response.json();
-        setQuizzesCompletados(data.quizzesCompletados);
-      } catch (error) {
-        console.error("Erro ao buscar quizzes completados:", error);
-      }
-    };
-
-    fetchTopics();
-    fetchQuizzesCompletados();
-  }, [area, user]);
-
-  const handleQuizClick = (event, isCompleted, topic) => {
-    if (isCompleted) {
-      event.preventDefault();
-
-      showToast(topic, () => navigate(`/${area}/${topic}`));
-    } else {
-      navigate(`/${area}/${topic}`);
-    }
-  };
+    fetchDificuldades();
+  }, [subtema]);
 
   return (
     <div>
       <HeaderArrowBack />
       <main className="body-quizzes">
-        {topics.length > 0 ? (
-          topics.map((topic) => {
-            const quizId = `${area}-${topic}`;
+        {dificuldades.length > 0 ? (
+          dificuldades.map((dificuldade) => {
+            const quizId = `${subtema}-${dificuldade}`;
             const isCompleted = quizzesCompletados.includes(quizId);
             return (
               <Link
-                key={topic}
-                to={`/${area}/${topic}`}
+                key={dificuldade}
+                to={`/quizzes/${area}/${subtema}/${dificuldade}`}
                 className={`quiz ${isCompleted ? "completed" : ""}`}
-                onClick={(event) => handleQuizClick(event, isCompleted, topic)}
               >
-                <h1>{topic}</h1>
+                <h1>{dificuldade}</h1>
               </Link>
             );
           })
         ) : (
-          <p>Nenhum tópico encontrado</p>
+          <p>Nenhuma dificuldade encontrada</p>
         )}
       </main>
       <Toaster />

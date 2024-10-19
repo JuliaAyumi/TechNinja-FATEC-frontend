@@ -12,6 +12,7 @@ import Esqueceu from "./pages/Esqueceu/Esqueceu";
 import Recuperar from "./pages/Recuperar/Recuperar";
 import { useEffect } from "react";
 import "./variables.css";
+import Subtemas from "./pages/Subtemas/Subtemas";
 
 const App = () => {
   const location = useLocation();
@@ -86,12 +87,20 @@ const App = () => {
       path: "/quizzes/:area",
       element: (
         <ProtectedRoute>
+          <Subtemas />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/quizzes/:area/:subtema",
+      element: (
+        <ProtectedRoute>
           <Quizzes />
         </ProtectedRoute>
       ),
     },
     {
-      path: "/:area/:topico",
+      path: "/quizzes/:area/:subtema/:dificuldade",
       element: (
         <ProtectedRoute>
           <Quiz />

@@ -8,7 +8,7 @@ import { toast, Toaster } from "react-hot-toast";
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
-  const { area, topico } = useParams();
+  const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const Quiz = () => {
             import.meta.env.MODE === "development"
               ? `http://localhost:${import.meta.env.VITE_PORT}`
               : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}/${topico}`
+          }/api/quiz/${area}/${subtema}/${dificuldade}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -34,7 +34,7 @@ const Quiz = () => {
     };
 
     fetchQuiz();
-  }, [area, topico]);
+  }, [area, subtema, dificuldade]);
 
   // Função para lidar com a seleção de uma resposta
   const handleRespostaChange = (indexPergunta, opcaoSelecionada) => {
@@ -116,7 +116,7 @@ const Quiz = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user}`,
           },
-          body: JSON.stringify({ area, topico }),
+          body: JSON.stringify({ area, subtema, dificuldade }),
         }
       );
     } catch (error) {
@@ -142,7 +142,7 @@ const Quiz = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [perguntas, respostasUsuario]);
-
+  console.log(perguntas);
   return (
     <div>
       <HeaderArrowBack />
@@ -166,7 +166,7 @@ const Quiz = () => {
                       onChange={() => handleRespostaChange(index, alt.opcao)}
                     />
                     <label htmlFor={`resposta${index}-${idx}`}>
-                      {alt.opcao}) {alt.textoOpcao}
+                      {alt.opcao}) {alt["texto-opcao"]}
                     </label>
                   </div>
                 ))}
