@@ -46,9 +46,24 @@
   }
 }
 
+.completed {
+  background-color: green;
+  color: white;
+}
+
 body.dark-mode .quiz {
   color: white;
   background-color: #3d444d;
+}
+
+body.dark-mode .quiz.completed {
+  background-color: green;
+  color: white;
+}
+
+body.daltonico .quiz.completed {
+  background-color: var(--true-daltonico);
+  color: white;
 }
 
 body.baixa-visao h1 {

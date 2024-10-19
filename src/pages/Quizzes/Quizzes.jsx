@@ -37,6 +37,12 @@ const Quizzes = () => {
           }/api/quiz/${area}/${subtema}/dificuldades`
         );
         const data = await response.json();
+
+        const dificuldadeOrder = ["facil", "medio", "dificil"];
+        data.sort(
+          (a, b) => dificuldadeOrder.indexOf(a) - dificuldadeOrder.indexOf(b)
+        );
+
         setDificuldades(data);
       } catch (error) {
         console.error("Erro ao buscar dificuldades:", error);
@@ -60,7 +66,6 @@ const Quizzes = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
         setQuizzesCompletados(data.quizzesCompletados);
       } catch (error) {
         console.error("Erro ao buscar quizzes completados:", error);
@@ -73,7 +78,7 @@ const Quizzes = () => {
 
   return (
     <div>
-      <HeaderArrowBack />
+      <HeaderArrowBack to={`/quizzes/${area}`} />
       <main className="body-quizzes">
         {dificuldades.length > 0 ? (
           dificuldades.map((dificuldade) => {
