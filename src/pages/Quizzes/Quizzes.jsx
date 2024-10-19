@@ -9,10 +9,24 @@ import { Toaster } from "react-hot-toast";
 const Quizzes = () => {
   const { area, subtema } = useParams();
   const { user } = useAuth();
-  const [dificuldades, setDificuldades] = useState([]); // Alterado para capturar dificuldades
+  const [dificuldades, setDificuldades] = useState([]);
   const [quizzesCompletados, setQuizzesCompletados] = useState([]);
+  const navigate = useNavigate();
+
+  // Função para lidar com clique no quiz
+  const handleQuizClick = (event, isCompleted, subtema, dificuldade) => {
+    if (isCompleted) {
+      event.preventDefault();
+      showToast(`${subtema} - ${dificuldade}`, () =>
+        navigate(`/quizzes/${area}/${subtema}/${dificuldade}`)
+      );
+    } else {
+      navigate(`/quizzes/${area}/${subtema}/${dificuldade}`);
+    }
+  };
 
   useEffect(() => {
+    // Função para buscar as dificuldades
     const fetchDificuldades = async () => {
       try {
         const response = await fetch(
@@ -29,8 +43,33 @@ const Quizzes = () => {
       }
     };
 
+    // Função para buscar quizzes completados
+    const fetchQuizzesCompletados = async () => {
+      try {
+        const response = await fetch(
+          `${
+            import.meta.env.MODE === "development"
+              ? `http://localhost:${import.meta.env.VITE_PORT}`
+              : import.meta.env.VITE_HEROKU_LINK
+          }/api/user-quizzes-completed`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user}`,
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        setQuizzesCompletados(data.quizzesCompletados);
+      } catch (error) {
+        console.error("Erro ao buscar quizzes completados:", error);
+      }
+    };
+
     fetchDificuldades();
-  }, [subtema]);
+    fetchQuizzesCompletados();
+  }, [subtema, area, user]);
 
   return (
     <div>
@@ -38,13 +77,17 @@ const Quizzes = () => {
       <main className="body-quizzes">
         {dificuldades.length > 0 ? (
           dificuldades.map((dificuldade) => {
-            const quizId = `${subtema}-${dificuldade}`;
+            const quizId = `${area}-${subtema}-${dificuldade}`;
             const isCompleted = quizzesCompletados.includes(quizId);
+
             return (
               <Link
                 key={dificuldade}
                 to={`/quizzes/${area}/${subtema}/${dificuldade}`}
                 className={`quiz ${isCompleted ? "completed" : ""}`}
+                onClick={(event) =>
+                  handleQuizClick(event, isCompleted, subtema, dificuldade)
+                }
               >
                 <h1>{dificuldade}</h1>
               </Link>

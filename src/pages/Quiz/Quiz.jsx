@@ -71,6 +71,7 @@ const Quiz = () => {
     toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
     const points = acertos * 10;
 
+    // Atualizar a pontuação do usuário
     try {
       const response = await fetch(
         `${
@@ -87,7 +88,6 @@ const Quiz = () => {
           body: JSON.stringify({ points }),
         }
       );
-
       const resData = await response.json();
       if (response.ok) {
         setTimeout(() => {
@@ -142,7 +142,6 @@ const Quiz = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [perguntas, respostasUsuario]);
-  console.log(perguntas);
   return (
     <div>
       <HeaderArrowBack />
