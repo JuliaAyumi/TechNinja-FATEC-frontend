@@ -6,15 +6,16 @@ import { useAuth } from "../../hooks/AuthContext";
 import { showToast } from "../../components/ConfirmToast";
 import { Toaster } from "react-hot-toast";
 import { formatarTexto } from "../../utils/formatarTexto";
+import logo from "../../assets/images/logoDark.png";
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
   const { user } = useAuth();
   const [dificuldades, setDificuldades] = useState([]);
   const [quizzesCompletados, setQuizzesCompletados] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Função para lidar com clique no quiz
   const handleQuizClick = (event, isCompleted, subtema, dificuldade) => {
     if (isCompleted) {
       event.preventDefault();
@@ -27,7 +28,6 @@ const Quizzes = () => {
   };
 
   useEffect(() => {
-    // Função para buscar as dificuldades
     const fetchDificuldades = async () => {
       try {
         const response = await fetch(
@@ -47,10 +47,11 @@ const Quizzes = () => {
         setDificuldades(data);
       } catch (error) {
         console.error("Erro ao buscar dificuldades:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    // Função para buscar quizzes completados
     const fetchQuizzesCompletados = async () => {
       try {
         const response = await fetch(
@@ -81,7 +82,12 @@ const Quizzes = () => {
     <div>
       <HeaderArrowBack to={`/quizzes/${area}`} />
       <main className="body-quizzes">
-        {dificuldades.length > 0 ? (
+        {loading ? (
+          <div className="loading-screen">
+            <img src={logo} alt="Logo TechNinja" className="logo-loading" />
+            <p>Carregando...</p>
+          </div>
+        ) : dificuldades.length > 0 ? (
           dificuldades.map((dificuldade) => {
             const quizId = `${area}-${subtema}-${dificuldade}`;
             const isCompleted = quizzesCompletados.includes(quizId);

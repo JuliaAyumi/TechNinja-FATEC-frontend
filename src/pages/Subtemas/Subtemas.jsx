@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import "./Subtemas.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import { formatarTexto } from "../../utils/formatarTexto";
+import logo from "../../assets/images/logoDark.png";
 
 const Subtemas = () => {
   const { area } = useParams();
   const [subtemas, setSubtemas] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSubtemas = async () => {
@@ -22,6 +24,8 @@ const Subtemas = () => {
         setSubtemas(data);
       } catch (error) {
         console.error("Erro ao buscar subtemas:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -32,7 +36,12 @@ const Subtemas = () => {
     <div>
       <HeaderArrowBack to={`/home`} />
       <main className="body-quizzes">
-        {subtemas.length > 0 ? (
+        {loading ? (
+          <div className="loading-screen">
+            <img src={logo} alt="Logo TechNinja" className="logo-loading" />
+            <p>Carregando...</p>
+          </div>
+        ) : subtemas.length > 0 ? (
           subtemas.map((subtema) => (
             <Link
               className="quiz"
