@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
 import HeaderHome from "../../components/HeaderHome/HeaderHome";
-// import iconArea from `../../assets/icons/${area.icon}`
 import "./Home.css";
 
 const Home = () => {
   const areas = [
     {
-      name: "historia-tecnologia",
-      title: "História da Tecnologia",
-      icon: "icon-sistemas-operacionais.svg",
-    },
-    {
       name: "linguagem-programacao",
       title: "Linguagem de Programação",
       icon: "icon-linguagem-de-programacao.svg",
+    },
+    {
+      name: "logica-programacao",
+      title: "Lógica de Programação",
+      icon: "icon-sistemas-operacionais.svg",
     },
     {
       name: "modelagem-dados",

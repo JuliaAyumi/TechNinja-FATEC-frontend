@@ -5,6 +5,7 @@ import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import { useAuth } from "../../hooks/AuthContext";
 import { showToast } from "../../components/ConfirmToast";
 import { Toaster } from "react-hot-toast";
+import { formatarTexto } from "../../utils/formatarTexto";
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
@@ -94,7 +95,7 @@ const Quizzes = () => {
                   handleQuizClick(event, isCompleted, subtema, dificuldade)
                 }
               >
-                <h1>{dificuldade}</h1>
+                <h1>{formatarTexto(dificuldade)}</h1>
               </Link>
             );
           })

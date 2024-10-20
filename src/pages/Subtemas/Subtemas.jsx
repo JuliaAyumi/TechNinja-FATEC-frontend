@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Subtemas.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
+import { formatarTexto } from "../../utils/formatarTexto";
 
 const Subtemas = () => {
   const { area } = useParams();
@@ -38,7 +39,7 @@ const Subtemas = () => {
               key={subtema}
               to={`/quizzes/${area}/${subtema}`}
             >
-              <h1>{subtema}</h1>
+              <h1>{formatarTexto(subtema)}</h1>
             </Link>
           ))
         ) : (
