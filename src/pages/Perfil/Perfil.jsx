@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./Perfil.css";
 import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import iconUsuario from "../../assets/icons/Shrek.png";
@@ -9,7 +8,7 @@ import iconLiteratura from "../../assets/icons/literatura.png";
 const Perfil = () => {
   return (
     <div>
-      <HeaderArrowBack />
+      <HeaderArrowBack to={'/home'}/>
 
       <main className="main-perfil">
         <div className="user-info">
