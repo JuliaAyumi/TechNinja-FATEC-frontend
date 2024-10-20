@@ -9,10 +9,12 @@ import logo from "../../assets/images/logoDark.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const userData = {
       email: email,
@@ -23,6 +25,8 @@ const Login = () => {
       await login(userData);
     } catch (error) {
       console.error("Erro no login:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -31,11 +35,7 @@ const Login = () => {
       <Header />
       <main className="main-login">
         <div className="left-column">
-          <img
-            src={logo}
-            alt="TechNinja logo"
-            className="login-main-image"
-          />
+          <img src={logo} alt="TechNinja logo" className="login-main-image" />
         </div>
 
         <div className="right-column">
@@ -57,8 +57,8 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="button1">
-              Entrar
+            <button type="submit" className="button1" disabled={isLoading}>
+              {isLoading ? "Entrando..." : "Entrar"}
             </button>
             <Link to="/esqueceu" className="esqueceu">
               <p className="esqueceu-text">Esqueceu a senha?</p>
