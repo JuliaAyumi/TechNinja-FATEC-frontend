@@ -139,6 +139,13 @@ body.dark-mode .form-group input{
 body.dark-mode .form-group label{
   color: white;
 }
+body.dark-mode .opcoes{ 
+  background-color: #3d444d;
+  color: white;
+}
+body.dark-mode .opcoes a{ 
+  color: white;
+}
 
 body.baixa-visao .form-group {
   font-size: var(--texto-baixa-visao);
@@ -148,8 +155,14 @@ body.baixa-visao .opcoes {
   font-size: var(--texto-baixa-visao);
 }
 
-body.baixa-visao #buttonSalvar {
-  width: 30em;
+body.baixa-visao .opcoes a{ 
+  font-size: 1.3em;
+}
+
+body.baixa-visao .form-group input {
+  width: 70%;
+  padding: 0.5em;
+  font-size:x-large;
 }
 
 body.daltonico input[type="checkbox"]:checked::before {

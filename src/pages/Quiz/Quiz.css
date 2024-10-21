@@ -104,10 +104,6 @@ body.baixa-visao .answers-block {
     font-size: var(--texto-baixa-visao);
 }
 
-body.baixa-visao .button1 {
-    font-size: 50px
-}
-
 body.daltonico .resposta-item:checked+label {
     background-color: var(--true-daltonico);
     color: white;

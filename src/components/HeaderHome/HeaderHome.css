@@ -40,9 +40,9 @@ body.dark-mode .header-home{
 }
 
 body.baixa-visao .header-home {
-  font-size: 50px;
+  font-size: 2em
 }
 
 body.baixa-visao .header-home img {
-  height: 100px;
+  height: 1.5em;
 }

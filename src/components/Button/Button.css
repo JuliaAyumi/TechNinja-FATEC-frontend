@@ -17,3 +17,7 @@
 .button1 > a {
   color: white;
 }
+
+body.baixa-visao .button1{
+  font-size: 1.6em;
+}
