@@ -6,25 +6,41 @@ import iconDiadema from "../../assets/icons/coroa.png";
 import iconLiteratura from "../../assets/icons/taca-de-ouro.png";
 import xp from "../../assets/icons/placar.png"
 import quizzes from "../../assets/icons/pontuacao-maxima.png"
+import useUserData from "../../hooks/UseUserData";
 
 const Perfil = () => {
+
+  //Obtendo o token e dados do usuario via hook
+  const tokenString = localStorage.getItem("user");
+
+  //Parse do JSON para extrair o token
+  const tokenArray = JSON.parse(tokenString);
+  const token = tokenArray[0];
+
+  const {userData, loading} = useUserData(token)
+
+  console.log(userData)
+
+  //Conntar os quizes completados
+  const quizzesCompletados = userData.quizzesCompletados.length;
+
   return (
     <div>
       <HeaderArrowBack to={'/home'}/>
       <main className="main-perfil">
         <div className="user-info">
-          <img src={iconUsuario} alt="Icon Usuario" className="iconUsuario" />
+          <img src={userData.avatar} alt="Icon Usuario" className="iconUsuario" />
           <h2 id="perfil" className="user-name">
-            Nome do usuário
+            {userData.nome}
           </h2>
           <p id="email" className="user-email">
-            email do usuário
+            {userData.email}
           </p>
 
           <h2>Pontuação</h2>
           <div className="stats-info">
-            <p className="stats-text"> <img src={xp} alt="icone xp" className="icone-xp"/>100 Xp</p>
-            <p className="stats-text"> <img src={quizzes} alt="icone quizzes" className="icone-quizzes"/> N Quizzes Concluídos</p>
+            <p className="stats-text"> <img src={xp} alt="icone xp" className="icone-xp"/>{userData.pontuacao} xp</p>
+            <p className="stats-text"> <img src={quizzes} alt="icone quizzes" className="icone-quizzes"/>{quizzesCompletados} quizzes completos</p>
           </div>
 
           <h2>Conquistas</h2>

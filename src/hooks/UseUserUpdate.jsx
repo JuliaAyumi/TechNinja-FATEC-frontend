@@ -5,6 +5,7 @@ const useUserUpdate = (userData, token) => {
   const [nome, setNome] = useState(userData?.nome || "");
   const [email, setEmail] = useState(userData?.email || "");
   const [senha, setSenha] = useState("");
+  const [avatar, setAvatar] = useState(userData?.avatar || null); // Novo estado para o avatar
 
   const decodedToken = new JwtDecode(token);
   const userId = decodedToken.payload.id;
@@ -13,32 +14,26 @@ const useUserUpdate = (userData, token) => {
     if (userData) {
       setNome(userData.nome || "");
       setEmail(userData.email || "");
+      setAvatar(userData.avatar || ""); // Preenche o avatar se existir
     }
   }, [userData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Cria um objeto para os dados a serem atualizados
     const updatedUserData = {
       nome,
       email,
+      avatar, // Inclui o avatar
     };
 
-    // Adiciona a senha apenas se ela estiver preenchida
     if (senha) {
       updatedUserData.senha = senha;
     }
 
-    console.log(updatedUserData);
-
     try {
       const response = await fetch(
-        `${
-          import.meta.env.MODE === "development"
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/users/update/${userId}`,
+        `${import.meta.env.MODE === "development" ? `http://localhost:${import.meta.env.VITE_PORT}` : import.meta.env.VITE_HEROKU_LINK}/api/users/update/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -51,7 +46,6 @@ const useUserUpdate = (userData, token) => {
 
       if (!response.ok) throw new Error("Erro ao atualizar dados do usuário");
       alert("Dados atualizados com sucesso!");
-      // Limpar senha após a atualização bem-sucedida
       setSenha("");
     } catch (error) {
       console.error("Erro ao atualizar dados do usuário", error);
@@ -66,6 +60,8 @@ const useUserUpdate = (userData, token) => {
     senha,
     setSenha,
     handleSubmit,
+    avatar,
+    setAvatar, // Retorna a função setAvatar
   };
 };
 

@@ -5,8 +5,11 @@ const useUserData = (token) => {
   const [userData, setUserData] = useState({
       nome: "",
       email: "",
-      senha: "",
-      imagem: "",
+      avatar: "",
+      pontuacao: "",
+      nivelmodulo: "",
+      ranking: "",
+      quizzesCompletados: ""
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

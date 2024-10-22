@@ -20,7 +20,7 @@ const Configuracoes = () => {
 
   const {userData, loading} = useUserData(token);
 
-  const { nome, setNome, email, setEmail, senha, setSenha, handleSubmit } = useUserUpdate(userData, token);
+  const { nome, setNome, email, setEmail, senha, setSenha, avatar, setAvatar ,handleSubmit } = useUserUpdate(userData, token);
 
   const [modoEscuro, setModoEscuro] = useState(
     localStorage.getItem("accessibilityMode") === "dark-mode"
@@ -66,6 +66,21 @@ const Configuracoes = () => {
     applyAccessibilityMode();
   }, [location]);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result); // Armazena a imagem em Base64
+      };
+      reader.readAsDataURL(file);
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   const toggleDarkMode = () => {
     const newMode = modoEscuro ? "light-mode" : "dark-mode";
     setModoEscuro(!modoEscuro);
@@ -109,6 +124,8 @@ const Configuracoes = () => {
               id="imagem"
               name="imagem"
               className="configuracoes-input"
+              accept="image/*"
+              onChange={handleFileChange}
             />
           </div>
           <div className="form-group">
