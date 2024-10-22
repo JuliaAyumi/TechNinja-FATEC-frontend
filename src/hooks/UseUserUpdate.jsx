@@ -19,12 +19,18 @@ const useUserUpdate = (userData, token) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Cria um objeto para os dados a serem atualizados
     const updatedUserData = {
       nome,
       email,
-      senha,
-      userId,
     };
+
+    // Adiciona a senha apenas se ela estiver preenchida
+    if (senha) {
+      updatedUserData.senha = senha;
+    }
+
+    console.log(updatedUserData);
 
     try {
       const response = await fetch(
@@ -32,7 +38,7 @@ const useUserUpdate = (userData, token) => {
           import.meta.env.MODE === "development"
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
-        }/api/users/update/${updatedUserData.userId}`,
+        }/api/users/update/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -45,6 +51,8 @@ const useUserUpdate = (userData, token) => {
 
       if (!response.ok) throw new Error("Erro ao atualizar dados do usuário");
       alert("Dados atualizados com sucesso!");
+      // Limpar senha após a atualização bem-sucedida
+      setSenha("");
     } catch (error) {
       console.error("Erro ao atualizar dados do usuário", error);
     }
