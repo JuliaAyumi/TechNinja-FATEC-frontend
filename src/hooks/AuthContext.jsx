@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(
         `${
-          import.meta.env.MODE === "development"
+          import.meta.env.VITE_MODE === "development"
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
         }/api/login`,
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(
         `${
-          import.meta.env.MODE === "development"
+          import.meta.env.VITE_MODE === "development"
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
         }/api/register`,

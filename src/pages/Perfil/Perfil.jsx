@@ -9,19 +9,13 @@ import quizzes from "../../assets/icons/pontuacao-maxima.png"
 import useUserData from "../../hooks/UseUserData";
 
 const Perfil = () => {
-
-  //Obtendo o token e dados do usuario via hook
   const tokenString = localStorage.getItem("user");
 
-  //Parse do JSON para extrair o token
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
 
   const {userData, loading} = useUserData(token)
 
-  console.log(userData)
-
-  //Conntar os quizes completados
   const quizzesCompletados = userData.quizzesCompletados.length;
 
   return (
