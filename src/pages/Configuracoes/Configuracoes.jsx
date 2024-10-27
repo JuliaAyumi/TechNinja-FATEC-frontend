@@ -5,16 +5,15 @@ import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
 import { useLocation } from "react-router-dom";
 import useUserData from "../../hooks/UseUserData";
 import useUserUpdate from "../../hooks/UseUserUpdate";
+import { Toaster } from "react-hot-toast";
 
 const Configuracoes = () => {
   const { logout } = useAuth();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("perfil");
 
-  //Obtendo o token e dados do usuario via hook
   const tokenString = localStorage.getItem("user");
 
-  //Parse do JSON para extrair o token
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
 
@@ -71,7 +70,7 @@ const Configuracoes = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setAvatar(reader.result); // Armazena a imagem em Base64
+        setAvatar(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -244,6 +243,7 @@ const Configuracoes = () => {
         </div>
 
         <div className="conteudo">{renderContent()}</div>
+        <Toaster />
       </main>
     </div>
   );
