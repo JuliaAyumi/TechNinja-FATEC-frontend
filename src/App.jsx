@@ -20,6 +20,9 @@ const App = () => {
     const accessibilityMode = localStorage.getItem("accessibilityMode");
     const daltonico = localStorage.getItem("daltonicoMode");
     const baixaVisao = localStorage.getItem("baixaVisaoMode");
+
+    window._mfq.push(['trackPageView']);
+
     if (
       ["/", "/login", "/cadastrar", "/esqueceu"].includes(location.pathname)
     ) {
