@@ -8,7 +8,8 @@ import { toast, Toaster } from "react-hot-toast";
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [acertos, setAcertos] = useState(0);
+  const [finalizado, setFinalizado] = useState(false);
   const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -59,17 +60,19 @@ const Quiz = () => {
       return;
     }
 
-    setIsButtonDisabled(true);
-
-    let acertos = 0;
+    let acertosContador = 0;
     perguntas.forEach((pergunta, index) => {
       if (respostasUsuario[index] === pergunta.resposta) {
-        acertos += 1;
+        acertosContador += 1;
       }
     });
 
-    toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
-    const points = acertos * 10;
+    toast.success(
+      `Você acertou ${acertosContador} de ${perguntas.length} perguntas!`
+    );
+    const points = acertosContador * 10;
+    setAcertos(acertosContador);
+    setFinalizado(true);
 
     try {
       const response = await fetch(
@@ -120,43 +123,67 @@ const Quiz = () => {
     } catch (error) {
       console.error("Erro ao marcar o quiz como completado:", error);
     }
+  };
 
-    setTimeout(() => {
-      navigate(`/quizzes/${area}/${subtema}`);
-      setIsButtonDisabled(false);
-    }, 5000);
+  const handleSair = () => {
+    navigate(`/quizzes/${area}/${subtema}`);
   };
 
   return (
     <div>
-      <HeaderArrowBack />
+      <HeaderArrowBack to={`/quizzes/${area}/${subtema}`} />
 
       <main className="quiz-main">
         {perguntas.length > 0 ? (
-          perguntas.map((pergunta, index) => (
-            <div key={index} className="area-pergunta">
-              <div className="question-block">
-                <h2 className="question-title">{pergunta.pergunta}</h2>
+          perguntas.map((pergunta, index) => {
+            const isRespostaCorreta =
+              finalizado && respostasUsuario[index] === pergunta.resposta;
+            const isRespostaErrada =
+              finalizado &&
+              respostasUsuario[index] !== pergunta.resposta &&
+              respostasUsuario[index];
+
+            return (
+              <div key={index} className="area-pergunta">
+                <div className="question-block">
+                  <h2 className="question-title">{pergunta.pergunta}</h2>
+                </div>
+                <div className="answers-block">
+                  {pergunta.alternativas.map((alt, idx) => {
+                    const isSelected = respostasUsuario[index] === alt.opcao;
+                    return (
+                      <div key={idx}>
+                        <input
+                          type="radio"
+                          className="resposta-item"
+                          id={`resposta${index}-${idx}`}
+                          name={`pergunta${index}`}
+                          value={alt.opcao}
+                          onChange={() =>
+                            handleRespostaChange(index, alt.opcao)
+                          }
+                          disabled={finalizado}
+                        />
+                        <label
+                          htmlFor={`resposta${index}-${idx}`}
+                          style={{
+                            backgroundColor:
+                              finalizado && isRespostaCorreta && isSelected
+                                ? "green"
+                                : finalizado && isRespostaErrada && isSelected
+                                ? "red"
+                                : isSelected,
+                          }}
+                        >
+                          {alt.opcao}) {alt["texto-opcao"]}
+                        </label>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="answers-block">
-                {pergunta.alternativas.map((alt, idx) => (
-                  <div key={idx}>
-                    <input
-                      type="radio"
-                      className="resposta-item"
-                      id={`resposta${index}-${idx}`}
-                      name={`pergunta${index}`}
-                      value={alt.opcao}
-                      onChange={() => handleRespostaChange(index, alt.opcao)}
-                    />
-                    <label htmlFor={`resposta${index}-${idx}`}>
-                      {alt.opcao}) {alt["texto-opcao"]}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <p>Carregando perguntas...</p>
         )}
@@ -164,10 +191,9 @@ const Quiz = () => {
         <div className="botoes">
           <button
             className="button1"
-            onClick={finalizarQuiz}
-            disabled={isButtonDisabled}
+            onClick={finalizado ? handleSair : finalizarQuiz}
           >
-            {isButtonDisabled ? "Finalizando..." : "Finalizar"}
+            {finalizado ? "Sair do Quiz" : "Finalizar"}
           </button>
         </div>
       </main>
