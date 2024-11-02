@@ -1,10 +1,11 @@
 import { toast } from "react-hot-toast";
+import { formatarTexto } from "../utils/formatarTexto";
 
 const ConfirmToast = ({ topic, onContinue, onCancel }) => {
   return (
     <span>
       <div>
-        Você já completou o quiz: <b>{topic}</b>
+        Você já completou o quiz: <b>{formatarTexto(topic)}</b>
       </div>
       <div style={{ marginTop: "10px" }}>
         <button
