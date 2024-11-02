@@ -8,6 +8,7 @@ import { toast, Toaster } from "react-hot-toast";
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -36,7 +37,6 @@ const Quiz = () => {
     fetchQuiz();
   }, [area, subtema, dificuldade]);
 
-  // Função para lidar com a seleção de uma resposta
   const handleRespostaChange = (indexPergunta, opcaoSelecionada) => {
     setRespostasUsuario({
       ...respostasUsuario,
@@ -44,7 +44,6 @@ const Quiz = () => {
     });
   };
 
-  // Verificar se todas as perguntas foram respondidas
   const todasRespondidas = () => {
     return (
       perguntas.length > 0 &&
@@ -52,7 +51,6 @@ const Quiz = () => {
     );
   };
 
-  // Função para finalizar o quiz
   const finalizarQuiz = async () => {
     if (!todasRespondidas()) {
       toast.error(
@@ -60,6 +58,8 @@ const Quiz = () => {
       );
       return;
     }
+
+    setIsButtonDisabled(true);
 
     let acertos = 0;
     perguntas.forEach((pergunta, index) => {
@@ -71,7 +71,6 @@ const Quiz = () => {
     toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
     const points = acertos * 10;
 
-    // Atualizar a pontuação do usuário
     try {
       const response = await fetch(
         `${
@@ -102,7 +101,6 @@ const Quiz = () => {
       console.error("Erro ao atualizar a pontuação:", error);
     }
 
-    // Marcar o quiz como completado
     try {
       await fetch(
         `${
@@ -125,23 +123,10 @@ const Quiz = () => {
 
     setTimeout(() => {
       navigate(`/quizzes/${area}/${subtema}`);
+      setIsButtonDisabled(false);
     }, 5000);
   };
 
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      if (!todasRespondidas()) {
-        e.preventDefault();
-        e.returnValue = "";
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [perguntas, respostasUsuario]);
   return (
     <div>
       <HeaderArrowBack />
@@ -177,8 +162,12 @@ const Quiz = () => {
         )}
 
         <div className="botoes">
-          <button className="button1" onClick={finalizarQuiz}>
-            Finalizar
+          <button
+            className="button1"
+            onClick={finalizarQuiz}
+            disabled={isButtonDisabled}
+          >
+            {isButtonDisabled ? "Finalizando..." : "Finalizar"}
           </button>
         </div>
       </main>

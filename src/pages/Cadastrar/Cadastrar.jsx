@@ -11,7 +11,7 @@ const Cadastrar = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleCadastrar = async (e) => {
     e.preventDefault();
@@ -27,21 +27,20 @@ const Cadastrar = () => {
       senha: password,
     };
 
-    setIsLoading(true);
+    setIsButtonDisabled(true);
 
     try {
       await register(userData);
     } catch (error) {
       console.error("Erro no cadastro:", error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => setIsButtonDisabled(false), 2000);
     }
   };
 
   return (
     <div>
       <Header />
-
       <main className="main-cadastrar">
         <div className="cadastrar-left-column">
           <form
@@ -85,12 +84,15 @@ const Cadastrar = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            <button type="submit" className="button1" disabled={isLoading}>
-              {isLoading ? "Cadastrando..." : "Cadastrar"}
+            <button
+              type="submit"
+              className="button1"
+              disabled={isButtonDisabled}
+            >
+              {isButtonDisabled ? "Aguarde..." : "Cadastrar"}
             </button>
           </form>
         </div>
-
         <div className="cadastrar-right-column">
           <img src={logo} alt="TechNinja logo" className="main-image" />
         </div>

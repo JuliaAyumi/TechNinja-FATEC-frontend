@@ -9,12 +9,12 @@ import logo from "../../assets/images/logoDark.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsButtonDisabled(true); 
 
     const userData = {
       email: email,
@@ -26,7 +26,7 @@ const Login = () => {
     } catch (error) {
       console.error("Erro no login:", error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => setIsButtonDisabled(false), 2000);
     }
   };
 
@@ -57,8 +57,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit" className="button1" disabled={isLoading}>
-              {isLoading ? "Entrando..." : "Entrar"}
+            <button
+              type="submit"
+              className="button1"
+              disabled={isButtonDisabled}
+            >
+              {isButtonDisabled ? "Aguarde..." : "Entrar"}
             </button>
             <Link to="/esqueceu" className="esqueceu">
               <p className="esqueceu-text">Esqueceu a senha?</p>
