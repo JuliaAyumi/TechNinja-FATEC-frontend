@@ -49,6 +49,7 @@ const HeaderHome = () => {
           </Link>
 
           <img
+            className="modo-escuro"
             src={isDarkMode ? iconLightmode : iconDarkmode}
             title={isDarkMode ? "Modo claro" : "Modo escuro"}
             alt={

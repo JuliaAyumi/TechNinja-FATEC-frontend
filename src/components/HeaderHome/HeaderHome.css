@@ -28,6 +28,10 @@
   filter: invert(1);
 }
 
+.modo-escuro {
+  cursor: pointer;
+}
+
 .header-home-options img:hover {
   transform: scale(1.1);
 }
