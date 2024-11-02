@@ -11,6 +11,10 @@
   padding: 0;
 }
 
+.body-quizzes p {
+  text-align: center;
+}
+
 .quiz {
   display: flex;
   justify-content: start;
