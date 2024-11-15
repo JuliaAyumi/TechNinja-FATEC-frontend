@@ -37,12 +37,12 @@ Sistema que visa oferecer uma plataforma educacional interativa para usuários i
 
 ## Caso de Uso
 <div align="center">
-  <img src="https://github.com/matheusduartedevs/3-semestre-projeto-integrador/assets/127058626/4b658f30-4291-431c-966b-bde9e40afca6" alt='Imagem do caso de uso geral da aplicação' />
+  <img src="https://github.com/user-attachments/assets/42eb6b05-92d4-43eb-8758-7e788d08ffb2" alt='Imagem do caso de uso geral da aplicação' />
 </div>
 
 ## Stack utilizada
 **Front-end:** React, Javascript <br />
-**Back-end:** Java, SpringBoot <br />
+**Back-end:** Node <br />
 **Banco de Dados:** MongoDB
 
 ### Processo de Desenvolvimento de Software - PDS
