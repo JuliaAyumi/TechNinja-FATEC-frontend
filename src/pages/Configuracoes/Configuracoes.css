@@ -93,6 +93,7 @@ form {
 .form-group label {
   display: inline;
   margin-bottom: 0.8em;
+  color: #333;
 }
 
 .form-group input {
@@ -133,6 +134,7 @@ form {
 
 body.dark-mode .form-group input{
   background-color: #3d444d;
+  color: white;
   border: none;
 }
 

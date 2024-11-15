@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "./HeaderHome.css";
 import { useState, useEffect } from "react";
-import iconTutorial from "../../assets/icons/icon-tutorial.png";
 import iconPerfil from "../../assets/icons/icon-profile-white.png";
 import iconDarkmode from "../../assets/icons/icon-darkmode-white.png";
 import iconLightmode from "../../assets/icons/icon-claro.png";
@@ -35,15 +34,6 @@ const HeaderHome = () => {
       <h3>TECHNINJA</h3>
       <div className="icons">
         <div className="header-home-options">
-          <a href="">
-            <img
-              src={iconTutorial}
-              title="Tutorial"
-              alt="Icone tutorial"
-              id="tutorial"
-            />
-          </a>
-
           <Link to="/perfil">
             <img src={iconPerfil} title="Perfil" alt="Icone Meu Perfil" />
           </Link>

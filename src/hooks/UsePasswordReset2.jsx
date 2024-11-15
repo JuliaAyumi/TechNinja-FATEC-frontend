@@ -31,7 +31,7 @@ const useResetPassword = (token) => {
 
             if (response.ok) {
                 alert('Senha redefinida com sucesso!');
-                navigate('/login'); // Redireciona para a página de login após sucesso
+                navigate('/login');
             } else {
                 const data = await response.json();
                 setErro(data.message || 'Erro ao redefinir a senha');

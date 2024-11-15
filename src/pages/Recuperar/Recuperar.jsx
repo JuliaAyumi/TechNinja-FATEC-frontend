@@ -5,7 +5,7 @@ import useResetPassword from '../../hooks/UsePasswordReset2';
 import logo from "../../assets/images/logoDark.png";
 
 const Recuperar = () => {
-    const {token} = useParams(); // Obtém o token da URL
+    const {token} = useParams();
 
     const {
         senha,
