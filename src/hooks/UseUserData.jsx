@@ -20,8 +20,6 @@ const useUserData = (token) => {
       const decodedToken = new JwtDecode(token);
       const userId = decodedToken.payload.id;
 
-      console.log(decodedToken)
-
       try {
           const response = await fetch(`${
             import.meta.env.VITE_MODE === "development"
