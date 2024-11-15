@@ -134,7 +134,7 @@ const Configuracoes = () => {
               id="nome"
               name="nome"
               className="configuracoes-input"
-              value={nome}
+              value={ loading ? 'Carregando' : nome}
               onChange={(e) => setNome(e.target.value)}
             />
           </div>
@@ -145,7 +145,7 @@ const Configuracoes = () => {
               id="email"
               name="email"
               className="configuracoes-input"
-              value={email}
+              value={ loading ? 'Carregando' : email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
