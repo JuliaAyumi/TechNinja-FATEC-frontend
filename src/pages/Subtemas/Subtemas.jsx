@@ -1,9 +1,9 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./Subtemas.css";
-import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
-import { formatarTexto } from "../../utils/formatarTexto";
-import logo from "../../assets/images/logoDark.png";
+import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import './Subtemas.css';
+import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
+import { formatarTexto } from '../../utils/formatarTexto';
+import logo from '../../assets/images/logoDark.png';
 
 const Subtemas = () => {
   const { area } = useParams();
@@ -15,15 +15,15 @@ const Subtemas = () => {
       try {
         const response = await fetch(
           `${
-            import.meta.env.VITE_MODE === "development"
+            import.meta.env.VITE_MODE === 'development'
               ? `http://localhost:${import.meta.env.VITE_PORT}`
               : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}`
+          }/api/quiz/${area}`,
         );
         const data = await response.json();
         setSubtemas(data);
       } catch (error) {
-        console.error("Erro ao buscar subtemas:", error);
+        console.error('Erro ao buscar subtemas:', error);
       } finally {
         setLoading(false);
       }
@@ -35,16 +35,16 @@ const Subtemas = () => {
   return (
     <div>
       <HeaderArrowBack to={`/home`} />
-      <main className="body-quizzes">
+      <main className='body-quizzes'>
         {loading ? (
-          <div className="loading-screen">
-            <img src={logo} alt="Logo TechNinja" className="logo-loading" />
+          <div className='loading-screen'>
+            <img src={logo} alt='Logo TechNinja' className='logo-loading' />
             <p>Carregando...</p>
           </div>
         ) : subtemas.length > 0 ? (
           subtemas.map((item) => (
             <Link
-              className="quiz"
+              className='quiz'
               key={item.subtema}
               to={`/quizzes/${area}/${item.subtema}`}
             >

@@ -1,12 +1,12 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./Quizzes.css";
-import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
-import { useAuth } from "../../hooks/AuthContext";
-import { showToast } from "../../components/ConfirmToast";
-import { Toaster } from "react-hot-toast";
-import { formatarTexto } from "../../utils/formatarTexto";
-import logo from "../../assets/images/logoDark.png";
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import './Quizzes.css';
+import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
+import { useAuth } from '../../hooks/AuthContext';
+import { showToast } from '../../components/ConfirmToast';
+import { Toaster } from 'react-hot-toast';
+import { formatarTexto } from '../../utils/formatarTexto';
+import logo from '../../assets/images/logoDark.png';
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
@@ -20,7 +20,7 @@ const Quizzes = () => {
     if (isCompleted) {
       event.preventDefault();
       showToast(`${subtema} - ${dificuldade}`, () =>
-        navigate(`/quizzes/${area}/${subtema}/${dificuldade}`)
+        navigate(`/quizzes/${area}/${subtema}/${dificuldade}`),
       );
     } else {
       navigate(`/quizzes/${area}/${subtema}/${dificuldade}`);
@@ -32,21 +32,21 @@ const Quizzes = () => {
       try {
         const response = await fetch(
           `${
-            import.meta.env.VITE_MODE === "development"
+            import.meta.env.VITE_MODE === 'development'
               ? `http://localhost:${import.meta.env.VITE_PORT}`
               : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}/${subtema}/dificuldades`
+          }/api/quiz/${area}/${subtema}/dificuldades`,
         );
         const data = await response.json();
 
-        const dificuldadeOrder = ["facil", "medio", "dificil"];
+        const dificuldadeOrder = ['facil', 'medio', 'dificil'];
         data.sort(
-          (a, b) => dificuldadeOrder.indexOf(a) - dificuldadeOrder.indexOf(b)
+          (a, b) => dificuldadeOrder.indexOf(a) - dificuldadeOrder.indexOf(b),
         );
 
         setDificuldades(data);
       } catch (error) {
-        console.error("Erro ao buscar dificuldades:", error);
+        console.error('Erro ao buscar dificuldades:', error);
       } finally {
         setLoading(false);
       }
@@ -56,21 +56,21 @@ const Quizzes = () => {
       try {
         const response = await fetch(
           `${
-            import.meta.env.VITE_MODE === "development"
+            import.meta.env.VITE_MODE === 'development'
               ? `http://localhost:${import.meta.env.VITE_PORT}`
               : import.meta.env.VITE_HEROKU_LINK
           }/api/user-quizzes-completed`,
           {
-            method: "GET",
+            method: 'GET',
             headers: {
               Authorization: `Bearer ${user}`,
             },
-          }
+          },
         );
         const data = await response.json();
         setQuizzesCompletados(data.quizzesCompletados);
       } catch (error) {
-        console.error("Erro ao buscar quizzes completados:", error);
+        console.error('Erro ao buscar quizzes completados:', error);
       }
     };
 
@@ -81,10 +81,10 @@ const Quizzes = () => {
   return (
     <div>
       <HeaderArrowBack to={`/quizzes/${area}`} />
-      <main className="body-quizzes">
+      <main className='body-quizzes'>
         {loading ? (
-          <div className="loading-screen">
-            <img src={logo} alt="Logo TechNinja" className="logo-loading" />
+          <div className='loading-screen'>
+            <img src={logo} alt='Logo TechNinja' className='logo-loading' />
             <p>Carregando...</p>
           </div>
         ) : dificuldades.length > 0 ? (
@@ -96,7 +96,7 @@ const Quizzes = () => {
               <Link
                 key={dificuldade}
                 to={`/quizzes/${area}/${subtema}/${dificuldade}`}
-                className={`quiz ${isCompleted ? "completed" : ""}`}
+                className={`quiz ${isCompleted ? 'completed' : ''}`}
                 onClick={(event) =>
                   handleQuizClick(event, isCompleted, subtema, dificuldade)
                 }

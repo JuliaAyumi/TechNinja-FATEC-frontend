@@ -1,62 +1,72 @@
-import { useState, useEffect } from "react";
-import "./Configuracoes.css";
-import { useAuth } from "../../hooks/AuthContext";
-import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
-import { useLocation } from "react-router-dom";
-import useUserData from "../../hooks/UseUserData";
-import useUserUpdate from "../../hooks/UseUserUpdate";
-import { Toaster } from "react-hot-toast";
+import { useState, useEffect } from 'react';
+import './Configuracoes.css';
+import { useAuth } from '../../hooks/AuthContext';
+import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
+import { useLocation } from 'react-router-dom';
+import useUserData from '../../hooks/UseUserData';
+import useUserUpdate from '../../hooks/UseUserUpdate';
+import { Toaster } from 'react-hot-toast';
 
 const Configuracoes = () => {
   const { logout } = useAuth();
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("perfil");
+  const [activeTab, setActiveTab] = useState('perfil');
 
-  const tokenString = localStorage.getItem("user");
+  const tokenString = localStorage.getItem('user');
 
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
 
-  const {userData, loading} = useUserData(token);
+  const { userData, loading } = useUserData(token);
 
-  const { nome, setNome, email, setEmail, senha, setSenha, avatar, setAvatar ,handleSubmit } = useUserUpdate(userData, token);
+  const {
+    nome,
+    setNome,
+    email,
+    setEmail,
+    senha,
+    setSenha,
+    avatar,
+    setAvatar,
+    handleSubmit,
+  } = useUserUpdate(userData, token);
 
   const [modoEscuro, setModoEscuro] = useState(
-    localStorage.getItem("accessibilityMode") === "dark-mode"
+    localStorage.getItem('accessibilityMode') === 'dark-mode',
   );
   const [modoDaltonico, setModoDaltonico] = useState(
-    localStorage.getItem("daltonicoMode") === "daltonico"
+    localStorage.getItem('daltonicoMode') === 'daltonico',
   );
   const [modoBaixaVisao, setModoBaixaVisao] = useState(
-    localStorage.getItem("baixaVisaoMode") === "baixa-visao"
+    localStorage.getItem('baixaVisaoMode') === 'baixa-visao',
   );
 
   const applyAccessibilityMode = () => {
-    const accessibilityMode = localStorage.getItem("accessibilityMode");
-    const daltonicoMode = localStorage.getItem("daltonicoMode");
-    const baixaVisaoMode = localStorage.getItem("baixaVisaoMode");
+    const accessibilityMode = localStorage.getItem('accessibilityMode');
+    const daltonicoMode = localStorage.getItem('daltonicoMode');
+    const baixaVisaoMode = localStorage.getItem('baixaVisaoMode');
 
     if (
-      ["/", "/login", "/cadastrar", "/esqueceu"].includes(location.pathname)
+      ['/', '/login', '/cadastrar', '/esqueceu'].includes(location.pathname)
     ) {
-      document.body.classList.remove("dark-mode", "daltonico", "baixa-visao");
+      document.body.classList.remove('dark-mode', 'daltonico', 'baixa-visao');
     } else {
-      if (accessibilityMode === "dark-mode") {
-        document.body.classList.add("dark-mode");
+      if (accessibilityMode === 'dark-mode') {
+        document.body.classList.add('dark-mode');
       } else {
-        document.body.classList.remove("dark-mode");
+        document.body.classList.remove('dark-mode');
       }
 
-      if (daltonicoMode === "daltonico") {
-        document.body.classList.add("daltonico");
+      if (daltonicoMode === 'daltonico') {
+        document.body.classList.add('daltonico');
       } else {
-        document.body.classList.remove("daltonico");
+        document.body.classList.remove('daltonico');
       }
 
-      if (baixaVisaoMode === "baixa-visao") {
-        document.body.classList.add("baixa-visao");
+      if (baixaVisaoMode === 'baixa-visao') {
+        document.body.classList.add('baixa-visao');
       } else {
-        document.body.classList.remove("baixa-visao");
+        document.body.classList.remove('baixa-visao');
       }
     }
   };
@@ -81,124 +91,124 @@ const Configuracoes = () => {
   };
 
   const toggleDarkMode = () => {
-    const newMode = modoEscuro ? "light-mode" : "dark-mode";
+    const newMode = modoEscuro ? 'light-mode' : 'dark-mode';
     setModoEscuro(!modoEscuro);
-    localStorage.setItem("accessibilityMode", newMode);
+    localStorage.setItem('accessibilityMode', newMode);
     applyAccessibilityMode();
   };
 
   const toggleDaltonicoMode = () => {
-    const newMode = modoDaltonico ? "light-mode" : "daltonico";
+    const newMode = modoDaltonico ? 'light-mode' : 'daltonico';
     setModoDaltonico(!modoDaltonico);
-    localStorage.setItem("daltonicoMode", newMode);
+    localStorage.setItem('daltonicoMode', newMode);
     applyAccessibilityMode();
   };
 
   const toggleBaixaVisaoMode = () => {
-    const newMode = modoBaixaVisao ? "light-mode" : "baixa-visao";
+    const newMode = modoBaixaVisao ? 'light-mode' : 'baixa-visao';
     setModoBaixaVisao(!modoBaixaVisao);
-    localStorage.setItem("baixaVisaoMode", newMode);
+    localStorage.setItem('baixaVisaoMode', newMode);
     applyAccessibilityMode();
   };
 
   const handleSalvarAcessibilidade = (event) => {
     event.preventDefault();
-    if ("Notification" in window) {
+    if ('Notification' in window) {
       Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          new Notification("Configurações salvas!");
+        if (permission === 'granted') {
+          new Notification('Configurações salvas!');
         }
       });
     }
   };
 
   const renderContent = () => {
-    if (activeTab === "perfil") {
+    if (activeTab === 'perfil') {
       return (
-        <form className="form-perfil" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="imagem">Alterar Imagem</label>
+        <form className='form-perfil' onSubmit={handleSubmit}>
+          <div className='form-group'>
+            <label htmlFor='imagem'>Alterar Imagem</label>
             <input
-              type="file"
-              id="imagem"
-              name="imagem"
-              className="configuracoes-input"
-              accept="image/*"
+              type='file'
+              id='imagem'
+              name='imagem'
+              className='configuracoes-input'
+              accept='image/*'
               onChange={handleFileChange}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="nome">Nome</label>
+          <div className='form-group'>
+            <label htmlFor='nome'>Nome</label>
             <input
-              type="text"
-              id="nome"
-              name="nome"
-              className="configuracoes-input"
-              value={ loading ? 'Carregando' : nome}
+              type='text'
+              id='nome'
+              name='nome'
+              className='configuracoes-input'
+              value={loading ? 'Carregando' : nome}
               onChange={(e) => setNome(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              className="configuracoes-input"
-              value={ loading ? 'Carregando' : email}
+              type='email'
+              id='email'
+              name='email'
+              className='configuracoes-input'
+              value={loading ? 'Carregando' : email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="senha">Senha</label>
+          <div className='form-group'>
+            <label htmlFor='senha'>Senha</label>
             <input
-              type="password"
-              id="senha"
-              name="senha"
-              className="configuracoes-input"
+              type='password'
+              id='senha'
+              name='senha'
+              className='configuracoes-input'
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
           </div>
-          <button type="submit" className="button1">
+          <button type='submit' className='button1'>
             Confirmar
           </button>
         </form>
       );
-    } else if (activeTab === "acessibilidade") {
+    } else if (activeTab === 'acessibilidade') {
       return (
-        <form id="accessibility-form" onSubmit={handleSalvarAcessibilidade}>
-          <div className="form-group">
-            <label htmlFor="escuro">Modo Escuro</label>
-            <label className="switch">
+        <form id='accessibility-form' onSubmit={handleSalvarAcessibilidade}>
+          <div className='form-group'>
+            <label htmlFor='escuro'>Modo Escuro</label>
+            <label className='switch'>
               <input
-                type="checkbox"
-                id="escuro"
-                className="configuracoes-switch"
+                type='checkbox'
+                id='escuro'
+                className='configuracoes-switch'
                 checked={modoEscuro}
                 onChange={toggleDarkMode}
               />
             </label>
           </div>
-          <div className="form-group">
-            <label htmlFor="daltonico">Modo Daltônico</label>
-            <label className="switch">
+          <div className='form-group'>
+            <label htmlFor='daltonico'>Modo Daltônico</label>
+            <label className='switch'>
               <input
-                type="checkbox"
-                id="daltonico"
-                className="configuracoes-switch"
+                type='checkbox'
+                id='daltonico'
+                className='configuracoes-switch'
                 checked={modoDaltonico}
                 onChange={toggleDaltonicoMode}
               />
             </label>
           </div>
-          <div className="form-group">
-            <label htmlFor="baixa-visao">Modo Baixa Visão</label>
-            <label className="switch">
+          <div className='form-group'>
+            <label htmlFor='baixa-visao'>Modo Baixa Visão</label>
+            <label className='switch'>
               <input
-                type="checkbox"
-                id="baixa-visao"
-                className="configuracoes-switch"
+                type='checkbox'
+                id='baixa-visao'
+                className='configuracoes-switch'
                 checked={modoBaixaVisao}
                 onChange={toggleBaixaVisaoMode}
               />
@@ -213,36 +223,36 @@ const Configuracoes = () => {
     <div>
       <HeaderArrowBack to={`/home`} />
 
-      <main className="main-configuracoes">
-        <div className="opcoes">
+      <main className='main-configuracoes'>
+        <div className='opcoes'>
           <ul>
             <li>
               <a
-                href="#"
-                className="link-option"
-                onClick={() => setActiveTab("perfil")}
+                href='#'
+                className='link-option'
+                onClick={() => setActiveTab('perfil')}
               >
                 Perfil
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="link-option"
-                onClick={() => setActiveTab("acessibilidade")}
+                href='#'
+                className='link-option'
+                onClick={() => setActiveTab('acessibilidade')}
               >
                 Acessibilidade
               </a>
             </li>
             <li>
-              <a onClick={logout} className="link-option">
+              <a onClick={logout} className='link-option'>
                 Sair
               </a>
             </li>
           </ul>
         </div>
 
-        <div className="conteudo">{renderContent()}</div>
+        <div className='conteudo'>{renderContent()}</div>
         <Toaster />
       </main>
     </div>

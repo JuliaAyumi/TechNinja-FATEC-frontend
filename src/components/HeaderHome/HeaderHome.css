@@ -2,7 +2,7 @@
   height: 3.4em;
   padding: 0.2em 1em;
   font-size: 1.45em;
-  font-family: "KARASHA", sans-serif;
+  font-family: 'KARASHA', sans-serif;
   background-color: black;
   color: white;
   text-align: center;
@@ -12,8 +12,8 @@
 }
 
 .header-home h3 {
-  font-size: 1.em;
-  font-family: "KARASHA";
+  font-size: 1em;
+  font-family: 'KARASHA';
   cursor: pointer;
   color: white;
 }
@@ -36,15 +36,15 @@
   transform: scale(1.1);
 }
 
-body.dark-mode .header-home{
+body.dark-mode .header-home {
   border-bottom: 0.08em;
   border-style: none none solid none;
-  border-color:#656c76;
+  border-color: #656c76;
   background-color: #010409;
 }
 
 body.baixa-visao .header-home {
-  font-size: 2em
+  font-size: 2em;
 }
 
 body.baixa-visao .header-home img {

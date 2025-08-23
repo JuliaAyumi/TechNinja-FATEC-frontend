@@ -1,47 +1,47 @@
-import { useLocation, useRoutes } from "react-router-dom";
-import Cadastrar from "./pages/Cadastrar/Cadastrar";
-import Configuracoes from "./pages/Configuracoes/Configuracoes";
-import Home from "./pages/Home/Home";
-import Inicial from "./pages/Inicial/Inicial";
-import Login from "./pages/Login/Login";
-import Perfil from "./pages/Perfil/Perfil";
-import Quiz from "./pages/Quiz/Quiz";
-import Quizzes from "./pages/Quizzes/Quizzes";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Esqueceu from "./pages/Esqueceu/Esqueceu";
-import Recuperar from "./pages/Recuperar/Recuperar";
-import { useEffect } from "react";
-import "./variables.css";
-import Subtemas from "./pages/Subtemas/Subtemas";
+import { useLocation, useRoutes } from 'react-router-dom';
+import Cadastrar from './pages/Cadastrar/Cadastrar';
+import Configuracoes from './pages/Configuracoes/Configuracoes';
+import Home from './pages/Home/Home';
+import Inicial from './pages/Inicial/Inicial';
+import Login from './pages/Login/Login';
+import Perfil from './pages/Perfil/Perfil';
+import Quiz from './pages/Quiz/Quiz';
+import Quizzes from './pages/Quizzes/Quizzes';
+import ProtectedRoute from './components/ProtectedRoute';
+import Esqueceu from './pages/Esqueceu/Esqueceu';
+import Recuperar from './pages/Recuperar/Recuperar';
+import { useEffect } from 'react';
+import './variables.css';
+import Subtemas from './pages/Subtemas/Subtemas';
 
 const App = () => {
   const location = useLocation();
   const applyAccessibilityMode = () => {
-    const accessibilityMode = localStorage.getItem("accessibilityMode");
-    const daltonico = localStorage.getItem("daltonicoMode");
-    const baixaVisao = localStorage.getItem("baixaVisaoMode");
+    const accessibilityMode = localStorage.getItem('accessibilityMode');
+    const daltonico = localStorage.getItem('daltonicoMode');
+    const baixaVisao = localStorage.getItem('baixaVisaoMode');
 
     window._mfq.push(['trackPageView']);
 
     if (
-      ["/", "/login", "/cadastrar", "/esqueceu"].includes(location.pathname)
+      ['/', '/login', '/cadastrar', '/esqueceu'].includes(location.pathname)
     ) {
-      document.body.classList.remove("dark-mode", "daltonico", "baixa-visao");
+      document.body.classList.remove('dark-mode', 'daltonico', 'baixa-visao');
     } else {
-      if (accessibilityMode === "dark-mode") {
-        document.body.classList.add("dark-mode");
+      if (accessibilityMode === 'dark-mode') {
+        document.body.classList.add('dark-mode');
       } else {
-        document.body.classList.remove("dark-mode");
+        document.body.classList.remove('dark-mode');
       }
-      if (daltonico === "daltonico") {
-        document.body.classList.add("daltonico");
+      if (daltonico === 'daltonico') {
+        document.body.classList.add('daltonico');
       } else {
-        document.body.classList.remove("daltonico");
+        document.body.classList.remove('daltonico');
       }
-      if (baixaVisao === "baixa-visao") {
-        document.body.classList.add("baixa-visao");
+      if (baixaVisao === 'baixa-visao') {
+        document.body.classList.add('baixa-visao');
       } else {
-        document.body.classList.remove("baixa-visao");
+        document.body.classList.remove('baixa-visao');
       }
     }
   };
@@ -51,27 +51,27 @@ const App = () => {
 
   const routes = useRoutes([
     {
-      path: "/",
+      path: '/',
       element: <Inicial />,
     },
     {
-      path: "/login",
+      path: '/login',
       element: <Login />,
     },
     {
-      path: "/cadastrar",
+      path: '/cadastrar',
       element: <Cadastrar />,
     },
     {
-      path: "/esqueceu",
+      path: '/esqueceu',
       element: <Esqueceu />,
     },
     {
-      path: "/recuperar/:token",
+      path: '/recuperar/:token',
       element: <Recuperar />,
     },
     {
-      path: "/home",
+      path: '/home',
       element: (
         <ProtectedRoute>
           <Home />
@@ -79,7 +79,7 @@ const App = () => {
       ),
     },
     {
-      path: "/perfil",
+      path: '/perfil',
       element: (
         <ProtectedRoute>
           <Perfil />
@@ -87,7 +87,7 @@ const App = () => {
       ),
     },
     {
-      path: "/quizzes/:area",
+      path: '/quizzes/:area',
       element: (
         <ProtectedRoute>
           <Subtemas />
@@ -95,7 +95,7 @@ const App = () => {
       ),
     },
     {
-      path: "/quizzes/:area/:subtema",
+      path: '/quizzes/:area/:subtema',
       element: (
         <ProtectedRoute>
           <Quizzes />
@@ -103,7 +103,7 @@ const App = () => {
       ),
     },
     {
-      path: "/quizzes/:area/:subtema/:dificuldade",
+      path: '/quizzes/:area/:subtema/:dificuldade',
       element: (
         <ProtectedRoute>
           <Quiz />
@@ -111,7 +111,7 @@ const App = () => {
       ),
     },
     {
-      path: "/configuracoes",
+      path: '/configuracoes',
       element: (
         <ProtectedRoute>
           <Configuracoes />
