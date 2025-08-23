@@ -1,18 +1,20 @@
 import { useLocation, useRoutes } from 'react-router-dom';
-import Cadastrar from './pages/Cadastrar/Cadastrar';
-import Configuracoes from './pages/Configuracoes/Configuracoes';
-import Home from './pages/Home/Home';
-import Inicial from './pages/Inicial/Inicial';
-import Login from './pages/Login/Login';
-import Perfil from './pages/Perfil/Perfil';
-import Quiz from './pages/Quiz/Quiz';
-import Quizzes from './pages/Quizzes/Quizzes';
-import ProtectedRoute from './ui/components/ProtectedRoute';
-import Esqueceu from './pages/Esqueceu/Esqueceu';
-import Recuperar from './pages/Recuperar/Recuperar';
+import Cadastrar from '@pages/Cadastrar/Cadastrar';
+import Configuracoes from '@pages/Configuracoes/Configuracoes';
+import Home from '@pages/Home/Home';
+import Inicial from '@pages/Inicial/Inicial';
+import Login from '@pages/Login/Login';
+import Perfil from '@pages/Perfil/Perfil';
+import Quiz from '@pages/Quiz/Quiz';
+import Quizzes from '@pages/Quizzes/Quizzes';
+import ProtectedRoute from '@ui/components/ProtectedRoute';
+import Esqueceu from '@pages/Esqueceu/Esqueceu';
+import Recuperar from '@pages/Recuperar/Recuperar';
 import { useEffect } from 'react';
-import './variables.css';
-import Subtemas from './pages/Subtemas/Subtemas';
+import '@styles/variables.css';
+import '@styles/fonts.css';
+import '@styles/design-system.css';
+import Subtemas from '@pages/Subtemas/Subtemas';
 
 const App = () => {
   const location = useLocation();

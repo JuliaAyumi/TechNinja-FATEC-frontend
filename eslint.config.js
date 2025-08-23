@@ -31,7 +31,7 @@ export default [
             ['@hooks', './src/hooks'],
             ['@utils', './src/utils'],
             ['@assets', './src/assets'],
-            ['@styles', './src'],
+            ['@styles', './src/styles'],
           ],
         },
       },

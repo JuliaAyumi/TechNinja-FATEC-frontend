@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from './UseLocalStorage';
+import { useLocalStorage } from '@hooks/UseLocalStorage';
 import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
