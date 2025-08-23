@@ -4,6 +4,7 @@ import './Subtemas.css';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import { formatarTexto } from '@utils/formatarTexto';
 import logo from '@assets/images/logoDark.png';
+import { getSubThemes } from '@services/quiz';
 
 const Subtemas = () => {
   const { area } = useParams();
@@ -13,14 +14,7 @@ const Subtemas = () => {
   useEffect(() => {
     const fetchSubtemas = async () => {
       try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_MODE === 'development'
-              ? `http://localhost:${import.meta.env.VITE_PORT}`
-              : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}`,
-        );
-        const data = await response.json();
+        const data = await getSubThemes(area);
         setSubtemas(data);
       } catch (error) {
         console.error('Erro ao buscar subtemas:', error);

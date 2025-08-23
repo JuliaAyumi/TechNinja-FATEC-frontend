@@ -32,6 +32,7 @@ export default [
             ['@utils', './src/utils'],
             ['@assets', './src/assets'],
             ['@styles', './src/styles'],
+            ['@services', './src/services'],
           ],
         },
       },

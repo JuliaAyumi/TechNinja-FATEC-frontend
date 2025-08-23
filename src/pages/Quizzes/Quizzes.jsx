@@ -7,6 +7,7 @@ import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
 import { formatarTexto } from '@utils/formatarTexto';
 import logo from '@assets/images/logoDark.png';
+import { getLevels } from '@services/quiz';
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
@@ -30,14 +31,7 @@ const Quizzes = () => {
   useEffect(() => {
     const fetchDificuldades = async () => {
       try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_MODE === 'development'
-              ? `http://localhost:${import.meta.env.VITE_PORT}`
-              : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}/${subtema}/dificuldades`,
-        );
-        const data = await response.json();
+        const data = await getLevels(area, subtema);
 
         const dificuldadeOrder = ['facil', 'medio', 'dificil'];
         data.sort(
