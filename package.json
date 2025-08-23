@@ -6,11 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "fix-all": "eslint . --fix --max-warnings=100 && prettier --write .",
+    "lint": "eslint --fix",
     "preview": "vite preview",
     "start": "serve -s dist"
   },
