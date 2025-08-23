@@ -42,13 +42,13 @@ const Subtemas = () => {
             <p>Carregando...</p>
           </div>
         ) : subtemas.length > 0 ? (
-          subtemas.map((subtema) => (
+          subtemas.map((item) => (
             <Link
               className="quiz"
-              key={subtema}
-              to={`/quizzes/${area}/${subtema}`}
+              key={item.subtema}
+              to={`/quizzes/${area}/${item.subtema}`}
             >
-              <h1>{formatarTexto(subtema)}</h1>
+              <h1>{item.subtema ? formatarTexto(item.subtema) : 'Subtema'}</h1>
             </Link>
           ))
         ) : (

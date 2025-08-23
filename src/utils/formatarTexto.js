@@ -1,4 +1,8 @@
 export const formatarTexto = (texto) => {
+  if (!texto || typeof texto !== 'string') {
+    return '';
+  }
+
   const mapCorrecoes = {
     funcao: "Função",
     funcoes: "Funções",
