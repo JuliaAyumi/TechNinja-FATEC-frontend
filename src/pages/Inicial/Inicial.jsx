@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button/Button';
-import Header from '../../components/Header/Header';
-import logo from '../../assets/images/logoDark.png';
+import Button from '@ui/components/Button/Button';
+import Header from '@ui/layout/Header/Header';
+import logo from '@assets/images/logoDark.png';
 import './Inicial.css';
 
 const Inicial = () => {

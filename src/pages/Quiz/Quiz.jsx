@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '@hooks/AuthContext';
 import './Quiz.css';
-import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import { toast, Toaster } from 'react-hot-toast';
 
 const Quiz = () => {

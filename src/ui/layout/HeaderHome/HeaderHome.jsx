@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import './HeaderHome.css';
 import { useState, useEffect } from 'react';
-import iconPerfil from '../../assets/icons/icon-profile-white.png';
-import iconDarkmode from '../../assets/icons/icon-darkmode-white.png';
-import iconLightmode from '../../assets/icons/icon-claro.png';
-import iconConfig from '../../assets/icons/icon-configuracoes.png';
+import iconPerfil from '@assets/icons/icon-profile-white.png';
+import iconDarkmode from '@assets/icons/icon-darkmode-white.png';
+import iconLightmode from '@assets/icons/icon-claro.png';
+import iconConfig from '@assets/icons/icon-configuracoes.png';
 
 const HeaderHome = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);

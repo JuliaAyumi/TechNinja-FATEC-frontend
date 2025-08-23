@@ -1,12 +1,12 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Quizzes.css';
-import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
-import { useAuth } from '../../hooks/AuthContext';
-import { showToast } from '../../components/ConfirmToast';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import { useAuth } from '@hooks/AuthContext';
+import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
-import { formatarTexto } from '../../utils/formatarTexto';
-import logo from '../../assets/images/logoDark.png';
+import { formatarTexto } from '@utils/formatarTexto';
+import logo from '@assets/images/logoDark.png';
 
 const Quizzes = () => {
   const { area, subtema } = useParams();

@@ -7,7 +7,7 @@ import Login from './pages/Login/Login';
 import Perfil from './pages/Perfil/Perfil';
 import Quiz from './pages/Quiz/Quiz';
 import Quizzes from './pages/Quizzes/Quizzes';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './ui/components/ProtectedRoute';
 import Esqueceu from './pages/Esqueceu/Esqueceu';
 import Recuperar from './pages/Recuperar/Recuperar';
 import { useEffect } from 'react';

@@ -1,9 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Subtemas.css';
-import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
-import { formatarTexto } from '../../utils/formatarTexto';
-import logo from '../../assets/images/logoDark.png';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import { formatarTexto } from '@utils/formatarTexto';
+import logo from '@assets/images/logoDark.png';
 
 const Subtemas = () => {
   const { area } = useParams();

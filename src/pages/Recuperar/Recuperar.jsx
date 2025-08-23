@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
-import Header from '../../components/Header/Header';
+import Header from '@ui/layout/Header/Header';
 import './Recuperar.css';
-import useResetPassword from '../../hooks/UsePasswordReset2';
-import logo from '../../assets/images/logoDark.png';
+import useResetPassword from '@hooks/UsePasswordReset2';
+import logo from '@assets/images/logoDark.png';
 
 const Recuperar = () => {
   const { token } = useParams();

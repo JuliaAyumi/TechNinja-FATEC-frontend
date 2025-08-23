@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Header from '../../components/Header/Header';
-import usePasswordReset from '../../hooks/UsePasswordReset';
-import logo from '../../assets/images/logoDark.png';
+import Header from '@ui/layout/Header/Header';
+import usePasswordReset from '@hooks/UsePasswordReset';
+import logo from '@assets/images/logoDark.png';
 import './Esqueceu.css';
 
 const Esqueceu = () => {

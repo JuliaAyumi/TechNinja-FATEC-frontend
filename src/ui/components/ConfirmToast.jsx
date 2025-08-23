@@ -1,5 +1,5 @@
 import { toast } from 'react-hot-toast';
-import { formatarTexto } from '../utils/formatarTexto';
+import { formatarTexto } from '@utils/formatarTexto';
 
 const ConfirmToast = ({ topic, onContinue, onCancel }) => {
   return (

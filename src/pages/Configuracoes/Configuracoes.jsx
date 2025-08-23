@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import './Configuracoes.css';
-import { useAuth } from '../../hooks/AuthContext';
-import HeaderArrowBack from '../../components/HeaderArrowBack/HeaderArrowBack';
+import { useAuth } from '@hooks/AuthContext';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import { useLocation } from 'react-router-dom';
-import useUserData from '../../hooks/UseUserData';
-import useUserUpdate from '../../hooks/UseUserUpdate';
+import useUserData from '@hooks/UseUserData';
+import useUserUpdate from '@hooks/UseUserUpdate';
 import { Toaster } from 'react-hot-toast';
 
 const Configuracoes = () => {

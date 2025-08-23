@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import iconBack from '../../assets/icons/icon-back.png';
+import iconBack from '@assets/icons/icon-back.png';
 import './HeaderArrowBack.css';
 
 const HeaderArrowBack = ({ to }) => {

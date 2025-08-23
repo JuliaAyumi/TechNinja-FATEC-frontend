@@ -1,9 +1,9 @@
 import './Cadastrar.css';
-import Header from '../../components/Header/Header';
-import { useAuth } from '../../hooks/AuthContext';
+import Header from '@ui/layout/Header/Header';
+import { useAuth } from '@hooks/AuthContext';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import logo from '../../assets/images/logoDark.png';
+import logo from '@assets/images/logoDark.png';
 
 const Cadastrar = () => {
   const { register } = useAuth();

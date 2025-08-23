@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import HeaderHome from '../../components/HeaderHome/HeaderHome';
-import IconLinguagemProgramacao from '../../assets/icons/icon-linguagem-de-programacao.svg';
-import IconSistemasOperacionais from '../../assets/icons/icon-sistemas-operacionais.svg';
-import IconModelagemDados from '../../assets/icons/icon-modelagem-de-dados.svg';
+import HeaderHome from '@ui/layout/HeaderHome/HeaderHome';
+import IconLinguagemProgramacao from '@assets/icons/icon-linguagem-de-programacao.svg';
+import IconSistemasOperacionais from '@assets/icons/icon-sistemas-operacionais.svg';
+import IconModelagemDados from '@assets/icons/icon-modelagem-de-dados.svg';
 import './Home.css';
 
 const Home = () => {

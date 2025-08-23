@@ -1,10 +1,10 @@
 import './Login.css';
-import Header from '../../components/Header/Header';
-import { useAuth } from '../../hooks/AuthContext';
+import Header from '@ui/layout/Header/Header';
+import { useAuth } from '@hooks/AuthContext';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import logo from '../../assets/images/logoDark.png';
+import logo from '@assets/images/logoDark.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');

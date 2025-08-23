@@ -18,7 +18,24 @@ export default [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18.3' },
+      'import/resolver': {
+        alias: {
+          map: [
+            ['@', './src'],
+            ['@ui', './src/ui'],
+            ['@components', './src/ui/components'],
+            ['@layout', './src/ui/layout'],
+            ['@pages', './src/pages'],
+            ['@hooks', './src/hooks'],
+            ['@utils', './src/utils'],
+            ['@assets', './src/assets'],
+            ['@styles', './src'],
+          ],
+        },
+      },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
