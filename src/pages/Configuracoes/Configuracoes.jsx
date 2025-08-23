@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './Configuracoes.css';
 import { useAuth } from '@hooks/AuthContext';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
@@ -26,7 +26,6 @@ const Configuracoes = () => {
     setEmail,
     senha,
     setSenha,
-    avatar,
     setAvatar,
     handleSubmit,
   } = useUserUpdate(userData, token);
@@ -41,7 +40,7 @@ const Configuracoes = () => {
     localStorage.getItem('baixaVisaoMode') === 'baixa-visao',
   );
 
-  const applyAccessibilityMode = () => {
+  const applyAccessibilityMode = useCallback(() => {
     const accessibilityMode = localStorage.getItem('accessibilityMode');
     const daltonicoMode = localStorage.getItem('daltonicoMode');
     const baixaVisaoMode = localStorage.getItem('baixaVisaoMode');
@@ -69,11 +68,11 @@ const Configuracoes = () => {
         document.body.classList.remove('baixa-visao');
       }
     }
-  };
+  }, [location]);
 
   useEffect(() => {
     applyAccessibilityMode();
-  }, [location]);
+  }, [applyAccessibilityMode]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -82,10 +81,6 @@ const Configuracoes = () => {
       reader.onloadend = () => {
         setAvatar(reader.result);
       };
-      reader.readAsDataURL(file);
-    }
-
-    if (file) {
       reader.readAsDataURL(file);
     }
   };

@@ -2,9 +2,9 @@
 <!-- - [ ] eslint -->
 <!-- - [ ] Organização de Pastas -->
 <!-- - [ ] Design System -->
+<!-- - [ ] Services -->
+<!-- - [ ] PropTypes -->
 
-- [ ] Services
-- [ ] PropTypes
 - [ ] Componentização
 - [ ] Organização de Hooks
 - [ ] Gerenciamento de Estado?

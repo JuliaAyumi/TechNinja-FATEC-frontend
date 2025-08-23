@@ -10,7 +10,7 @@ import Quizzes from '@pages/Quizzes/Quizzes';
 import ProtectedRoute from '@ui/components/ProtectedRoute';
 import Esqueceu from '@pages/Esqueceu/Esqueceu';
 import Recuperar from '@pages/Recuperar/Recuperar';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import '@styles/variables.css';
 import '@styles/fonts.css';
 import '@styles/design-system.css';
@@ -18,7 +18,7 @@ import Subtemas from '@pages/Subtemas/Subtemas';
 
 const App = () => {
   const location = useLocation();
-  const applyAccessibilityMode = () => {
+  const applyAccessibilityMode = useCallback(() => {
     const accessibilityMode = localStorage.getItem('accessibilityMode');
     const daltonico = localStorage.getItem('daltonicoMode');
     const baixaVisao = localStorage.getItem('baixaVisaoMode');
@@ -46,10 +46,10 @@ const App = () => {
         document.body.classList.remove('baixa-visao');
       }
     }
-  };
+  }, [location]);
   useEffect(() => {
     applyAccessibilityMode();
-  }, [location]);
+  }, [applyAccessibilityMode]);
 
   const routes = useRoutes([
     {

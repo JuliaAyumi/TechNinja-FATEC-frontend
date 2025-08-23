@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import './AreaConhecimentoCard.css';
 
-// eslint-disable-next-line react/prop-types
 const AreaConhecimentoCard = ({ title, icon }) => {
   return (
     <main>

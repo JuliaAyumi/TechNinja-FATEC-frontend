@@ -5,7 +5,6 @@ import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage('user', null);
   const navigate = useNavigate();
