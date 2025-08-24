@@ -4,7 +4,24 @@ import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'custom-welcome',
+      configureServer() {
+        setTimeout(() => {
+          console.log('\n');
+          console.log('  _____         _     _   _ _        _       ');
+          console.log('  |_   _|__  ___| |__ | \\ | (_)_ __  (_) __ _ ');
+          console.log("    | |/ _ \\/ __| '_ \\|  \\| | '_ \\ | |/ _` |");
+          console.log('    | |  __/ (__| | | | |\\  | | | | || | (_| |');
+          console.log('    |_|\\___|\\___|_| |_|_| \\_|_|_| |_|/ |\\__,_|');
+          console.log('                                   |__/       ');
+        }, 100);
+      },
+    },
+  ],
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
