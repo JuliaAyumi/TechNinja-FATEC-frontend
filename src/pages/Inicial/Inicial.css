@@ -1,5 +1,10 @@
+/* body {
+  background-color: var(--color-background-primary);
+  font-size: var(--font-size-text);
+} */
+
 .main-inicial {
-  font-family: Arial, sans-serif;
+  font-family: "Quicksand", sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -18,9 +23,9 @@
   margin: 0;
 }
 
-.inicial-left-column h1{
+.inicial-left-column h1 {
   margin: 0 0 0.6em;
-} 
+}
 
 .inicial-right-column {
   flex: 1;

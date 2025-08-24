@@ -1,4 +1,4 @@
-input[type="checkbox"] {
+input[type='checkbox'] {
   appearance: none;
   height: 2rem;
   width: 1.75rem;
@@ -8,8 +8,8 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-input[type="checkbox"]::before {
-  content: "";
+input[type='checkbox']::before {
+  content: '';
   display: block;
   height: 1.5em;
   width: 1.5em;
@@ -22,7 +22,7 @@ input[type="checkbox"]::before {
   transition: 0.3s ease;
 }
 
-input[type="checkbox"]:checked::before {
+input[type='checkbox']:checked::before {
   background-color: var(--true);
   left: calc(100% - (1.9em / 2 + 0.3em));
 }
@@ -103,7 +103,7 @@ form {
   border-radius: 0.5em;
 }
 
-.form-group input[type="checkbox"] {
+.form-group input[type='checkbox'] {
   width: 5.4rem;
   text-align: right;
   margin: 1em 30% 0;
@@ -122,7 +122,7 @@ form {
     padding: 2em;
   }
 
-  .form-group input[type="checkbox"] {
+  .form-group input[type='checkbox'] {
     width: 19%;
     margin: 0em;
   }
@@ -132,20 +132,20 @@ form {
   }
 }
 
-body.dark-mode .form-group input{
+body.dark-mode .form-group input {
   background-color: #3d444d;
   color: white;
   border: none;
 }
 
-body.dark-mode .form-group label{
+body.dark-mode .form-group label {
   color: white;
 }
-body.dark-mode .opcoes{ 
+body.dark-mode .opcoes {
   background-color: #3d444d;
   color: white;
 }
-body.dark-mode .opcoes a{ 
+body.dark-mode .opcoes a {
   color: white;
 }
 
@@ -157,17 +157,17 @@ body.baixa-visao .opcoes {
   font-size: var(--texto-baixa-visao);
 }
 
-body.baixa-visao .opcoes a{ 
+body.baixa-visao .opcoes a {
   font-size: 1.3em;
 }
 
 body.baixa-visao .form-group input {
   width: 70%;
   padding: 0.5em;
-  font-size:x-large;
+  font-size: x-large;
 }
 
-body.daltonico input[type="checkbox"]:checked::before {
+body.daltonico input[type='checkbox']:checked::before {
   background-color: var(--true-daltonico);
 }
 

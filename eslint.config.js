@@ -1,11 +1,12 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import prettier from 'eslint-plugin-prettier';
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'node_modules'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -17,11 +18,30 @@ export default [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18.3' },
+      'import/resolver': {
+        alias: {
+          map: [
+            ['@', './src'],
+            ['@ui', './src/ui'],
+            ['@components', './src/ui/components'],
+            ['@layout', './src/ui/layout'],
+            ['@pages', './src/pages'],
+            ['@hooks', './src/hooks'],
+            ['@utils', './src/utils'],
+            ['@assets', './src/assets'],
+            ['@styles', './src/styles'],
+            ['@services', './src/services'],
+          ],
+        },
+      },
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      prettier,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -33,6 +53,11 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'prettier/prettier': 'error',
+      'arrow-body-style': 'off',
+      'prefer-arrow-callback': 'off',
+      'no-unused-vars': 'warn',
+      'react/prop-types': 'off',
     },
   },
-]
+];

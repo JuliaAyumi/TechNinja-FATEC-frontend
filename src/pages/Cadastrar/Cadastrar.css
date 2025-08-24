@@ -47,13 +47,13 @@ div > form > div {
   border: 1px solid #000;
   border-radius: 0.6em;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .main-image {
   height: 28em;
   justify-content: center;
-  margin: 0 3em 0 0 ;
+  margin: 0 3em 0 0;
 }
 
 @media only screen and (max-width: 700px) {

@@ -1,23 +1,23 @@
-import "./Cadastrar.css";
-import Header from "../../components/Header/Header";
-import { useAuth } from "../../hooks/AuthContext";
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import logo from "../../assets/images/logoDark.png";
+import './Cadastrar.css';
+import Header from '@ui/layout/Header/Header';
+import { useAuth } from '@hooks/AuthContext';
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import logo from '@assets/images/logoDark.png';
 
 const Cadastrar = () => {
   const { register } = useAuth();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleCadastrar = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error("As senhas não coincidem!");
+      toast.error('As senhas não coincidem!');
       return;
     }
 
@@ -32,7 +32,7 @@ const Cadastrar = () => {
     try {
       await register(userData);
     } catch (error) {
-      console.error("Erro no cadastro:", error);
+      console.error('Erro no cadastro:', error);
     } finally {
       setTimeout(() => setIsButtonDisabled(false), 2000);
     }
@@ -41,60 +41,60 @@ const Cadastrar = () => {
   return (
     <div>
       <Header />
-      <main className="main-cadastrar">
-        <div className="cadastrar-left-column">
+      <main className='main-cadastrar'>
+        <div className='cadastrar-left-column'>
           <form
-            id="register-form"
-            className="form-cadastrar"
+            id='register-form'
+            className='form-cadastrar'
             onSubmit={handleCadastrar}
           >
             <input
-              className="cadastrar-input"
-              type="text"
-              placeholder="Nome"
-              id="name"
+              className='cadastrar-input'
+              type='text'
+              placeholder='Nome'
+              id='name'
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
             <input
-              className="cadastrar-input"
-              type="email"
-              placeholder="Email"
-              id="email"
+              className='cadastrar-input'
+              type='email'
+              placeholder='Email'
+              id='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input
-              className="cadastrar-input"
-              type="password"
-              placeholder="Senha"
-              id="password"
+              className='cadastrar-input'
+              type='password'
+              placeholder='Senha'
+              id='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <input
-              className="cadastrar-input"
-              type="password"
-              placeholder="Confirmar senha"
-              id="confirm-password"
+              className='cadastrar-input'
+              type='password'
+              placeholder='Confirmar senha'
+              id='confirm-password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
             <button
-              type="submit"
-              className="button1"
+              type='submit'
+              className='button1'
               disabled={isButtonDisabled}
             >
-              {isButtonDisabled ? "Aguarde..." : "Cadastrar"}
+              {isButtonDisabled ? 'Aguarde...' : 'Cadastrar'}
             </button>
           </form>
         </div>
-        <div className="cadastrar-right-column">
-          <img src={logo} alt="TechNinja logo" className="main-image" />
+        <div className='cadastrar-right-column'>
+          <img src={logo} alt='TechNinja logo' className='main-image' />
         </div>
       </main>
       <Toaster />

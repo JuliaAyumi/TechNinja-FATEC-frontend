@@ -1,5 +1,5 @@
-import { toast } from "react-hot-toast";
-import { formatarTexto } from "../utils/formatarTexto";
+import { toast } from 'react-hot-toast';
+import { formatarTexto } from '@utils/formatarTexto';
 
 const ConfirmToast = ({ topic, onContinue, onCancel }) => {
   return (
@@ -7,15 +7,15 @@ const ConfirmToast = ({ topic, onContinue, onCancel }) => {
       <div>
         Você já completou o quiz: <b>{formatarTexto(topic)}</b>
       </div>
-      <div style={{ marginTop: "10px" }}>
+      <div style={{ marginTop: '10px' }}>
         <button
           style={{
-            marginRight: "10px",
-            padding: "5px 10px",
-            backgroundColor: "#f0f0f0",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
+            marginRight: '10px',
+            padding: '5px 10px',
+            backgroundColor: '#f0f0f0',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
           }}
           onClick={onCancel}
         >
@@ -23,12 +23,12 @@ const ConfirmToast = ({ topic, onContinue, onCancel }) => {
         </button>
         <button
           style={{
-            padding: "5px 10px",
-            backgroundColor: "#4CAF50",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
+            padding: '5px 10px',
+            backgroundColor: '#4CAF50',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
           }}
           onClick={onContinue}
         >
@@ -51,7 +51,7 @@ export const showToast = (topic, onContinue) => {
         onCancel={() => toast.dismiss(t.id)}
       />
     ),
-    { duration: 5000 }
+    { duration: 5000 },
   );
 };
 

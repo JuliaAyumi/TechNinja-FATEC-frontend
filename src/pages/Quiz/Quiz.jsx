@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/AuthContext";
-import "./Quiz.css";
-import HeaderArrowBack from "../../components/HeaderArrowBack/HeaderArrowBack";
-import { toast, Toaster } from "react-hot-toast";
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '@hooks/AuthContext';
+import './Quiz.css';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import { toast, Toaster } from 'react-hot-toast';
 
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
@@ -19,19 +19,19 @@ const Quiz = () => {
       try {
         const response = await fetch(
           `${
-            import.meta.env.VITE_MODE === "development"
+            import.meta.env.VITE_MODE === 'development'
               ? `http://localhost:${import.meta.env.VITE_PORT}`
               : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}/${subtema}/${dificuldade}`
+          }/api/quiz/${area}/${subtema}/${dificuldade}`,
         );
         if (response.ok) {
           const data = await response.json();
           setPerguntas(data);
         } else {
-          console.error("Erro ao buscar o quiz");
+          console.error('Erro ao buscar o quiz');
         }
       } catch (error) {
-        console.error("Erro na requisição:", error);
+        console.error('Erro na requisição:', error);
       }
     };
 
@@ -55,7 +55,7 @@ const Quiz = () => {
   const finalizarQuiz = async () => {
     if (!todasRespondidas()) {
       toast.error(
-        "Por favor, responda todas as perguntas antes de finalizar o quiz."
+        'Por favor, responda todas as perguntas antes de finalizar o quiz.',
       );
       return;
     }
@@ -68,7 +68,7 @@ const Quiz = () => {
     });
 
     toast.success(
-      `Você acertou ${acertosContador} de ${perguntas.length} perguntas!`
+      `Você acertou ${acertosContador} de ${perguntas.length} perguntas!`,
     );
     const points = acertosContador * 10;
     setAcertos(acertosContador);
@@ -77,51 +77,51 @@ const Quiz = () => {
     try {
       const response = await fetch(
         `${
-          import.meta.env.VITE_MODE === "development"
+          import.meta.env.VITE_MODE === 'development'
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
         }/api/update-score`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${user}`,
           },
           body: JSON.stringify({ points }),
-        }
+        },
       );
       const resData = await response.json();
       if (response.ok) {
         setTimeout(() => {
           toast.success(
-            `Pontuação atualizada! Nova pontuação: ${resData.newScore}`
+            `Pontuação atualizada! Nova pontuação: ${resData.newScore}`,
           );
         }, 2500);
       } else {
-        toast.error(resData.message || "Erro ao atualizar a pontuação");
+        toast.error(resData.message || 'Erro ao atualizar a pontuação');
       }
     } catch (error) {
-      console.error("Erro ao atualizar a pontuação:", error);
+      console.error('Erro ao atualizar a pontuação:', error);
     }
 
     try {
       await fetch(
         `${
-          import.meta.env.VITE_MODE === "development"
+          import.meta.env.VITE_MODE === 'development'
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
         }/api/mark-quiz-completed`,
         {
-          method: "PUT",
+          method: 'PUT',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${user}`,
           },
           body: JSON.stringify({ area, subtema, dificuldade }),
-        }
+        },
       );
     } catch (error) {
-      console.error("Erro ao marcar o quiz como completado:", error);
+      console.error('Erro ao marcar o quiz como completado:', error);
     }
   };
 
@@ -133,7 +133,7 @@ const Quiz = () => {
     <div>
       <HeaderArrowBack to={`/quizzes/${area}/${subtema}`} />
 
-      <main className="quiz-main">
+      <main className='quiz-main'>
         {perguntas.length > 0 ? (
           perguntas.map((pergunta, index) => {
             const isRespostaCorreta =
@@ -144,18 +144,18 @@ const Quiz = () => {
               respostasUsuario[index];
 
             return (
-              <div key={index} className="area-pergunta">
-                <div className="question-block">
-                  <h2 className="question-title">{pergunta.pergunta}</h2>
+              <div key={index} className='area-pergunta'>
+                <div className='question-block'>
+                  <h2 className='question-title'>{pergunta.pergunta}</h2>
                 </div>
-                <div className="answers-block">
+                <div className='answers-block'>
                   {pergunta.alternativas.map((alt, idx) => {
                     const isSelected = respostasUsuario[index] === alt.opcao;
                     return (
                       <div key={idx}>
                         <input
-                          type="radio"
-                          className="resposta-item"
+                          type='radio'
+                          className='resposta-item'
                           id={`resposta${index}-${idx}`}
                           name={`pergunta${index}`}
                           value={alt.opcao}
@@ -169,13 +169,13 @@ const Quiz = () => {
                           style={{
                             backgroundColor:
                               finalizado && isRespostaCorreta && isSelected
-                                ? "green"
+                                ? 'green'
                                 : finalizado && isRespostaErrada && isSelected
-                                ? "red"
-                                : isSelected,
+                                  ? 'red'
+                                  : isSelected,
                           }}
                         >
-                          {alt.opcao}) {alt["texto-opcao"]}
+                          {alt.opcao}) {alt['texto-opcao']}
                         </label>
                       </div>
                     );
@@ -188,12 +188,12 @@ const Quiz = () => {
           <p>Carregando perguntas...</p>
         )}
 
-        <div className="botoes">
+        <div className='botoes'>
           <button
-            className="button1"
+            className='button1'
             onClick={finalizado ? handleSair : finalizarQuiz}
           >
-            {finalizado ? "Sair do Quiz" : "Finalizar"}
+            {finalizado ? 'Sair do Quiz' : 'Finalizar'}
           </button>
         </div>
       </main>

@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   font-size: 1.8em;
-  font-family: "KARASHA", sans-serif ;
+  font-family: 'KARASHA', sans-serif;
   font-weight: bold;
   width: 100%;
   height: 3em;
@@ -14,11 +14,11 @@
 
 #headerInicial-img {
   height: 0;
-} 
+}
 
-#headerInicial p{
-  margin: 0 0.5em;  
-  font-family: "KARASHA";
+#headerInicial p {
+  margin: 0 0.5em;
+  font-family: 'KARASHA';
   cursor: pointer;
 }
 

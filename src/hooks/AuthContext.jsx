@@ -1,46 +1,45 @@
-import { createContext, useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocalStorage } from "./UseLocalStorage";
-import { toast } from "react-hot-toast";
+import { createContext, useContext, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLocalStorage } from '@hooks/UseLocalStorage';
+import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useLocalStorage("user", null);
+  const [user, setUser] = useLocalStorage('user', null);
   const navigate = useNavigate();
 
   const login = async (data) => {
     try {
       const response = await fetch(
         `${
-          import.meta.env.VITE_MODE === "development"
+          import.meta.env.VITE_MODE === 'development'
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
         }/api/login`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-        }
+        },
       );
-      
+
       const resData = await response.json();
 
       if (response.ok) {
-        toast.success("Logado com sucesso!");
+        toast.success('Logado com sucesso!');
         setUser(resData.token);
 
         setTimeout(() => {
-          navigate("/home");
+          navigate('/home');
         }, 1500);
       } else {
-        toast.error(resData.message || "Erro ao fazer login");
+        toast.error(resData.message || 'Erro ao fazer login');
       }
     } catch (error) {
-      toast.error("Erro ao fazer login", error);
+      toast.error('Erro ao fazer login', error);
     }
   };
 
@@ -48,29 +47,29 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(
         `${
-          import.meta.env.VITE_MODE === "development"
+          import.meta.env.VITE_MODE === 'development'
             ? `http://localhost:${import.meta.env.VITE_PORT}`
             : import.meta.env.VITE_HEROKU_LINK
         }/api/register`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(userData),
-        }
+        },
       );
 
       const resData = await response.json();
       if (response.ok) {
-        toast.success("Usuário registrado com sucesso!");
+        toast.success('Usuário registrado com sucesso!');
         setUser(resData.token);
 
         setTimeout(() => {
-          navigate("/login");
+          navigate('/login');
         }, 1500);
       } else {
-        toast.error(resData.message || "Erro ao registrar");
+        toast.error(resData.message || 'Erro ao registrar');
       }
     } catch (error) {
       console.log(error);
@@ -79,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    navigate("/", { replace: true });
+    navigate('/', { replace: true });
   };
 
   const value = useMemo(
@@ -89,7 +88,7 @@ export const AuthProvider = ({ children }) => {
       register,
       logout,
     }),
-    [user]
+    [user],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

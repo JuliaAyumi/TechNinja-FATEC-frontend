@@ -48,7 +48,7 @@
   width: 25em;
   border: 1px solid #000;
   border-radius: 0.6em;
-  font-size: .95em;
+  font-size: 0.95em;
 }
 
 /* .esqueceu-text {
@@ -84,7 +84,7 @@ div > form > div {
     width: 18em;
   }
 
-  .right-column{
+  .right-column {
     margin: 0;
   }
 }

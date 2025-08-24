@@ -8,7 +8,7 @@
 }
 
 .area-conhecimento {
-  width: calc(33.33% - 20px);  
+  width: calc(33.33% - 20px);
   height: 25em;
   margin: 2em 2em;
   background-color: #a1ff8e;
@@ -20,7 +20,6 @@
   border-radius: 0.3em;
   flex: 1;
   text-align: center;
-  
 }
 
 .area-conhecimento img {
@@ -44,11 +43,11 @@
   }
 }
 
-body.dark-mode  {
+body.dark-mode {
   background-color: #0d1117;
   color: white;
 }
-body.dark-mode .area-conhecimento{
+body.dark-mode .area-conhecimento {
   background-color: #03a65a;
 }
 
@@ -58,7 +57,7 @@ body.daltonico .area-conhecimento {
 }
 
 body.daltonico .area-conhecimento img {
-  filter: invert(1)
+  filter: invert(1);
 }
 
 body.baixa-visao h1.baixa-visao {

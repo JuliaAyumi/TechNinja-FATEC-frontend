@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   background-color: #ddd;
-
 }
 
 .user-info {
@@ -19,11 +18,11 @@
   background-color: white;
 }
 
-.main-perfil h2{
+.main-perfil h2 {
   padding-top: 0.1em;
 }
 
-.iconUsuario{
+.iconUsuario {
   /*border-radius: 50%;
   background-color: green;*/
   width: 10em;
@@ -49,10 +48,10 @@
   padding: 0.6em;
   background-color: #ddd;
 }
-.icone-xp{
+.icone-xp {
   height: 1.6em;
 }
-.icone-quizzes{
+.icone-quizzes {
   height: 1.6em;
 }
 
@@ -121,15 +120,15 @@ body.dark-mode .user-info {
 
 body.dark-mode .main-perfil {
   background-color: #3d444d;
-  color: black
+  color: black;
 }
 
 body.dark-mode .stats-text {
   background-color: #3d444d;
-  color:white;
+  color: white;
 }
 
-body.dark-mode .icone-quizzes{
+body.dark-mode .icone-quizzes {
   filter: invert(1);
 }
 
