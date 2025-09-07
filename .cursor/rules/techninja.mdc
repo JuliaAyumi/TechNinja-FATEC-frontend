@@ -1,0 +1,257 @@
+---
+description:
+  Regras de desenvolvimento para o projeto TechNinja - Plataforma educacional de
+  quizzes de programação
+globs: ['**/*.{js,jsx,css,json}']
+alwaysApply: true
+---
+
+# TechNinja - Regras de Desenvolvimento
+
+## Regras Gerais de Código
+
+### Comentários
+
+- **NUNCA** adicionar comentários gerados por IA no código
+- **NUNCA** deixar comentários explicativos automáticos
+- **EVITAR** comentários desnecessários que explicam código óbvio
+- **USAR** comentários apenas quando estritamente necessário para lógica
+  complexa
+- **MANTER** código limpo e autoexplicativo sem dependência de comentários
+
+## Arquitetura e Estrutura
+
+### Stack Tecnológica
+
+- **Frontend**: React 18.3.1 com Vite 7.1.3
+- **Roteamento**: React Router DOM v6
+- **Gerenciamento de Estado**: Context API + localStorage
+- **Estilização**: CSS puro com design system
+- **Autenticação**: JWT com Context API
+- **Notificações**: react-hot-toast
+- **Linting**: ESLint + Prettier
+
+### Estrutura de Pastas
+
+```
+src/
+├── assets/          # Imagens, ícones, fontes
+├── hooks/           # Custom hooks (AuthContext, UseLocalStorage, etc.)
+├── pages/           # Componentes de página (cada pasta com .jsx + .css)
+├── services/        # Serviços de API
+├── styles/          # CSS global (design-system, variables, fonts)
+├── ui/
+│   ├── components/  # Componentes reutilizáveis
+│   └── layout/      # Componentes de layout
+└── utils/           # Funções utilitárias
+```
+
+## Padrões de Código
+
+### Componentes React
+
+- **Sempre** usar function components com arrow functions
+- **Sempre** exportar como default no final do arquivo
+- **Sempre** criar arquivo CSS correspondente na mesma pasta
+- **Sempre** usar PascalCase para nomes de componentes
+- **Sempre** usar destructuring para props
+
+```jsx
+// ✅ Correto
+const ComponentName = ({ prop1, prop2 }) => {
+  return <div className='component-name'>{/* conteúdo */}</div>;
+};
+
+export default ComponentName;
+```
+
+### Imports e Aliases
+
+**Sempre** usar os aliases configurados:
+
+- `@/` - src root
+- `@ui/` - src/ui
+- `@components/` - src/ui/components
+- `@layout/` - src/ui/layout
+- `@pages/` - src/pages
+- `@hooks/` - src/hooks
+- `@utils/` - src/utils
+- `@assets/` - src/assets
+- `@styles/` - src/styles
+- `@services/` - src/services
+
+```jsx
+// ✅ Correto
+import HeaderHome from '@ui/layout/HeaderHome/HeaderHome';
+import { useAuth } from '@hooks/AuthContext';
+import '@styles/design-system.css';
+
+// ❌ Incorreto
+import HeaderHome from '../../ui/layout/HeaderHome/HeaderHome';
+```
+
+### Nomenclatura
+
+- **Arquivos/Componentes**: PascalCase (`HeaderHome.jsx`)
+- **Pastas**: PascalCase (`HeaderHome/`)
+- **Classes CSS**: kebab-case (`header-home`, `main-container`)
+- **IDs CSS**: kebab-case com prefixos (`ac-linguagem-programacao`)
+- **Variáveis**: camelCase (`accessibilityMode`)
+- **Constantes**: camelCase (`areas`, `routes`)
+
+### Roteamento
+
+- **Sempre** usar `useRoutes` para definição de rotas
+- **Sempre** proteger rotas autenticadas com `<ProtectedRoute>`
+- **Sempre** usar parâmetros dinâmicos para navegação contextual
+
+```jsx
+// ✅ Padrão de rotas
+{
+  path: '/quizzes/:area/:subtema/:dificuldade',
+  element: (
+    <ProtectedRoute>
+      <Quiz />
+    </ProtectedRoute>
+  ),
+}
+```
+
+## Acessibilidade
+
+### Modos de Acessibilidade Obrigatórios
+
+O projeto **DEVE** suportar:
+
+1. **Dark Mode** (`dark-mode` class)
+2. **Modo Daltônico** (`daltonico` class)
+3. **Baixa Visão** (`baixa-visao` class)
+
+### Implementação
+
+- **Sempre** aplicar classes de acessibilidade no `document.body`
+- **Sempre** remover modos de acessibilidade em páginas públicas (`/`, `/login`,
+  `/cadastrar`, `/esqueceu`)
+- **Sempre** persistir preferências no localStorage
+
+```jsx
+// ✅ Padrão de aplicação de acessibilidade
+const applyAccessibilityMode = useCallback(() => {
+  const accessibilityMode = localStorage.getItem('accessibilityMode');
+  const daltonico = localStorage.getItem('daltonicoMode');
+  const baixaVisao = localStorage.getItem('baixaVisaoMode');
+
+  if (['/', '/login', '/cadastrar', '/esqueceu'].includes(location.pathname)) {
+    document.body.classList.remove('dark-mode', 'daltonico', 'baixa-visao');
+  } else {
+    // Aplicar classes baseadas nas preferências
+  }
+}, [location]);
+```
+
+## CSS e Design System
+
+### Variáveis CSS
+
+**Sempre** usar as variáveis CSS definidas em `variables.css`:
+
+- Cores: `--color-background-primary`, `--color-action-primary`, etc.
+- Fontes: `--font-family-primary`, `--font-size-title`, etc.
+- **Sempre** incluir variantes para daltonismo e baixa visão
+
+### Estrutura CSS
+
+- **Sempre** criar arquivo CSS específico para cada componente
+- **Sempre** usar classes com nomes descritivos
+- **Sempre** importar `design-system.css`, `variables.css`, `fonts.css` no
+  App.jsx
+
+### Responsividade
+
+- **Sempre** considerar diferentes tamanhos de tela
+- **Sempre** testar em modo de baixa visão (fontes maiores)
+
+## Autenticação e Estado
+
+### Context API
+
+- **Sempre** usar `AuthContext` para gerenciamento de autenticação
+- **Sempre** usar `useLocalStorage` hook para persistência
+- **Sempre** usar `useMemo` para otimização de contextos
+
+### Padrões de API
+
+```jsx
+// ✅ Padrão de chamadas API
+const response = await fetch(
+  `${
+    import.meta.env.VITE_MODE === 'development'
+      ? `http://localhost:${import.meta.env.VITE_PORT}`
+      : import.meta.env.VITE_HEROKU_LINK
+  }/api/endpoint`,
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  },
+);
+```
+
+### Tratamento de Erros
+
+- **Sempre** usar `react-hot-toast` para feedback
+- **Sempre** tratar erros de rede e API
+- **Sempre** fornecer mensagens em português
+
+## Padrões Específicos do Projeto
+
+### Áreas de Conhecimento
+
+As áreas suportadas são:
+
+- `linguagem-programacao`
+- `logica-programacao`
+- `modelagem-dados`
+
+### Estrutura de Navegação
+
+```
+/home → /quizzes/:area → /quizzes/:area/:subtema → /quizzes/:area/:subtema/:dificuldade
+```
+
+### Componentes de Layout
+
+- **HeaderHome**: Para página inicial autenticada
+- **HeaderArrowBack**: Para navegação com botão voltar
+- **ProtectedRoute**: Para proteção de rotas
+
+## Linting e Formatação
+
+### ESLint Rules Específicas
+
+- `react/prop-types`: off (projeto não usa PropTypes)
+- `no-unused-vars`: warn
+- `prettier/prettier`: error
+- **Sempre** usar Prettier para formatação automática
+
+### Commits e Versionamento
+
+- **Sempre** usar mensagens de commit em português
+- **Sempre** testar funcionalidades de acessibilidade antes do commit
+- **Sempre** verificar se não há erros de lint
+
+## Performance
+
+### Otimizações Obrigatórias
+
+- **Sempre** usar `useCallback` para funções que dependem de props/state
+- **Sempre** usar `useMemo` para cálculos custosos
+- **Sempre** lazy load de componentes quando apropriado
+- **Sempre** otimizar imagens e assets
+
+### Boas Práticas
+
+- **Evitar** re-renders desnecessários
+- **Evitar** inline functions em JSX quando possível
+- **Evitar** mutação direta de state
+- **Sempre** limpar event listeners e timeouts
