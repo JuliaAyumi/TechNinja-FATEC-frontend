@@ -4,22 +4,29 @@ import IconLinguagemProgramacao from '@assets/icons/icon-linguagem-de-programaca
 import IconSistemasOperacionais from '@assets/icons/icon-sistemas-operacionais.svg';
 import IconModelagemDados from '@assets/icons/icon-modelagem-de-dados.svg';
 import './Home.css';
+import AreaConhecimentoCard from '../../ui/components/AreaConhecimentoCard/AreaConhecimentoCard';
 
 const Home = () => {
   const areas = [
     {
       name: 'linguagem-programacao',
       title: 'Linguagem de Programação',
+      description:
+        'Aprenda as bases e técnicas de programação para criar aplicações robustas e eficientes',
       icon: IconLinguagemProgramacao,
     },
     {
       name: 'logica-programacao',
       title: 'Lógica de Programação',
+      description:
+        'Desenvolva o raciocínio lógico essencial para resolver problemas complexos de forma estruturada',
       icon: IconSistemasOperacionais,
     },
     {
       name: 'modelagem-dados',
       title: 'Modelagem de Dados',
+      description:
+        'Entenda como organizar e representar dados de maneira eficiente e escalável para sistemas complexos',
       icon: IconModelagemDados,
     },
   ];
@@ -29,19 +36,13 @@ const Home = () => {
       <HeaderHome />
       <main className='main-home'>
         {areas.map((area) => (
-          <Link
+          <AreaConhecimentoCard
             key={area.name}
+            title={area.title}
+            description={area.description}
+            icon={area.icon}
             to={`/quizzes/${area.name}`}
-            className='area-conhecimento'
-          >
-            <div id={`ac-${area.name}`}>
-              <h1>{area.title}</h1>
-              <img
-                src={area.icon}
-                alt={`Ícone da área de conhecimento de ${area.title}`}
-              />
-            </div>
-          </Link>
+          />
         ))}
       </main>
     </div>
