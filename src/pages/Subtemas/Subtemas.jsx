@@ -1,10 +1,11 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Subtemas.css';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import { formatarTexto } from '@utils/formatarTexto';
 import logo from '@assets/images/logoDark.png';
 import { getSubThemes } from '@services/quiz';
+import SubthemeCard from '@ui/components/SubthemeCard/SubthemeCard';
 
 const Subtemas = () => {
   const { area } = useParams();
@@ -29,7 +30,7 @@ const Subtemas = () => {
   return (
     <div>
       <HeaderArrowBack to={`/home`} />
-      <main className='body-quizzes'>
+      <main className='body-subtemas'>
         {loading ? (
           <div className='loading-screen'>
             <img src={logo} alt='Logo TechNinja' className='logo-loading' />
@@ -37,13 +38,13 @@ const Subtemas = () => {
           </div>
         ) : subtemas.length > 0 ? (
           subtemas.map((item) => (
-            <Link
-              className='quiz'
+            <SubthemeCard
               key={item.subtema}
+              area={area}
+              title={item.subtema ? formatarTexto(item.subtema) : 'Subtema'}
               to={`/quizzes/${area}/${item.subtema}`}
-            >
-              <h1>{item.subtema ? formatarTexto(item.subtema) : 'Subtema'}</h1>
-            </Link>
+              variant='subtema'
+            />
           ))
         ) : (
           <p>Nenhum subtema encontrado</p>
