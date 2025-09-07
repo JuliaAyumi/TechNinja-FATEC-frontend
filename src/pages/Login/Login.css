@@ -70,53 +70,11 @@ body {
   gap: 1rem;
 }
 
-.login-input {
-  padding: 0.75rem 1rem;
-  width: 100%;
-  max-width: 400px;
-  border: 1px solid var(--color-text-secondary);
-  border-radius: 0.5rem;
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-text);
-  background-color: var(--color-background-component-secondary);
-  color: var(--color-text-secondary);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.login-input:focus {
-  outline: none;
-  border-color: var(--color-action-primary);
-  box-shadow: 0 0 0 2px rgba(82, 216, 69, 0.2);
-}
-
-.login-input::placeholder {
-  color: #666;
-}
-
 .error-message {
   color: var(--color-action-tertiary);
   font-size: 0.875rem;
   text-align: center;
   min-height: 1rem;
-}
-
-body.dark-mode .login-input {
-  background-color: var(--color-background-component);
-  color: var(--color-text-primary);
-  border-color: #555;
-}
-
-body.dark-mode .login-input::placeholder {
-  color: #999;
-}
-
-body.baixa-visao .login-input {
-  font-size: var(--font-size-text-low-vision);
-  padding: 1rem 1.25rem;
-}
-
-body.baixa-visao .form-login {
-  gap: 1.5rem;
 }
 
 body.baixa-visao .esqueceu-text {
@@ -143,10 +101,6 @@ body.baixa-visao .esqueceu-text {
 
   .login-main-image {
     max-width: 300px;
-  }
-
-  .login-input {
-    max-width: 100%;
   }
 }
 

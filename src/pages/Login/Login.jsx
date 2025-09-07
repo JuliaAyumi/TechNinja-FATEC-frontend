@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import logo from '@assets/images/logoDark.png';
 import Button from '@ui/components/Button/Button';
+import Form from '@ui/components/Form/Form';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -42,21 +43,21 @@ const Login = () => {
         <div className='right-column'>
           <form id='login-form' className='form-login' onSubmit={handleLogin}>
             <div className='error-message' id='error-message'></div>
-            <input
-              className='login-input'
+            <Form
               type='email'
               placeholder='Email'
               id='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
-            <input
-              className='login-input'
+            <Form
               type='password'
               placeholder='Senha'
               id='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <Button
               type='action'

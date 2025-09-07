@@ -5,6 +5,7 @@ import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import logo from '@assets/images/logoDark.png';
 import Button from '@ui/components/Button/Button';
+import Form from '@ui/components/Form/Form';
 
 const Cadastrar = () => {
   const { register } = useAuth();
@@ -49,8 +50,7 @@ const Cadastrar = () => {
             className='form-cadastrar'
             onSubmit={handleCadastrar}
           >
-            <input
-              className='cadastrar-input'
+            <Form
               type='text'
               placeholder='Nome'
               id='name'
@@ -58,8 +58,7 @@ const Cadastrar = () => {
               onChange={(e) => setName(e.target.value)}
               required
             />
-            <input
-              className='cadastrar-input'
+            <Form
               type='email'
               placeholder='Email'
               id='email'
@@ -67,8 +66,7 @@ const Cadastrar = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <input
-              className='cadastrar-input'
+            <Form
               type='password'
               placeholder='Senha'
               id='password'
@@ -76,8 +74,7 @@ const Cadastrar = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <input
-              className='cadastrar-input'
+            <Form
               type='password'
               placeholder='Confirmar senha'
               id='confirm-password'
