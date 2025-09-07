@@ -4,6 +4,7 @@ import { useAuth } from '@hooks/AuthContext';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import logo from '@assets/images/logoDark.png';
+import Button from '@ui/components/Button/Button';
 
 const Cadastrar = () => {
   const { register } = useAuth();
@@ -84,13 +85,12 @@ const Cadastrar = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            <button
-              type='submit'
-              className='button1'
+            <Button
+              type='action'
+              buttonType='submit'
+              option={isButtonDisabled ? 'Aguarde...' : 'Cadastrar'}
               disabled={isButtonDisabled}
-            >
-              {isButtonDisabled ? 'Aguarde...' : 'Cadastrar'}
-            </button>
+            />
           </form>
         </div>
         <div className='cadastrar-right-column'>

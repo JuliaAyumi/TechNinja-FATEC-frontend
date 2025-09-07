@@ -11,17 +11,14 @@ const Inicial = () => {
 
       <main className='main-inicial'>
         <div className='inicial-left-column'>
-          <h1>
-            Bem vindo(a) ao TechNinja! Aqui você pode realizar seu cadastro ou
-            acessar uma conta já cadastrada.
-          </h1>
-
-          <Link to='/login'>
-            <Button className='button1' option={'Entrar'} />
-          </Link>
+          <h1>Desafie seu conhecimento em tecnologia com o TechNinja</h1>
 
           <Link to='/cadastrar'>
-            <Button className='button1' option={'Cadastrar'} />
+            <Button type='action' option={'Cadastrar'} />
+          </Link>
+
+          <Link to='/login'>
+            <Button type='secondary' option={'Já tenho uma conta'} />
           </Link>
         </div>
 

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import logo from '@assets/images/logoDark.png';
+import Button from '@ui/components/Button/Button';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -57,13 +58,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button
-              type='submit'
-              className='button1'
+            <Button
+              type='action'
+              buttonType='submit'
+              option={isButtonDisabled ? 'Aguarde...' : 'Entrar'}
               disabled={isButtonDisabled}
-            >
-              {isButtonDisabled ? 'Aguarde...' : 'Entrar'}
-            </button>
+            />
             <Link to='/esqueceu' className='esqueceu'>
               <p className='esqueceu-text'>Esqueceu a senha?</p>
             </Link>

@@ -1,23 +1,69 @@
-.button1 {
+.button {
+  width: 343px;
+  height: 64px;
   margin: 0.3em;
-  height: 2.3em;
-  width: 19em;
-  font-size: 1em;
+  font-size: 16px;
   border: none;
-  border-radius: 0.6em;
-  background-color: black;
-  color: white;
-}
-
-.button1:hover {
+  border-radius: 16px;
+  font-family: var(--font-family-primary);
   cursor: pointer;
-  background-color: #03a65a;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
-.button1 > a {
+.button.action {
+  background-color: var(--color-action-primary);
+  color: #000000;
+}
+
+.button.action:hover {
+  background-color: var(--color-action-primary-hover);
+}
+
+.button.secondary {
+  background-color: var(--color-action-primary-bg);
+  color: white;
+  border: 1px solid #FFF;
+}
+
+.button.secondary:hover {
+  background-color: var(--color-action-primary-bg-hover);
+}
+
+.button > a {
   color: white;
 }
 
-body.baixa-visao .button1 {
+body.baixa-visao .button {
   font-size: 1.6em;
+}
+
+body.daltonico .button.action {
+  background-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .button.action:hover {
+  background-color: var(--color-action-primary-colorblind-hover);
+}
+
+body.daltonico .button.secondary {
+  background-color: var(--color-action-secondary-colorblind);
+}
+
+body.daltonico .button.secondary:hover {
+  background-color: var(--color-action-secondary-colorblind-hover);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:disabled:hover {
+  background-color: var(--color-action-primary);
+}
+
+.button.secondary:disabled:hover {
+  background-color: var(--color-action-primary-bg);
 }

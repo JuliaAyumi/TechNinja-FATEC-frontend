@@ -1,16 +1,22 @@
-/* body {
+* {
+  box-sizing: border-box;
+}
+
+body {
   background-color: var(--color-background-primary);
-  font-size: var(--font-size-text);
-} */
+  font-family: var(--font-family-primary);
+  margin: 0;
+  padding: 0;
+}
 
 .main-inicial {
-  font-family: "Quicksand", sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 3em 0 0 0;
-  margin: 0 1em;
+  min-height: calc(100vh - 80px);
+  padding: 2rem 1rem;
+  gap: 2rem;
 }
 
 .inicial-left-column {
@@ -19,12 +25,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5em 0 5em 8em;
-  margin: 0;
+  max-width: 500px;
+  padding: 2rem;
+  gap: 1rem;
 }
 
 .inicial-left-column h1 {
-  margin: 0 0 0.6em;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-align: center;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .inicial-right-column {
@@ -32,31 +45,55 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2em 4em 2em 2em;
+  max-width: 500px;
+  padding: 2rem;
 }
 
 .main-image {
-  height: 28em;
-  justify-content: center;
-  margin: 0 3em 0 0;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   .main-inicial {
     flex-direction: column;
-    padding: 6em 4em 0 0;
-    margin: 0em 0em;
+    min-height: calc(100vh - 60px);
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .inicial-left-column {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .inicial-right-column {
+    padding: 1rem;
+    order: -1;
   }
 
   .main-image {
-    height: 0em;
+    max-width: 300px;
   }
 
-  input {
-    width: 20em;
+  .inicial-left-column h1 {
+    font-size: clamp(1.5rem, 4vw, var(--font-size-title));
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .main-inicial {
+    padding: 0.5rem;
   }
 
-  .left-column {
-    padding: 0;
+  .inicial-left-column,
+  .inicial-right-column {
+    padding: 0.5rem;
+  }
+
+  .main-image {
+    max-width: 250px;
   }
 }

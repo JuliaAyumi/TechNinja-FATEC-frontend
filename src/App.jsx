@@ -12,7 +12,6 @@ import Esqueceu from '@pages/Esqueceu/Esqueceu';
 import Recuperar from '@pages/Recuperar/Recuperar';
 import { useEffect, useCallback } from 'react';
 import '@styles/variables.css';
-import '@styles/fonts.css';
 import '@styles/design-system.css';
 import Subtemas from '@pages/Subtemas/Subtemas';
 

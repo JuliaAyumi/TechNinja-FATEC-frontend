@@ -1,7 +1,16 @@
 import './Button.css';
 
-const Button = ({ option }) => {
-  return <button className='button1'>{option}</button>;
+const Button = ({
+  type = 'action',
+  option,
+  disabled = false,
+  buttonType = 'button',
+}) => {
+  return (
+    <button className={`button ${type}`} type={buttonType} disabled={disabled}>
+      {option}
+    </button>
+  );
 };
 
 export default Button;
