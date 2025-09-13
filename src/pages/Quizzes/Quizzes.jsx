@@ -1,13 +1,13 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Quizzes.css';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import { useAuth } from '@hooks/AuthContext';
 import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
-import { formatarTexto } from '@utils/formatarTexto';
 import logo from '@assets/images/logoDark.png';
 import { getLevels } from '@services/quiz';
+import LevelCard from '@ui/components/LevelCard/LevelCard';
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
@@ -87,16 +87,16 @@ const Quizzes = () => {
             const isCompleted = quizzesCompletados.includes(quizId);
 
             return (
-              <Link
+              <LevelCard
                 key={dificuldade}
-                to={`/quizzes/${area}/${subtema}/${dificuldade}`}
-                className={`quiz ${isCompleted ? 'completed' : ''}`}
+                area={area}
+                subtema={subtema}
+                dificuldade={dificuldade}
+                isCompleted={isCompleted}
                 onClick={(event) =>
                   handleQuizClick(event, isCompleted, subtema, dificuldade)
                 }
-              >
-                <h1>{formatarTexto(dificuldade)}</h1>
-              </Link>
+              />
             );
           })
         ) : (
