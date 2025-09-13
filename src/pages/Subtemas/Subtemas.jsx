@@ -27,16 +27,22 @@ const Subtemas = () => {
     fetchSubtemas();
   }, [area]);
 
+  if (loading) {
+    return (
+      <div>
+        <HeaderArrowBack to={`/home`} />
+        <div className='loading-screen'>
+          <img src={logo} alt='Logo TechNinja' className='logo-loading' />
+          <p>Carregando...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <HeaderArrowBack to={`/home`} />
       <main className='body-subtemas'>
-        {loading ? (
-          <div className='loading-screen'>
-            <img src={logo} alt='Logo TechNinja' className='logo-loading' />
-            <p>Carregando...</p>
-          </div>
-        ) : subtemas.length > 0 ? (
+        {subtemas.length > 0 ? (
           subtemas.map((item) => (
             <SubthemeCard
               key={item.subtema}
