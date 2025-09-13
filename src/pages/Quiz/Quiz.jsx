@@ -1,49 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth } from '@hooks/AuthContext';
-import './Quiz.css';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import { toast, Toaster } from 'react-hot-toast';
+import { useAuth } from '@hooks/AuthContext';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import Button from '@ui/components/Button/Button';
+import Question from '@ui/components/Question/Question';
+import Answer from '@ui/components/Answer/Answer';
+import './Quiz.css';
 
 const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
-  const [acertos, setAcertos] = useState(0);
   const [finalizado, setFinalizado] = useState(false);
+
   const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchQuiz = async () => {
-      try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_MODE === 'development'
-              ? `http://localhost:${import.meta.env.VITE_PORT}`
-              : import.meta.env.VITE_HEROKU_LINK
-          }/api/quiz/${area}/${subtema}/${dificuldade}`,
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setPerguntas(data);
-        } else {
-          console.error('Erro ao buscar o quiz');
-        }
-      } catch (error) {
-        console.error('Erro na requisição:', error);
-      }
-    };
-
-    fetchQuiz();
-  }, [area, subtema, dificuldade]);
-
-  const handleRespostaChange = (indexPergunta, opcaoSelecionada) => {
-    setRespostasUsuario({
-      ...respostasUsuario,
-      [indexPergunta]: opcaoSelecionada,
-    });
-  };
+  const API_BASE_URL =
+    import.meta.env.VITE_MODE === 'development'
+      ? `http://localhost:${import.meta.env.VITE_PORT}`
+      : import.meta.env.VITE_HEROKU_LINK;
 
   const todasRespondidas = () => {
     return (
@@ -52,45 +29,43 @@ const Quiz = () => {
     );
   };
 
-  const finalizarQuiz = async () => {
-    if (!todasRespondidas()) {
-      toast.error(
-        'Por favor, responda todas as perguntas antes de finalizar o quiz.',
-      );
-      return;
-    }
+  const calcularAcertos = () => {
+    return perguntas.reduce((acertos, pergunta, index) => {
+      return respostasUsuario[index] === pergunta.resposta
+        ? acertos + 1
+        : acertos;
+    }, 0);
+  };
 
-    let acertosContador = 0;
-    perguntas.forEach((pergunta, index) => {
-      if (respostasUsuario[index] === pergunta.resposta) {
-        acertosContador += 1;
-      }
-    });
+  const getProgressPercentage = () => {
+    if (perguntas.length === 0) return 0;
+    return (Object.keys(respostasUsuario).length / perguntas.length) * 100;
+  };
 
-    toast.success(
-      `Você acertou ${acertosContador} de ${perguntas.length} perguntas!`,
-    );
-    const points = acertosContador * 10;
-    setAcertos(acertosContador);
-    setFinalizado(true);
+  const handleRespostaChange = (indexPergunta, opcaoSelecionada) => {
+    setRespostasUsuario((prev) => ({
+      ...prev,
+      [indexPergunta]: opcaoSelecionada,
+    }));
+  };
 
+  const handleSair = () => {
+    navigate(`/quizzes/${area}/${subtema}`);
+  };
+
+  const updateScore = async (points) => {
     try {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_MODE === 'development'
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/update-score`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user}`,
-          },
-          body: JSON.stringify({ points }),
+      const response = await fetch(`${API_BASE_URL}/api/update-score`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user}`,
         },
-      );
+        body: JSON.stringify({ points }),
+      });
+
       const resData = await response.json();
+
       if (response.ok) {
         setTimeout(() => {
           toast.success(
@@ -103,100 +78,123 @@ const Quiz = () => {
     } catch (error) {
       console.error('Erro ao atualizar a pontuação:', error);
     }
+  };
 
+  const markQuizCompleted = async () => {
     try {
-      await fetch(
-        `${
-          import.meta.env.VITE_MODE === 'development'
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/mark-quiz-completed`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${user}`,
-          },
-          body: JSON.stringify({ area, subtema, dificuldade }),
+      await fetch(`${API_BASE_URL}/api/mark-quiz-completed`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user}`,
         },
-      );
+        body: JSON.stringify({ area, subtema, dificuldade }),
+      });
     } catch (error) {
       console.error('Erro ao marcar o quiz como completado:', error);
     }
   };
 
-  const handleSair = () => {
-    navigate(`/quizzes/${area}/${subtema}`);
+  const finalizarQuiz = async () => {
+    if (!todasRespondidas()) {
+      toast.error(
+        'Por favor, responda todas as perguntas antes de finalizar o quiz.',
+      );
+      return;
+    }
+
+    const acertos = calcularAcertos();
+    const points = acertos * 10;
+
+    toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
+    setFinalizado(true);
+
+    await Promise.all([updateScore(points), markQuizCompleted()]);
   };
+
+  const ProgressBar = () => (
+    <div className='quiz-progress'>
+      <div className='progress-bar'>
+        <div
+          className='progress-fill'
+          style={{ width: `${getProgressPercentage()}%` }}
+        />
+      </div>
+      <div className='progress-text'>
+        {Object.keys(respostasUsuario).length} de {perguntas.length} perguntas
+        respondidas
+      </div>
+    </div>
+  );
+
+  const QuestionItem = ({ pergunta, index }) => {
+    const isRespostaCorreta =
+      finalizado && respostasUsuario[index] === pergunta.resposta;
+    const isRespostaErrada =
+      finalizado &&
+      respostasUsuario[index] !== pergunta.resposta &&
+      respostasUsuario[index];
+
+    return (
+      <div key={index} className='area-pergunta'>
+        <Question title={pergunta.pergunta} />
+        <Answer
+          alternativas={pergunta.alternativas}
+          perguntaIndex={index}
+          respostasUsuario={respostasUsuario}
+          onRespostaChange={handleRespostaChange}
+          finalizado={finalizado}
+          isRespostaCorreta={isRespostaCorreta}
+          isRespostaErrada={isRespostaErrada}
+        />
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    const loadQuiz = async () => {
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/quiz/${area}/${subtema}/${dificuldade}`,
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setPerguntas(data);
+        } else {
+          console.error('Erro ao buscar o quiz');
+        }
+      } catch (error) {
+        console.error('Erro na requisição:', error);
+      }
+    };
+
+    loadQuiz();
+  }, [area, subtema, dificuldade, API_BASE_URL]);
 
   return (
     <div>
       <HeaderArrowBack to={`/quizzes/${area}/${subtema}`} />
 
       <main className='quiz-main'>
-        {perguntas.length > 0 ? (
-          perguntas.map((pergunta, index) => {
-            const isRespostaCorreta =
-              finalizado && respostasUsuario[index] === pergunta.resposta;
-            const isRespostaErrada =
-              finalizado &&
-              respostasUsuario[index] !== pergunta.resposta &&
-              respostasUsuario[index];
+        {perguntas.length > 0 && <ProgressBar />}
 
-            return (
-              <div key={index} className='area-pergunta'>
-                <div className='question-block'>
-                  <h2 className='question-title'>{pergunta.pergunta}</h2>
-                </div>
-                <div className='answers-block'>
-                  {pergunta.alternativas.map((alt, idx) => {
-                    const isSelected = respostasUsuario[index] === alt.opcao;
-                    return (
-                      <div key={idx}>
-                        <input
-                          type='radio'
-                          className='resposta-item'
-                          id={`resposta${index}-${idx}`}
-                          name={`pergunta${index}`}
-                          value={alt.opcao}
-                          onChange={() =>
-                            handleRespostaChange(index, alt.opcao)
-                          }
-                          disabled={finalizado}
-                        />
-                        <label
-                          htmlFor={`resposta${index}-${idx}`}
-                          style={{
-                            backgroundColor:
-                              finalizado && isRespostaCorreta && isSelected
-                                ? 'green'
-                                : finalizado && isRespostaErrada && isSelected
-                                  ? 'red'
-                                  : isSelected,
-                          }}
-                        >
-                          {alt.opcao}) {alt['texto-opcao']}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })
+        {perguntas.length > 0 ? (
+          perguntas.map((pergunta, index) => (
+            <QuestionItem key={index} pergunta={pergunta} index={index} />
+          ))
         ) : (
           <p>Carregando perguntas...</p>
         )}
 
         <div className='botoes'>
-          <button
-            className='button1'
+          <Button
             onClick={finalizado ? handleSair : finalizarQuiz}
-          >
-            {finalizado ? 'Sair do Quiz' : 'Finalizar'}
-          </button>
+            option={finalizado ? 'Sair do Quiz' : 'Finalizar'}
+          />
         </div>
       </main>
+
       <Toaster />
     </div>
   );

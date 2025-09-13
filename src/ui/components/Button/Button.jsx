@@ -5,9 +5,15 @@ const Button = ({
   option,
   disabled = false,
   buttonType = 'button',
+  onClick,
 }) => {
   return (
-    <button className={`button ${type}`} type={buttonType} disabled={disabled}>
+    <button
+      className={`button ${type}`}
+      type={buttonType}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {option}
     </button>
   );
