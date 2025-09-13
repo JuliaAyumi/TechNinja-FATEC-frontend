@@ -50,7 +50,17 @@ const Quiz = () => {
   };
 
   const handleSair = () => {
-    navigate(`/quizzes/${area}/${subtema}`);
+    const acertos = calcularAcertos();
+    const pontos = acertos * 10;
+
+    navigate(`/quizzes/${area}/${subtema}/${dificuldade}/resultado`, {
+      state: {
+        dificuldade,
+        acertos,
+        totalPerguntas: perguntas.length,
+        pontos,
+      },
+    });
   };
 
   const updateScore = async (points) => {

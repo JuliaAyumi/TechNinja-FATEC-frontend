@@ -14,6 +14,7 @@ import { useEffect, useCallback } from 'react';
 import '@styles/variables.css';
 import '@styles/design-system.css';
 import Subtemas from '@pages/Subtemas/Subtemas';
+import FinishedQuiz from '@pages/FinishedQuiz/FinishedQuiz';
 
 const App = () => {
   const location = useLocation();
@@ -108,6 +109,14 @@ const App = () => {
       element: (
         <ProtectedRoute>
           <Quiz />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/quizzes/:area/:subtema/:dificuldade/resultado',
+      element: (
+        <ProtectedRoute>
+          <FinishedQuiz />
         </ProtectedRoute>
       ),
     },
