@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Header from '@ui/layout/Header/Header';
+import Form from '@ui/components/Form/Form';
+import Button from '@ui/components/Button/Button';
 import usePasswordReset from '@hooks/UsePasswordReset';
 import logo from '@assets/images/logoDark.png';
 import './Esqueceu.css';
@@ -32,15 +34,14 @@ const Esqueceu = () => {
             para modificar sua senha
           </h1>
           <form id='forgot-form' onSubmit={handleSubmit}>
-            <input
+            <Form
               type='email'
               placeholder='Email'
-              id=''
               value={email}
               onChange={handleInputChange}
               required
             />
-            <button className='button1'>Enviar email</button>
+            <Button option='Enviar email' buttonType='submit' />
           </form>
         </div>
       </main>
