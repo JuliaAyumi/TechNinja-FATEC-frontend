@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Subtemas.css';
+import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import useMediaQuery from '@hooks/UseMediaQuery';
 import { formatarTexto } from '@utils/formatarTexto';
 import logo from '@assets/images/logoDark.png';
 import { getSubThemes } from '@services/quiz';
@@ -11,6 +13,7 @@ const Subtemas = () => {
   const { area } = useParams();
   const [subtemas, setSubtemas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     const fetchSubtemas = async () => {
@@ -30,7 +33,7 @@ const Subtemas = () => {
   if (loading) {
     return (
       <div>
-        <HeaderArrowBack to={`/home`} />
+        {isMobile ? <HeaderArrowBack to={`/home`} /> : <Sidebar to={`/home`} />}
         <div className='loading-screen'>
           <img src={logo} alt='Logo TechNinja' className='logo-loading' />
           <p>Carregando...</p>
@@ -38,9 +41,10 @@ const Subtemas = () => {
       </div>
     );
   }
+
   return (
     <div>
-      <HeaderArrowBack to={`/home`} />
+      {isMobile ? <HeaderArrowBack to={`/home`} /> : <Sidebar to={`/home`} />}
       <main className='body-subtemas'>
         {subtemas.length > 0 ? (
           subtemas.map((item) => (

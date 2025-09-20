@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import Sidebar from '../../ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import useMediaQuery from '@hooks/UseMediaQuery';
 import Button from '@ui/components/Button/Button';
 import './FinishedQuiz.css';
 
@@ -9,6 +11,7 @@ const FinishedQuiz = () => {
   const { area, subtema, dificuldade } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const { acertos = 0, totalPerguntas = 0, pontos = 0 } = location.state || {};
 
@@ -97,7 +100,7 @@ const FinishedQuiz = () => {
 
   return (
     <div className='finished-quiz-container'>
-      <HeaderArrowBack to='/home' />
+      {isMobile ? <HeaderArrowBack to='/home' /> : <Sidebar to='/home' />}
 
       <main className='finished-quiz-main'>
         <div className={`ninja-avatar ${animationPhase}`}>

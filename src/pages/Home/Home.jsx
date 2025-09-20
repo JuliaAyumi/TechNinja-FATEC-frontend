@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
-import HeaderHome from '@ui/layout/HeaderHome/HeaderHome';
 import IconLinguagemProgramacao from '@assets/icons/icon-linguagem-de-programacao.svg';
 import IconSistemasOperacionais from '@assets/icons/icon-sistemas-operacionais.svg';
 import IconModelagemDados from '@assets/icons/icon-modelagem-de-dados.svg';
-import './Home.css';
+import Sidebar from '@ui/components/Sidebar/Sidebar';
+import HeaderHome from '@ui/layout/HeaderHome/HeaderHome';
 import AreaConhecimentoCard from '../../ui/components/AreaConhecimentoCard/AreaConhecimentoCard';
+import useMediaQuery from '@hooks/UseMediaQuery';
+import './Home.css';
 
 const Home = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   const areas = [
     {
       name: 'linguagem-programacao',
@@ -33,7 +36,7 @@ const Home = () => {
 
   return (
     <div>
-      <HeaderHome />
+      {isMobile ? <HeaderHome /> : <Sidebar />}
       <main className='main-home'>
         {areas.map((area) => (
           <AreaConhecimentoCard

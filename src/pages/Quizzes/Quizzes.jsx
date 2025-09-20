@@ -1,7 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Quizzes.css';
+import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import useMediaQuery from '@hooks/UseMediaQuery';
 import { useAuth } from '@hooks/AuthContext';
 import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
@@ -16,6 +18,7 @@ const Quizzes = () => {
   const [quizzesCompletados, setQuizzesCompletados] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleQuizClick = (event, isCompleted, subtema, dificuldade) => {
     if (isCompleted) {
@@ -74,7 +77,11 @@ const Quizzes = () => {
 
   return (
     <div>
-      <HeaderArrowBack to={`/quizzes/${area}`} />
+      {isMobile ? (
+        <HeaderArrowBack to={`/quizzes/${area}`} />
+      ) : (
+        <Sidebar to={`/quizzes/${area}`} />
+      )}
       <main className='body-quizzes'>
         {loading ? (
           <div className='loading-screen'>

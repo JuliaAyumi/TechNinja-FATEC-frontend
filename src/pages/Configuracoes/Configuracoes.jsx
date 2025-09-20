@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import './Configuracoes.css';
 import { useAuth } from '@hooks/AuthContext';
+import Sidebar from '../../ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import useMediaQuery from '@hooks/UseMediaQuery';
 import { useLocation } from 'react-router-dom';
 import useUserData from '@hooks/UseUserData';
 import useUserUpdate from '@hooks/UseUserUpdate';
@@ -11,6 +13,7 @@ const Configuracoes = () => {
   const { logout } = useAuth();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('perfil');
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const tokenString = localStorage.getItem('user');
 
@@ -216,7 +219,7 @@ const Configuracoes = () => {
 
   return (
     <div>
-      <HeaderArrowBack to={`/home`} />
+      {isMobile ? <HeaderArrowBack to={`/home`} /> : <Sidebar to={`/home`} />}
 
       <main className='main-configuracoes'>
         <div className='opcoes'>
