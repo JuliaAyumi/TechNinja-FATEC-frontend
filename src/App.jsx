@@ -17,6 +17,7 @@ import Subtemas from '@pages/Subtemas/Subtemas';
 import FinishedQuiz from '@pages/FinishedQuiz/FinishedQuiz';
 import Acessibilidade from './pages/Acessibilidade/Acessibilidade';
 import PerfilConfiguracoes from './pages/PerfilConfiguracoes/PerfilConfiguracoes';
+import PerfilSeguranca from './pages/PerfilSeguranca/PerfilSeguranca';
 
 const App = () => {
   const location = useLocation();
@@ -146,14 +147,14 @@ const App = () => {
         </ProtectedRoute>
       ),
     },
-    // {
-    //   path: '/configuracoes/seguranca',
-    //   element: (
-    //     <ProtectedRoute>
-    //       <Seguranca />
-    //     </ProtectedRoute>
-    //   ),
-    // },
+    {
+      path: '/configuracoes/seguranca',
+      element: (
+        <ProtectedRoute>
+          <PerfilSeguranca />
+        </ProtectedRoute>
+      ),
+    },
   ]);
 
   return routes;
