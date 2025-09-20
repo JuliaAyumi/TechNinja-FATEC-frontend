@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import './Acessibilidade.css';
+import './PerfilAcessibilidade.css';
 import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import useMediaQuery from '@hooks/UseMediaQuery';
@@ -8,7 +8,7 @@ import AccessibilityOption from '../../ui/components/AccessibilityOption/Accessi
 import Button from '../../ui/components/Button/Button';
 import { toast } from 'react-hot-toast';
 
-const Acessibilidade = () => {
+const PerfilAcessibilidade = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const location = useLocation();
 
@@ -111,4 +111,4 @@ const Acessibilidade = () => {
   );
 };
 
-export default Acessibilidade;
+export default PerfilAcessibilidade;

@@ -1,4 +1,5 @@
 import { useLocation, useRoutes } from 'react-router-dom';
+import { useEffect, useCallback } from 'react';
 import Cadastrar from '@pages/Cadastrar/Cadastrar';
 import Configuracoes from '@pages/Configuracoes/Configuracoes';
 import Home from '@pages/Home/Home';
@@ -10,14 +11,13 @@ import Quizzes from '@pages/Quizzes/Quizzes';
 import ProtectedRoute from '@ui/components/ProtectedRoute';
 import Esqueceu from '@pages/Esqueceu/Esqueceu';
 import Recuperar from '@pages/Recuperar/Recuperar';
-import { useEffect, useCallback } from 'react';
-import '@styles/variables.css';
-import '@styles/design-system.css';
 import Subtemas from '@pages/Subtemas/Subtemas';
 import FinishedQuiz from '@pages/FinishedQuiz/FinishedQuiz';
-import Acessibilidade from './pages/Acessibilidade/Acessibilidade';
+import PerfilAcessibilidade from './pages/PerfilAcessibilidade/PerfilAcessibilidade';
 import PerfilConfiguracoes from './pages/PerfilConfiguracoes/PerfilConfiguracoes';
 import PerfilSeguranca from './pages/PerfilSeguranca/PerfilSeguranca';
+import '@styles/variables.css';
+import '@styles/design-system.css';
 
 const App = () => {
   const location = useLocation();
@@ -143,7 +143,7 @@ const App = () => {
       path: '/configuracoes/acessibilidade',
       element: (
         <ProtectedRoute>
-          <Acessibilidade />
+          <PerfilAcessibilidade />
         </ProtectedRoute>
       ),
     },
