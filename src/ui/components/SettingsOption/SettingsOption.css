@@ -1,0 +1,70 @@
+.settings-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 16px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  min-height: 60px;
+}
+
+.settings-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.settings-option-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.settings-option-arrow {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.settings-option:hover .settings-option-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Modos de Acessibilidade */
+body.baixa-visao .settings-option {
+  min-height: 70px;
+  padding: 24px 28px;
+}
+
+body.baixa-visao .settings-option-text {
+  font-size: var(--font-size-text-low-vision);
+}
+
+body.baixa-visao .settings-option-arrow {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .settings-option {
+    padding: 18px 20px;
+    min-height: 56px;
+  }
+
+  .settings-option-text {
+    font-size: 15px;
+  }
+
+  .settings-option-arrow {
+    width: 18px;
+    height: 18px;
+  }
+}
