@@ -1,11 +1,11 @@
 import './Configuracoes.css';
 import { useAuth } from '@hooks/AuthContext';
+import { Toaster } from 'react-hot-toast';
 import Sidebar from '../../ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import useMediaQuery from '@hooks/UseMediaQuery';
 import SettingsOption from '@ui/components/SettingsOption/SettingsOption';
 import Button from '@ui/components/Button/Button';
-import { Toaster } from 'react-hot-toast';
 
 const Configuracoes = () => {
   const { logout } = useAuth();
@@ -34,7 +34,10 @@ const Configuracoes = () => {
 
           <div className='configuracoes-section'>
             <div className='settings-group'>
-              <SettingsOption option='Sobre esse app' />
+              <SettingsOption
+                option='Sobre esse sistema'
+                to='/configuracoes/sobre'
+              />
             </div>
           </div>
 

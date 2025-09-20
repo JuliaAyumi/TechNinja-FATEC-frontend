@@ -18,6 +18,7 @@ import PerfilConfiguracoes from './pages/PerfilConfiguracoes/PerfilConfiguracoes
 import PerfilSeguranca from './pages/PerfilSeguranca/PerfilSeguranca';
 import '@styles/variables.css';
 import '@styles/design-system.css';
+import About from './pages/About/About';
 
 const App = () => {
   const location = useLocation();
@@ -152,6 +153,14 @@ const App = () => {
       element: (
         <ProtectedRoute>
           <PerfilSeguranca />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/configuracoes/sobre',
+      element: (
+        <ProtectedRoute>
+          <About />
         </ProtectedRoute>
       ),
     },
