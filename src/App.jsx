@@ -16,6 +16,7 @@ import '@styles/design-system.css';
 import Subtemas from '@pages/Subtemas/Subtemas';
 import FinishedQuiz from '@pages/FinishedQuiz/FinishedQuiz';
 import Acessibilidade from './pages/Acessibilidade/Acessibilidade';
+import PerfilConfiguracoes from './pages/PerfilConfiguracoes/PerfilConfiguracoes';
 
 const App = () => {
   const location = useLocation();
@@ -126,6 +127,14 @@ const App = () => {
       element: (
         <ProtectedRoute>
           <Configuracoes />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/configuracoes/perfil',
+      element: (
+        <ProtectedRoute>
+          <PerfilConfiguracoes />
         </ProtectedRoute>
       ),
     },

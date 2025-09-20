@@ -20,7 +20,7 @@ const Configuracoes = () => {
           <div className='configuracoes-section'>
             <h2 className='section-title'>Geral</h2>
             <div className='settings-group'>
-              <SettingsOption option='Minha conta' to='/perfil' />
+              <SettingsOption option='Minha conta' to='/configuracoes/perfil' />
               <SettingsOption
                 option='Acessibilidade'
                 to='/configuracoes/acessibilidade'
