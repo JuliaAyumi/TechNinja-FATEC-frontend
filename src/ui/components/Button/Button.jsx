@@ -7,10 +7,11 @@ const Button = ({
   buttonType = 'button',
   onClick,
   size = 'large',
+  className = '',
 }) => {
   return (
     <button
-      className={`button ${type} ${size === 'small' ? 'small' : ''}`}
+      className={`button ${type} ${size === 'small' ? 'small' : ''} ${className}`}
       type={buttonType}
       disabled={disabled}
       onClick={onClick}
