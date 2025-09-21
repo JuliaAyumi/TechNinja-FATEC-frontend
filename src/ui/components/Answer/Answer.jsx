@@ -5,14 +5,26 @@ const Answer = ({
   perguntaIndex,
   respostasUsuario,
   onRespostaChange,
-  finalizado,
-  isRespostaCorreta,
-  isRespostaErrada,
+  mostrarFeedback,
+  respostaCorreta,
+  acertou,
+  errou,
 }) => {
   return (
     <div className='answers-block'>
       {alternativas.map((alt, idx) => {
         const isSelected = respostasUsuario[perguntaIndex] === alt.opcao;
+        const isCorrectAnswer = alt.opcao === respostaCorreta;
+
+        let className = '';
+        if (mostrarFeedback && isSelected) {
+          className = acertou ? 'resposta-correta' : 'resposta-incorreta';
+        } else if (mostrarFeedback && errou && isCorrectAnswer) {
+          className = 'resposta-correta-mostrar';
+        } else if (isSelected) {
+          className = 'resposta-selecionada';
+        }
+
         return (
           <div key={idx}>
             <input
@@ -22,27 +34,23 @@ const Answer = ({
               name={`pergunta${perguntaIndex}`}
               value={alt.opcao}
               onChange={() => onRespostaChange(perguntaIndex, alt.opcao)}
-              disabled={finalizado}
+              disabled={mostrarFeedback}
+              checked={isSelected}
             />
             <label
               htmlFor={`resposta${perguntaIndex}-${idx}`}
-              className={
-                finalizado && isRespostaCorreta && isSelected
-                  ? 'resposta-correta'
-                  : finalizado && isRespostaErrada && isSelected
-                    ? 'resposta-incorreta'
-                    : isSelected
-                      ? 'resposta-selecionada'
-                      : ''
-              }
+              className={className}
             >
               <span className='opcao-letra'>{alt.opcao})</span>
               <span className='opcao-texto'>{alt['texto-opcao']}</span>
-              {finalizado && isRespostaCorreta && isSelected && (
+              {mostrarFeedback && isSelected && acertou && (
                 <span className='feedback-icon'>✓</span>
               )}
-              {finalizado && isRespostaErrada && isSelected && (
+              {mostrarFeedback && isSelected && errou && (
                 <span className='feedback-icon'>✗</span>
+              )}
+              {mostrarFeedback && errou && isCorrectAnswer && !isSelected && (
+                <span className='feedback-icon'>✓</span>
               )}
             </label>
           </div>

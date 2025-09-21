@@ -12,6 +12,8 @@ const Quiz = () => {
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
   const [finalizado, setFinalizado] = useState(false);
+  const [perguntaAtual, setPerguntaAtual] = useState(0);
+  const [mostrarFeedback, setMostrarFeedback] = useState(false);
 
   const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
@@ -37,16 +39,22 @@ const Quiz = () => {
     }, 0);
   };
 
-  const getProgressPercentage = () => {
-    if (perguntas.length === 0) return 0;
-    return (Object.keys(respostasUsuario).length / perguntas.length) * 100;
-  };
-
   const handleRespostaChange = (indexPergunta, opcaoSelecionada) => {
     setRespostasUsuario((prev) => ({
       ...prev,
       [indexPergunta]: opcaoSelecionada,
     }));
+
+    setMostrarFeedback(true);
+  };
+
+  const proximaPergunta = () => {
+    if (perguntaAtual < perguntas.length - 1) {
+      setPerguntaAtual(perguntaAtual + 1);
+      setMostrarFeedback(false);
+    } else {
+      finalizarQuiz();
+    }
   };
 
   const handleSair = () => {
@@ -127,23 +135,22 @@ const Quiz = () => {
       <div className='progress-bar'>
         <div
           className='progress-fill'
-          style={{ width: `${getProgressPercentage()}%` }}
+          style={{
+            width: `${((perguntaAtual + 1) / perguntas.length) * 100}%`,
+          }}
         />
       </div>
       <div className='progress-text'>
-        {Object.keys(respostasUsuario).length} de {perguntas.length} perguntas
-        respondidas
+        Pergunta {perguntaAtual + 1} de {perguntas.length}
       </div>
     </div>
   );
 
   const QuestionItem = ({ pergunta, index }) => {
-    const isRespostaCorreta =
-      finalizado && respostasUsuario[index] === pergunta.resposta;
-    const isRespostaErrada =
-      finalizado &&
-      respostasUsuario[index] !== pergunta.resposta &&
-      respostasUsuario[index];
+    const respostaUsuario = respostasUsuario[index];
+    const jaRespondeu = respostaUsuario !== undefined;
+    const acertou = jaRespondeu && respostaUsuario === pergunta.resposta;
+    const errou = jaRespondeu && respostaUsuario !== pergunta.resposta;
 
     return (
       <div key={index} className='area-pergunta'>
@@ -153,9 +160,10 @@ const Quiz = () => {
           perguntaIndex={index}
           respostasUsuario={respostasUsuario}
           onRespostaChange={handleRespostaChange}
-          finalizado={finalizado}
-          isRespostaCorreta={isRespostaCorreta}
-          isRespostaErrada={isRespostaErrada}
+          mostrarFeedback={mostrarFeedback}
+          respostaCorreta={pergunta.resposta}
+          acertou={acertou}
+          errou={errou}
         />
       </div>
     );
@@ -190,19 +198,37 @@ const Quiz = () => {
         {perguntas.length > 0 && <ProgressBar />}
 
         {perguntas.length > 0 ? (
-          perguntas.map((pergunta, index) => (
-            <QuestionItem key={index} pergunta={pergunta} index={index} />
-          ))
+          <div className='quiz-container'>
+            <QuestionItem
+              key={perguntaAtual}
+              pergunta={perguntas[perguntaAtual]}
+              index={perguntaAtual}
+            />
+
+            <div className='navigation-buttons'>
+              {mostrarFeedback && !finalizado && (
+                <Button
+                  onClick={proximaPergunta}
+                  option={
+                    perguntaAtual === perguntas.length - 1
+                      ? 'Finalizar Quiz'
+                      : 'Próxima'
+                  }
+                />
+              )}
+
+              {finalizado && (
+                <Button
+                  className='button-resultado'
+                  onClick={handleSair}
+                  option='Ver Resultado'
+                />
+              )}
+            </div>
+          </div>
         ) : (
           <p>Carregando perguntas...</p>
         )}
-
-        <div className='botoes'>
-          <Button
-            onClick={finalizado ? handleSair : finalizarQuiz}
-            option={finalizado ? 'Sair do Quiz' : 'Finalizar'}
-          />
-        </div>
       </main>
 
       <Toaster />

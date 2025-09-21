@@ -28,6 +28,14 @@
   margin-bottom: 2em;
 }
 
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+}
+
 .progress-bar {
   width: 100%;
   height: 8px;
@@ -58,11 +66,26 @@
   justify-content: center;
 }
 
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.button-resultado {
+  align-self: center;
+}
 
 @media only screen and (max-width: 700px) {
   .area-questao {
     font-size: 1.5em;
     width: 75%;
+  }
+
+  .navigation-buttons {
+    margin-top: 1.5rem;
   }
 
   .resposta {

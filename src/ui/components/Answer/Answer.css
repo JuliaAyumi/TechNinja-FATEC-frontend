@@ -26,7 +26,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.answers-block label:hover:not(.resposta-selecionada):not(.resposta-correta):not(.resposta-incorreta) {
+.answers-block label:hover:not(.resposta-selecionada):not(.resposta-correta):not(.resposta-incorreta):not(.resposta-correta-mostrar) {
   cursor: pointer;
   background-color: var(--color-background-component-tertiary);
   transform: translateY(-2px);
@@ -56,18 +56,26 @@
   box-shadow: 0 4px 12px rgba(82, 216, 69, 0.3);
 }
 
-.resposta-correta {
+.answers-block label.resposta-correta {
   background-color: var(--color-action-primary) !important;
   color: white !important;
   border: 2px solid var(--color-action-primary) !important;
   animation: correctAnswer 0.6s ease;
 }
 
-.resposta-incorreta {
-  background-color: var(--color-action-tertiary) !important;
+.answers-block label.resposta-incorreta {
+  background-color: #C83030 !important;
   color: white !important;
-  border: 2px solid var(--color-action-tertiary) !important;
+  border: 2px solid #C83030 !important;
   animation: incorrectAnswer 0.6s ease;
+}
+
+.answers-block label.resposta-correta-mostrar {
+  background-color: var(--color-action-primary) !important;
+  color: white !important;
+  border: 2px solid var(--color-action-primary) !important;
+  animation: correctAnswer 0.6s ease;
+  opacity: 0.8;
 }
 
 .opcao-letra {
@@ -126,12 +134,17 @@ body.daltonico .resposta-selecionada {
   border-color: var(--color-action-primary-colorblind);
 }
 
-body.daltonico .resposta-correta {
+body.daltonico .answers-block label.resposta-correta {
   background-color: var(--color-action-primary-colorblind) !important;
   border-color: var(--color-action-primary-colorblind) !important;
 }
 
-body.daltonico .resposta-incorreta {
-  background-color: var(--color-action-tertiary-colorblind) !important;
-  border-color: var(--color-action-tertiary-colorblind) !important;
+body.daltonico .answers-block label.resposta-incorreta {
+  background-color: #B00020 !important;
+  border-color: #B00020 !important;
+}
+
+body.daltonico .answers-block label.resposta-correta-mostrar {
+  background-color: var(--color-action-primary-colorblind) !important;
+  border-color: var(--color-action-primary-colorblind) !important;
 }
