@@ -12,72 +12,62 @@ const PerfilAcessibilidade = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const location = useLocation();
 
-  const [modoEscuro, setModoEscuro] = useState(
-    localStorage.getItem('accessibilityMode') === 'dark-mode',
-  );
-  const [modoDaltonico, setModoDaltonico] = useState(
-    localStorage.getItem('daltonicoMode') === 'daltonico',
-  );
-  const [modoBaixaVisao, setModoBaixaVisao] = useState(
-    localStorage.getItem('baixaVisaoMode') === 'baixa-visao',
-  );
+  const [toggles, setToggles] = useState({
+    daltonico: false,
+    baixaVisao: false,
+  });
 
-  const applyAccessibilityMode = useCallback(() => {
-    const accessibilityMode = localStorage.getItem('accessibilityMode');
-    const daltonicoMode = localStorage.getItem('daltonicoMode');
-    const baixaVisaoMode = localStorage.getItem('baixaVisaoMode');
+  const loadSavedSettings = useCallback(() => {
+    const settings = {
+      daltonico: localStorage.getItem('daltonicoMode') === 'daltonico',
+      baixaVisao: localStorage.getItem('baixaVisaoMode') === 'baixa-visao',
+    };
 
-    if (
-      ['/', '/login', '/cadastrar', '/esqueceu'].includes(location.pathname)
-    ) {
-      document.body.classList.remove('dark-mode', 'daltonico', 'baixa-visao');
-    } else {
-      if (accessibilityMode === 'dark-mode') {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
+    setToggles(settings);
+    return settings;
+  }, []);
+
+  const applyAccessibilityModes = useCallback(
+    (settings) => {
+      const isPublicPage = ['/', '/login', '/cadastrar', '/esqueceu'].includes(
+        location.pathname,
+      );
+
+      if (isPublicPage) {
+        document.body.classList.remove('daltonico', 'baixa-visao');
+        return;
       }
 
-      if (daltonicoMode === 'daltonico') {
-        document.body.classList.add('daltonico');
-      } else {
-        document.body.classList.remove('daltonico');
-      }
-
-      if (baixaVisaoMode === 'baixa-visao') {
-        document.body.classList.add('baixa-visao');
-      } else {
-        document.body.classList.remove('baixa-visao');
-      }
-    }
-  }, [location]);
+      document.body.classList.toggle('daltonico', settings.daltonico);
+      document.body.classList.toggle('baixa-visao', settings.baixaVisao);
+    },
+    [location],
+  );
 
   useEffect(() => {
-    applyAccessibilityMode();
-  }, [applyAccessibilityMode]);
+    const settings = loadSavedSettings();
+    applyAccessibilityModes(settings);
+  }, [loadSavedSettings, applyAccessibilityModes]);
 
-  const toggleDarkMode = () => {
-    const newMode = modoEscuro ? 'light-mode' : 'dark-mode';
-    setModoEscuro(!modoEscuro);
-    localStorage.setItem('accessibilityMode', newMode);
-    applyAccessibilityMode();
-  };
-
-  const toggleDaltonicoMode = () => {
-    const newMode = modoDaltonico ? 'light-mode' : 'daltonico';
-    setModoDaltonico(!modoDaltonico);
-    localStorage.setItem('daltonicoMode', newMode);
-    applyAccessibilityMode();
-  };
-
-  const toggleBaixaVisaoMode = () => {
-    const newMode = modoBaixaVisao ? 'light-mode' : 'baixa-visao';
-    setModoBaixaVisao(!modoBaixaVisao);
-    localStorage.setItem('baixaVisaoMode', newMode);
-    applyAccessibilityMode();
+  const handleToggle = (mode) => {
+    setToggles((prev) => ({
+      ...prev,
+      [mode]: !prev[mode],
+    }));
   };
 
   const handleSalvar = () => {
+    localStorage.setItem(
+      'daltonicoMode',
+      toggles.daltonico ? 'daltonico' : 'disabled',
+    );
+    localStorage.setItem(
+      'baixaVisaoMode',
+      toggles.baixaVisao ? 'baixa-visao' : 'disabled',
+    );
+
+    applyAccessibilityModes(toggles);
+
     toast.success('Configurações de acessibilidade salvas!');
   };
 
@@ -92,13 +82,13 @@ const PerfilAcessibilidade = () => {
         <div className='acessibilidade-container'>
           <AccessibilityOption
             option='Modo Daltônico'
-            isEnabled={modoDaltonico}
-            onToggle={toggleDaltonicoMode}
+            isEnabled={toggles.daltonico}
+            onToggle={() => handleToggle('daltonico')}
           />
           <AccessibilityOption
             option='Modo Baixa Visão'
-            isEnabled={modoBaixaVisao}
-            onToggle={toggleBaixaVisaoMode}
+            isEnabled={toggles.baixaVisao}
+            onToggle={() => handleToggle('baixaVisao')}
           />
           <Button
             className='button-salvar'
