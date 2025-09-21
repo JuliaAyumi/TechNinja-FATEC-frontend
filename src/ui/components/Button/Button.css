@@ -25,6 +25,15 @@
   background-color: var(--color-action-primary-hover);
 }
 
+.button.danger {
+  background-color: var(--color-action-tertiary);
+  color: white;
+}
+
+.button.danger:hover {
+  background-color: var(--color-action-tertiary-hover);
+}
+
 .button.secondary {
   background-color: var(--color-action-primary-bg);
   color: white;
@@ -57,6 +66,14 @@ body.daltonico .button.secondary {
 
 body.daltonico .button.secondary:hover {
   background-color: var(--color-action-secondary-colorblind-hover);
+}
+
+body.daltonico .button.danger {
+  background-color: #8b4513;
+}
+
+body.daltonico .button.danger:hover {
+  background-color: #654321;
 }
 
 .button:disabled {
