@@ -18,14 +18,17 @@ body.baixa-visao .main-home {
 @media only screen and (max-width: 768px) {
   .main-home {
     flex-direction: column;
-    margin-left: 60px;
-    width: calc(100vw - 60px);
-    padding: 16px;
+    margin-left: 0;
+    width: 100vw;
+    margin: 0 auto;
+    padding: calc(3.4em + 16px) 16px 16px 16px;
+    margin-top: 2em;
   }
 
   body.baixa-visao .main-home {
-    margin-left: 70px;
-    width: calc(100vw - 70px);
+    margin-left: 0;
+    width: 100vw;
+    padding: calc(4em + 16px) 16px 16px 16px;
   }
 }
 

@@ -62,10 +62,26 @@ body.baixa-visao .area-conhecimento h1 {
   font-size: var(--texto-baixa-visao);
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
   .area-conhecimento {
-    width: 25em;
-    margin: 1em 5em;
-    padding: 1.5em;
+    width: 90%;
+    max-width: 350px;
+    margin: 0 auto 16px auto;
+    padding: 24px;
+    height: 280px;
+  }
+
+  .area-conhecimento h1 {
+    font-size: 24px;
+  }
+
+  .area-conhecimento p {
+    font-size: 14px;
+  }
+
+  .area-conhecimento img {
+    width: 100px;
+    height: 100px;
+    bottom: 24px;
   }
 }
