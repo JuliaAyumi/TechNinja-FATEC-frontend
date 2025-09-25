@@ -6,6 +6,11 @@ import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import Button from '@ui/components/Button/Button';
 import Question from '@ui/components/Question/Question';
 import Answer from '@ui/components/Answer/Answer';
+import TrueFalseAnswer from '@ui/components/TrueFalseAnswer/TrueFalseAnswer';
+import MatchColumnsAnswer from '@ui/components/MatchColumnsAnswer/MatchColumnsAnswer';
+import DragDropAnswer from '@ui/components/DragDropAnswer/DragDropAnswer';
+import CompleteAnswer from '@ui/components/CompleteAnswer/CompleteAnswer';
+import mockData from '@assets/palmeiras.json';
 import './Quiz.css';
 
 const Quiz = () => {
@@ -27,15 +32,75 @@ const Quiz = () => {
   const todasRespondidas = () => {
     return (
       perguntas.length > 0 &&
-      perguntas.every((_, index) => respostasUsuario[index])
+      perguntas.every((pergunta, index) => {
+        const resposta = respostasUsuario[index];
+
+        switch (pergunta.categoria) {
+          case 'multipla-escolha':
+          case 'verdadeiro-falso':
+          case 'completar':
+            return resposta && resposta !== '';
+
+          case 'relacionar-colunas':
+            return (
+              resposta &&
+              typeof resposta === 'object' &&
+              Object.keys(resposta).length ===
+                Object.keys(pergunta.pares).length
+            );
+
+          case 'drag-drop':
+            return (
+              Array.isArray(resposta) &&
+              resposta.length === pergunta.respostaCorreta.length &&
+              resposta.every((item) => item !== null && item !== undefined)
+            );
+
+          default:
+            return !!resposta;
+        }
+      })
     );
   };
 
   const calcularAcertos = () => {
     return perguntas.reduce((acertos, pergunta, index) => {
-      return respostasUsuario[index] === pergunta.resposta
-        ? acertos + 1
-        : acertos;
+      const respostaUsuario = respostasUsuario[index];
+
+      switch (pergunta.categoria) {
+        case 'multipla-escolha':
+        case 'verdadeiro-falso':
+          return respostaUsuario === pergunta.resposta ? acertos + 1 : acertos;
+
+        case 'relacionar-colunas': {
+          if (!respostaUsuario || typeof respostaUsuario !== 'object')
+            return acertos;
+          const paresCorretos = Object.keys(pergunta.pares).every(
+            (chave) => respostaUsuario[chave] === pergunta.pares[chave],
+          );
+          return paresCorretos ? acertos + 1 : acertos;
+        }
+
+        case 'drag-drop': {
+          if (!Array.isArray(respostaUsuario)) return acertos;
+          const dragDropCorreto = pergunta.respostaCorreta.every(
+            (resposta, idx) => respostaUsuario[idx] === resposta,
+          );
+          return dragDropCorreto ? acertos + 1 : acertos;
+        }
+
+        case 'completar': {
+          if (!respostaUsuario) return acertos;
+          const respostaNormalizada = respostaUsuario.toLowerCase().trim();
+          const completarCorreto = pergunta.respostaCorreta.some(
+            (opcao) => opcao.toLowerCase() === respostaNormalizada,
+          );
+          return completarCorreto ? acertos + 1 : acertos;
+        }
+
+        default:
+          return acertos;
+      }
     }, 0);
   };
 
@@ -45,6 +110,31 @@ const Quiz = () => {
       [indexPergunta]: opcaoSelecionada,
     }));
 
+    const pergunta = perguntas[perguntaAtual];
+    if (pergunta && pergunta.categoria === 'drag-drop') {
+      const todosPreenchidos =
+        Array.isArray(opcaoSelecionada) &&
+        opcaoSelecionada.length === pergunta.respostaCorreta.length &&
+        opcaoSelecionada.every((item) => item !== null);
+
+      if (todosPreenchidos) {
+        setMostrarFeedback(true);
+      }
+      return;
+    }
+
+    if (pergunta && pergunta.categoria === 'relacionar-colunas') {
+      const todasAssociacoes =
+        opcaoSelecionada &&
+        typeof opcaoSelecionada === 'object' &&
+        Object.keys(opcaoSelecionada).length ===
+          Object.keys(pergunta.pares).length;
+
+      if (todasAssociacoes) {
+        setMostrarFeedback(true);
+      }
+      return;
+    }
     setMostrarFeedback(true);
   };
 
@@ -148,23 +238,134 @@ const Quiz = () => {
 
   const QuestionItem = ({ pergunta, index }) => {
     const respostaUsuario = respostasUsuario[index];
-    const jaRespondeu = respostaUsuario !== undefined;
-    const acertou = jaRespondeu && respostaUsuario === pergunta.resposta;
-    const errou = jaRespondeu && respostaUsuario !== pergunta.resposta;
+    const jaRespondeu =
+      respostaUsuario !== undefined &&
+      respostaUsuario !== null &&
+      respostaUsuario !== '';
+
+    let acertou = false;
+    if (jaRespondeu) {
+      switch (pergunta.categoria) {
+        case 'multipla-escolha':
+        case 'verdadeiro-falso':
+          acertou = respostaUsuario === pergunta.resposta;
+          break;
+
+        case 'relacionar-colunas':
+          acertou =
+            typeof respostaUsuario === 'object' &&
+            Object.keys(pergunta.pares).every(
+              (chave) => respostaUsuario[chave] === pergunta.pares[chave],
+            );
+          break;
+
+        case 'drag-drop':
+          acertou =
+            Array.isArray(respostaUsuario) &&
+            pergunta.respostaCorreta.every(
+              (resposta, idx) => respostaUsuario[idx] === resposta,
+            );
+          break;
+
+        case 'completar': {
+          const respostaNormalizada = respostaUsuario.toLowerCase().trim();
+          acertou = pergunta.respostaCorreta.some(
+            (opcao) => opcao.toLowerCase() === respostaNormalizada,
+          );
+          break;
+        }
+        default:
+          break;
+      }
+    }
+
+    const errou = jaRespondeu && !acertou;
+
+    const renderAnswerComponent = () => {
+      switch (pergunta.categoria) {
+        case 'multipla-escolha':
+          return (
+            <Answer
+              alternativas={pergunta.alternativas}
+              perguntaIndex={index}
+              respostasUsuario={respostasUsuario}
+              onRespostaChange={handleRespostaChange}
+              mostrarFeedback={mostrarFeedback}
+              respostaCorreta={pergunta.resposta}
+              acertou={acertou}
+              errou={errou}
+            />
+          );
+
+        case 'verdadeiro-falso':
+          return (
+            <TrueFalseAnswer
+              alternatives={pergunta.alternativas}
+              questionIndex={index}
+              userAnswers={respostasUsuario}
+              onAnswerChange={handleRespostaChange}
+              showFeedback={mostrarFeedback}
+              correctAnswer={pergunta.resposta}
+              isCorrect={acertou}
+              isWrong={errou}
+            />
+          );
+
+        case 'relacionar-colunas':
+          return (
+            <MatchColumnsAnswer
+              pairs={pergunta.pares}
+              questionIndex={index}
+              userAnswers={respostasUsuario}
+              onAnswerChange={handleRespostaChange}
+              showFeedback={mostrarFeedback}
+            />
+          );
+
+        case 'drag-drop':
+          return (
+            <DragDropAnswer
+              question={pergunta.pergunta}
+              itemsToRearrange={pergunta.itensParaArrastar}
+              correctAnswer={pergunta.respostaCorreta}
+              questionIndex={index}
+              userAnswers={respostasUsuario}
+              onAnswerChange={handleRespostaChange}
+              showFeedback={mostrarFeedback}
+            />
+          );
+
+        case 'completar':
+          return (
+            <CompleteAnswer
+              correctAnswer={pergunta.respostaCorreta}
+              questionIndex={index}
+              userAnswers={respostasUsuario}
+              onAnswerChange={handleRespostaChange}
+              showFeedback={mostrarFeedback}
+            />
+          );
+
+        default:
+          return (
+            <Answer
+              alternativas={pergunta.alternativas}
+              perguntaIndex={index}
+              respostasUsuario={respostasUsuario}
+              onRespostaChange={handleRespostaChange}
+              mostrarFeedback={mostrarFeedback}
+              respostaCorreta={pergunta.resposta}
+              acertou={acertou}
+              errou={errou}
+            />
+          );
+      }
+    };
 
     return (
       <div key={index} className='area-pergunta'>
         <Question title={pergunta.pergunta} />
-        <Answer
-          alternativas={pergunta.alternativas}
-          perguntaIndex={index}
-          respostasUsuario={respostasUsuario}
-          onRespostaChange={handleRespostaChange}
-          mostrarFeedback={mostrarFeedback}
-          respostaCorreta={pergunta.resposta}
-          acertou={acertou}
-          errou={errou}
-        />
+        {renderAnswerComponent()}
       </div>
     );
   };
@@ -172,6 +373,11 @@ const Quiz = () => {
   useEffect(() => {
     const loadQuiz = async () => {
       try {
+        if (import.meta.env.VITE_MODE === 'development') {
+          setPerguntas(mockData);
+          return;
+        }
+
         const response = await fetch(
           `${API_BASE_URL}/api/quiz/${area}/${subtema}/${dificuldade}`,
         );
@@ -181,9 +387,11 @@ const Quiz = () => {
           setPerguntas(data);
         } else {
           console.error('Erro ao buscar o quiz');
+          setPerguntas(mockData);
         }
       } catch (error) {
         console.error('Erro na requisição:', error);
+        setPerguntas(mockData);
       }
     };
 
