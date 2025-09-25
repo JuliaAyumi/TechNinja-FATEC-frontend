@@ -1,0 +1,214 @@
+.true-false-block {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 1rem;
+}
+
+.true-false-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.true-false-block input[type='radio'] {
+  display: none;
+}
+
+.true-false-block label {
+  height: 70px;
+  margin: 0.8em 0;
+  padding: 1.2em 1.5em;
+  text-align: center;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--color-background-component);
+  font-weight: 600;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.true-false-block label:hover:not(.resposta-selecionada):not(.resposta-correta):not(.resposta-incorreta):not(.resposta-correta-mostrar) {
+  cursor: pointer;
+  background-color: var(--color-background-component-tertiary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-action-primary);
+}
+
+.resposta-selecionada:hover {
+  background-color: var(--color-action-primary-hover) !important;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.resposta-item:checked + label {
+  background-color: var(--color-action-primary) !important;
+  color: white !important;
+  font-weight: 700;
+  border: 2px solid var(--color-action-primary) !important;
+  box-shadow: 0 4px 12px rgba(82, 216, 69, 0.3);
+}
+
+.resposta-selecionada {
+  background-color: var(--color-action-primary) !important;
+  color: white !important;
+  font-weight: 700;
+  border: 2px solid var(--color-action-primary) !important;
+  box-shadow: 0 4px 12px rgba(82, 216, 69, 0.3);
+}
+
+.true-false-block label.resposta-correta {
+  background-color: var(--color-action-primary) !important;
+  color: white !important;
+  border: 2px solid var(--color-action-primary) !important;
+  animation: correctAnswer 0.6s ease;
+}
+
+.true-false-block label.resposta-incorreta {
+  background-color: #C83030 !important;
+  color: white !important;
+  border: 2px solid #C83030 !important;
+  animation: incorrectAnswer 0.6s ease;
+}
+
+.true-false-block label.resposta-correta-mostrar {
+  background-color: var(--color-action-primary) !important;
+  color: white !important;
+  border: 2px solid var(--color-action-primary) !important;
+  animation: correctAnswer 0.6s ease;
+  opacity: 0.8;
+}
+
+.opcao-texto {
+  flex: 1;
+  font-weight: inherit;
+}
+
+.feedback-icon {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.explicacao-feedback {
+  margin-top: 0.8rem;
+  padding: 1rem;
+  background-color: var(--color-background-component-secondary);
+  border-radius: 12px;
+  border-left: 4px solid var(--color-action-primary);
+  animation: slideDown 0.3s ease;
+}
+
+.explicacao-feedback p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+@keyframes correctAnswer {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes incorrectAnswer {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slideDown {
+  0% { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media only screen and (max-width: 700px) {
+  .true-false-block {
+    width: 90%;
+  }
+  
+  .true-false-block label {
+    font-size: 1.1rem;
+    padding: 1rem 1.2em;
+  }
+}
+
+/* Dark Mode */
+body.dark-mode .true-false-block label {
+  color: white;
+  background-color: #3d444d;
+}
+
+body.dark-mode .resposta-item:checked + label {
+  background-color: #03a65a;
+  font-weight: bold;
+}
+
+body.dark-mode .explicacao-feedback {
+  background-color: #2d3748;
+  border-left-color: #03a65a;
+}
+
+body.dark-mode .explicacao-feedback p {
+  color: #e2e8f0;
+}
+
+/* Baixa Visão */
+body.baixa-visao .true-false-block {
+  width: 90%;
+  gap: 1.5rem;
+}
+
+body.baixa-visao .true-false-block label {
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  min-height: 80px;
+}
+
+body.baixa-visao .explicacao-feedback {
+  padding: 1.5rem;
+}
+
+body.baixa-visao .explicacao-feedback p {
+  font-size: 1.2rem;
+}
+
+/* Daltonismo */
+body.daltonico .resposta-item:checked + label,
+body.daltonico .resposta-selecionada {
+  background-color: var(--color-action-primary-colorblind);
+  border-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .true-false-block label.resposta-correta {
+  background-color: var(--color-action-primary-colorblind) !important;
+  border-color: var(--color-action-primary-colorblind) !important;
+}
+
+body.daltonico .true-false-block label.resposta-incorreta {
+  background-color: #B00020 !important;
+  border-color: #B00020 !important;
+}
+
+body.daltonico .true-false-block label.resposta-correta-mostrar {
+  background-color: var(--color-action-primary-colorblind) !important;
+  border-color: var(--color-action-primary-colorblind) !important;
+}
+
+body.daltonico .explicacao-feedback {
+  border-left-color: var(--color-action-primary-colorblind);
+}
