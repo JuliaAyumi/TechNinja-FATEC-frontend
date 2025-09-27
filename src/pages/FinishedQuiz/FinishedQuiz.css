@@ -1,6 +1,6 @@
 .finished-quiz-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: var(--color-background-primary);
   position: relative;
   overflow: hidden;
 }
@@ -418,7 +418,7 @@
 }
 
 body.dark-mode .finished-quiz-container {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  background-color: var(--color-background-primary);
 }
 
 body.daltonico .ring-progress {

@@ -16,17 +16,11 @@
 .sidebar-logo {
   margin-bottom: 20px;
   text-align: center;
-  animation: logoFloat 3s ease-in-out infinite;
-}
-
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-5px); }
 }
 
 .sidebar-back {
-  width: 80px;
-  height: auto;
+  width: 40px;
+  height: 40px;
   filter: brightness(0) invert(1);
   transition: transform 0.3s ease;
 }
