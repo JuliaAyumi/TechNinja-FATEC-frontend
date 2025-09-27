@@ -14,6 +14,8 @@ import mockData from '@assets/palmeiras.json';
 import './Quiz.css';
 
 const Quiz = () => {
+  // esse código ficou retardado e gigante e uma merda, mas funciona. entao eu nao me importo. fodase, eu NAO me importo!
+
   const [perguntas, setPerguntas] = useState([]);
   const [respostasUsuario, setRespostasUsuario] = useState({});
   const [finalizado, setFinalizado] = useState(false);
@@ -35,8 +37,11 @@ const Quiz = () => {
       perguntas.every((pergunta, index) => {
         const resposta = respostasUsuario[index];
 
+        if (!pergunta.categoria || pergunta.categoria === 'multipla-escolha') {
+          return !!resposta;
+        }
+
         switch (pergunta.categoria) {
-          case 'multipla-escolha':
           case 'verdadeiro-falso':
           case 'completar':
             return resposta && resposta !== '';
@@ -67,8 +72,11 @@ const Quiz = () => {
     return perguntas.reduce((acertos, pergunta, index) => {
       const respostaUsuario = respostasUsuario[index];
 
+      if (!pergunta.categoria || pergunta.categoria === 'multipla-escolha') {
+        return respostaUsuario === pergunta.resposta ? acertos + 1 : acertos;
+      }
+
       switch (pergunta.categoria) {
-        case 'multipla-escolha':
         case 'verdadeiro-falso':
           return respostaUsuario === pergunta.resposta ? acertos + 1 : acertos;
 
@@ -99,7 +107,7 @@ const Quiz = () => {
         }
 
         default:
-          return acertos;
+          return respostaUsuario === pergunta.resposta ? acertos + 1 : acertos;
       }
     }, 0);
   };
@@ -111,7 +119,17 @@ const Quiz = () => {
     }));
 
     const pergunta = perguntas[perguntaAtual];
-    if (pergunta && pergunta.categoria === 'drag-drop') {
+
+    if (
+      !pergunta.categoria ||
+      pergunta.categoria === 'multipla-escolha' ||
+      pergunta.categoria === 'verdadeiro-falso'
+    ) {
+      setMostrarFeedback(true);
+      return;
+    }
+
+    if (pergunta.categoria === 'drag-drop') {
       const todosPreenchidos =
         Array.isArray(opcaoSelecionada) &&
         opcaoSelecionada.length === pergunta.respostaCorreta.length &&
@@ -123,7 +141,7 @@ const Quiz = () => {
       return;
     }
 
-    if (pergunta && pergunta.categoria === 'relacionar-colunas') {
+    if (pergunta.categoria === 'relacionar-colunas') {
       const todasAssociacoes =
         opcaoSelecionada &&
         typeof opcaoSelecionada === 'object' &&
@@ -135,6 +153,7 @@ const Quiz = () => {
       }
       return;
     }
+
     setMostrarFeedback(true);
   };
 
@@ -245,58 +264,61 @@ const Quiz = () => {
 
     let acertou = false;
     if (jaRespondeu) {
-      switch (pergunta.categoria) {
-        case 'multipla-escolha':
-        case 'verdadeiro-falso':
-          acertou = respostaUsuario === pergunta.resposta;
-          break;
-
-        case 'relacionar-colunas':
-          acertou =
-            typeof respostaUsuario === 'object' &&
-            Object.keys(pergunta.pares).every(
-              (chave) => respostaUsuario[chave] === pergunta.pares[chave],
+      if (!pergunta.categoria || pergunta.categoria === 'multipla-escolha') {
+        acertou = respostaUsuario === pergunta.resposta;
+      } else {
+        switch (pergunta.categoria) {
+          case 'verdadeiro-falso':
+            acertou = respostaUsuario === pergunta.resposta;
+            break;
+          case 'relacionar-colunas':
+            acertou =
+              typeof respostaUsuario === 'object' &&
+              Object.keys(pergunta.pares).every(
+                (chave) => respostaUsuario[chave] === pergunta.pares[chave],
+              );
+            break;
+          case 'drag-drop':
+            acertou =
+              Array.isArray(respostaUsuario) &&
+              pergunta.respostaCorreta.every(
+                (resposta, idx) => respostaUsuario[idx] === resposta,
+              );
+            break;
+          case 'completar': {
+            const respostaNormalizada = respostaUsuario.toLowerCase().trim();
+            acertou = pergunta.respostaCorreta.some(
+              (opcao) => opcao.toLowerCase() === respostaNormalizada,
             );
-          break;
-
-        case 'drag-drop':
-          acertou =
-            Array.isArray(respostaUsuario) &&
-            pergunta.respostaCorreta.every(
-              (resposta, idx) => respostaUsuario[idx] === resposta,
-            );
-          break;
-
-        case 'completar': {
-          const respostaNormalizada = respostaUsuario.toLowerCase().trim();
-          acertou = pergunta.respostaCorreta.some(
-            (opcao) => opcao.toLowerCase() === respostaNormalizada,
-          );
-          break;
+            break;
+          }
+          default:
+            acertou = respostaUsuario === pergunta.resposta;
         }
-        default:
-          break;
       }
     }
 
     const errou = jaRespondeu && !acertou;
 
     const renderAnswerComponent = () => {
-      switch (pergunta.categoria) {
-        case 'multipla-escolha':
-          return (
-            <Answer
-              alternativas={pergunta.alternativas}
-              perguntaIndex={index}
-              respostasUsuario={respostasUsuario}
-              onRespostaChange={handleRespostaChange}
-              mostrarFeedback={mostrarFeedback}
-              respostaCorreta={pergunta.resposta}
-              acertou={acertou}
-              errou={errou}
-            />
-          );
+      // TODO: todas as perguntas do banco hoje sao do tipo true ou false, mas faltam a categoria e a explicaco. ENTAO, quando atualizar o banco,
+      // essa bosta abaixo vai sair e vai usar somente o TrueFalseAnswer
+      if (!pergunta.categoria || pergunta.categoria === 'multipla-escolha') {
+        return (
+          <Answer
+            alternativas={pergunta.alternativas}
+            perguntaIndex={index}
+            respostasUsuario={respostasUsuario}
+            onRespostaChange={handleRespostaChange}
+            mostrarFeedback={mostrarFeedback}
+            respostaCorreta={pergunta.resposta}
+            acertou={acertou}
+            errou={errou}
+          />
+        );
+      }
 
+      switch (pergunta.categoria) {
         case 'verdadeiro-falso':
           return (
             <TrueFalseAnswer
