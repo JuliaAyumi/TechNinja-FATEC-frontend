@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '@ui/components/Button/Button';
 import './CompleteAnswer.css';
 
 const CompleteAnswer = ({
@@ -9,12 +10,24 @@ const CompleteAnswer = ({
   showFeedback,
 }) => {
   const [answer, setAnswer] = useState(userAnswers[questionIndex] || '');
+  const [isSubmitted, setIsSubmitted] = useState(!!userAnswers[questionIndex]);
 
   const handleInputChange = (value) => {
     if (showFeedback) return;
-
     setAnswer(value);
-    onAnswerChange(questionIndex, value.trim());
+  };
+
+  const handleSubmit = () => {
+    if (showFeedback || !answer.trim()) return;
+
+    setIsSubmitted(true);
+    onAnswerChange(questionIndex, answer.trim());
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
   };
 
   const isCorrect = () => {
@@ -39,11 +52,21 @@ const CompleteAnswer = ({
           className={`complete-input ${getInputStatus()}`}
           value={answer}
           onChange={(e) => handleInputChange(e.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder='Digite sua resposta...'
           disabled={showFeedback}
           autoComplete='off'
           spellCheck='false'
         />
+
+        {!showFeedback && !isSubmitted && (
+          <Button
+            option='Enviar'
+            onClick={handleSubmit}
+            disabled={!answer.trim()}
+            className='submit-answer-btn'
+          />
+        )}
 
         {showFeedback && (
           <div className='input-feedback'>
