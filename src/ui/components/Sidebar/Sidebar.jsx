@@ -80,7 +80,7 @@ const Sidebar = ({ to }) => {
         )}
       </div>
 
-      {!to && (
+      {
         <div className='sidebar-stats'>
           <div className='stat-item'>
             <span className='stat-icon'>🔥</span>
@@ -93,7 +93,7 @@ const Sidebar = ({ to }) => {
             ></div>
           </div>
         </div>
-      )}
+      }
 
       <div className='sidebar-links'>
         {menuItems.map((item) => (

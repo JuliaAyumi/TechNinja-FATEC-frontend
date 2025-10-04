@@ -23,7 +23,7 @@ const Quizzes = () => {
   const handleQuizClick = (event, isCompleted, subtema, dificuldade) => {
     if (isCompleted) {
       event.preventDefault();
-      showToast(`${subtema} - ${dificuldade}`, () =>
+      showToast(subtema, dificuldade, () =>
         navigate(`/quizzes/${area}/${subtema}/${dificuldade}`),
       );
     } else {
