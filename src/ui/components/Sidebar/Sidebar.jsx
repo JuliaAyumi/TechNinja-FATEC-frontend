@@ -48,7 +48,7 @@ const Sidebar = ({ to }) => {
       path: '/ranking',
       icon: RankingIcon,
       label: 'Ranking',
-      tooltip: 'Classificação Global',
+      tooltip: 'Ranking',
     },
     {
       path: '/perfil',
