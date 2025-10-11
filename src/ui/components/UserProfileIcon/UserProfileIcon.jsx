@@ -21,7 +21,7 @@ const UserProfileIcon = ({ image, name, position, badge }) => {
   const badgeToShow = getBadgeForPosition(position);
 
   return (
-    <div className='user-profile-icon'>
+    <div className='user-profile-icon' data-position={position}>
       <div className='user-profile-icon-position'>{position}°</div>
       <div className='user-profile-icon-avatar-container'>
         <img

@@ -16,8 +16,8 @@
 }
 
 .user-profile-icon:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   border-color: #007bff;
 }
 
@@ -71,10 +71,6 @@
   transition: all 0.3s ease;
 }
 
-.user-profile-icon:hover .user-profile-icon-badge {
-  transform: scale(1.1) rotate(10deg);
-}
-
 .user-profile-icon-name {
   font-size: 1.125rem;
   font-weight: 500;
@@ -91,35 +87,35 @@
   transform: translateX(-50%);
 }
 
-.user-profile-icon:nth-child(1) {
+.user-profile-icon[data-position="1"] {
   border-color: #ffd700;
   border-width: 3px;
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
 }
 
-.user-profile-icon:nth-child(1) .user-profile-icon-position {
+.user-profile-icon[data-position="1"] .user-profile-icon-position {
   background: linear-gradient(135deg, #ffd700, #ffed4e);
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
-.user-profile-icon:nth-child(2) {
+.user-profile-icon[data-position="2"] {
   border-color: #c0c0c0;
   border-width: 3px;
   box-shadow: 0 4px 20px rgba(192, 192, 192, 0.3);
 }
 
-.user-profile-icon:nth-child(2) .user-profile-icon-position {
+.user-profile-icon[data-position="2"] .user-profile-icon-position {
   background: linear-gradient(135deg, #6c757d, #495057);
   box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
 }
 
-.user-profile-icon:nth-child(3) {
+.user-profile-icon[data-position="3"] {
   border-color: #cd7f32;
   border-width: 3px;
   box-shadow: 0 4px 20px rgba(205, 127, 50, 0.3);
 }
 
-.user-profile-icon:nth-child(3) .user-profile-icon-position {
+.user-profile-icon[data-position="3"] .user-profile-icon-position {
   background: linear-gradient(135deg, #8b4513, #a0522d);
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
 }
@@ -157,17 +153,17 @@
   }
 }
 
-.daltonico .user-profile-icon:nth-child(1) {
+.daltonico .user-profile-icon[data-position="1"] {
   border-color: #0066cc;
   box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
 }
 
-.daltonico .user-profile-icon:nth-child(2) {
+.daltonico .user-profile-icon[data-position="2"] {
   border-color: #666666;
   box-shadow: 0 4px 20px rgba(102, 102, 102, 0.3);
 }
 
-.daltonico .user-profile-icon:nth-child(3) {
+.daltonico .user-profile-icon[data-position="3"] {
   border-color: #cc6600;
   box-shadow: 0 4px 20px rgba(204, 102, 0, 0.3);
 }

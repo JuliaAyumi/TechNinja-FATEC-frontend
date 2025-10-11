@@ -8,7 +8,14 @@
   border-radius: 12px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ranking-user-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #007bff;
 }
 
 .ranking-user-card-position {
@@ -29,6 +36,12 @@
   padding: 0.25rem;
   border-width: 2px;
   gap: 0;
+}
+
+.ranking-user-card-avatar .user-profile-icon:hover {
+  transform: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: #ddd;
 }
 
 .ranking-user-card-avatar .user-profile-icon-position {

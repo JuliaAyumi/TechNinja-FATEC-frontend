@@ -19,6 +19,7 @@ import PerfilSeguranca from './pages/PerfilSeguranca/PerfilSeguranca';
 import '@styles/variables.css';
 import '@styles/design-system.css';
 import About from './pages/About/About';
+import Ranking from './pages/Ranking/Ranking';
 
 const App = () => {
   const location = useLocation();
@@ -121,6 +122,14 @@ const App = () => {
       element: (
         <ProtectedRoute>
           <FinishedQuiz />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: '/ranking',
+      element: (
+        <ProtectedRoute>
+          <Ranking />
         </ProtectedRoute>
       ),
     },
