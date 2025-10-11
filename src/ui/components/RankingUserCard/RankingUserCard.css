@@ -1,0 +1,149 @@
+.ranking-user-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ranking-user-card-position {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #666;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.ranking-user-card-avatar {
+  flex-shrink: 0;
+}
+
+.ranking-user-card-avatar .user-profile-icon {
+  width: 50px;
+  height: 50px;
+  padding: 0.25rem;
+  border-width: 2px;
+  gap: 0;
+}
+
+.ranking-user-card-avatar .user-profile-icon-position {
+  display: none;
+}
+
+.ranking-user-card-avatar .user-profile-icon-image {
+  width: 35px;
+  height: 35px;
+  border-width: 2px;
+}
+
+.ranking-user-card-avatar .user-profile-icon-badge {
+  width: 18px;
+  height: 18px;
+  bottom: -3px;
+  right: -3px;
+  border-width: 1px;
+  padding: 2px;
+}
+
+.ranking-user-card-avatar .user-profile-icon-name {
+  display: none;
+}
+
+.ranking-user-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.ranking-user-card-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.ranking-user-card-score {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .ranking-user-card {
+    padding: 0.5rem 0.75rem;
+    gap: 0.75rem;
+    max-width: 100%;
+  }
+
+  .ranking-user-card-position {
+    font-size: 1rem;
+    min-width: 1.5rem;
+  }
+
+  .ranking-user-card-avatar .user-profile-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0.2rem;
+  }
+
+  .ranking-user-card-avatar .user-profile-icon-image {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ranking-user-card-avatar .user-profile-icon-badge {
+    width: 14px;
+    height: 14px;
+    bottom: -2px;
+    right: -2px;
+  }
+
+  .ranking-user-card-name {
+    font-size: 0.875rem;
+  }
+
+  .ranking-user-card-score {
+    font-size: 0.75rem;
+  }
+}
+
+.baixa-visao .ranking-user-card {
+  padding: 1rem 1.25rem;
+  gap: 1.25rem;
+}
+
+.baixa-visao .ranking-user-card-position {
+  font-size: 1.25rem;
+  min-width: 2.5rem;
+}
+
+.baixa-visao .ranking-user-card-avatar .user-profile-icon {
+  width: 60px;
+  height: 60px;
+  padding: 0.3rem;
+}
+
+.baixa-visao .ranking-user-card-avatar .user-profile-icon-image {
+  width: 42px;
+  height: 42px;
+}
+
+.baixa-visao .ranking-user-card-avatar .user-profile-icon-badge {
+  width: 22px;
+  height: 22px;
+  bottom: -4px;
+  right: -4px;
+}
+
+.baixa-visao .ranking-user-card-name {
+  font-size: 1.125rem;
+}
+
+.baixa-visao .ranking-user-card-score {
+  font-size: 1rem;
+}
