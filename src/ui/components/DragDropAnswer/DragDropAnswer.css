@@ -1,0 +1,509 @@
+.drag-drop-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.instructions {
+  background-color: var(--color-background-component-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--color-action-primary);
+}
+
+.instructions p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.progress-info {
+  color: var(--color-text-secondary) !important;
+  font-weight: 500;
+  font-size: 0.9rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.selection-hint {
+  color: var(--color-action-primary) !important;
+  font-weight: 600;
+  margin-top: 0.5rem !important;
+}
+
+.question-with-blanks {
+  background-color: var(--color-background-component);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  line-height: 2;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.drop-space {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  min-height: 40px;
+  margin: 0 8px;
+  padding: 8px 16px;
+  border: 2px dashed var(--color-action-primary);
+  border-radius: 8px;
+  background-color: var(--color-background-component-secondary);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.drop-space:hover {
+  background-color: var(--color-background-component-tertiary);
+  transform: translateY(-1px);
+}
+
+.drop-space.available {
+  border-color: var(--color-action-primary);
+  border-style: solid;
+  background-color: rgba(82, 216, 69, 0.1);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.drop-space.correct-drop {
+  background-color: rgba(82, 216, 69, 0.2);
+  border-color: var(--color-action-primary);
+  border-style: solid;
+  animation: correctDrop 0.5s ease;
+}
+
+.drop-space.incorrect-drop {
+  background-color: rgba(200, 48, 48, 0.2);
+  border-color: #C83030;
+  border-style: solid;
+  animation: incorrectDrop 0.5s ease;
+}
+
+.dropped-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #000000 !important; /* Forçar cor preta para melhor visibilidade */
+}
+
+.placeholder-text {
+  font-size: 0.9rem;
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.remove-icon {
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.remove-icon:hover {
+  color: #C83030;
+}
+
+.feedback-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.correct-drop .feedback-icon {
+  color: var(--color-action-primary);
+}
+
+.incorrect-drop .feedback-icon {
+  color: #C83030;
+}
+
+.draggable-items {
+  background-color: var(--color-background-component);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.items-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.draggable-item {
+  padding: 0.8rem 1.2rem;
+  background-color: var(--color-action-primary);
+  color: white;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.draggable-item:hover:not(.disabled) {
+  background-color: var(--color-action-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.draggable-item.selected {
+  background-color: #000000 !important;
+  color: white !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  border: 2px solid #000000 !important;
+}
+
+.draggable-item.used {
+  background-color: #e8f5e8 !important;
+  color: #333 !important;
+  position: relative;
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+.draggable-item.used:hover {
+  background-color: #d4f4d4 !important;
+  transform: translateY(-1px) !important;
+}
+
+.used-indicator {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--color-action-primary);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.draggable-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.correct-answer-display {
+  background-color: var(--color-background-component);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--color-action-primary);
+  animation: slideUp 0.3s ease;
+}
+
+.correct-answer-display h4 {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.correct-sentence {
+  font-size: 1.2rem;
+  line-height: 2;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.correct-word {
+  font-weight: 700;
+  color: var(--color-action-primary);
+  background-color: rgba(82, 216, 69, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin: 0 4px;
+}
+
+/* Novos estilos para o feedback em lista */
+.correct-words-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.correct-word-item {
+  background-color: var(--color-background-primary);
+  color: var(--color-text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-action-primary);
+  font-size: 1rem;
+}
+
+.correct-word-item strong {
+  color: var(--color-action-primary);
+  font-weight: 700;
+}
+
+/* Novo layout para espaços sem repetir pergunta */
+.drop-spaces-container {
+  background-color: var(--color-background-component);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.drop-spaces-container h4 {
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.spaces-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.space-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.space-label {
+  font-weight: 600;
+  color: #000000;
+  min-width: 80px;
+  font-size: 0.95rem;
+}
+
+@keyframes correctDrop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes incorrectDrop {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slideUp {
+  0% { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media only screen and (max-width: 768px) {
+  .drag-drop-container {
+    width: 95%;
+  }
+  
+  .question-with-blanks {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .drop-space {
+    min-width: 100px;
+    min-height: 35px;
+    margin: 4px;
+    padding: 6px 12px;
+  }
+  
+  .draggable-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .correct-sentence {
+    font-size: 1.1rem;
+  }
+}
+
+/* Dark Mode */
+body.dark-mode .question-with-blanks {
+  background-color: #2d3748;
+  color: #e2e8f0;
+}
+
+body.dark-mode .drop-space {
+  background-color: #4a5568;
+  border-color: #03a65a;
+}
+
+body.dark-mode .drop-space:hover {
+  background-color: #5a6579;
+}
+
+body.dark-mode .drop-space.correct-drop {
+  background-color: rgba(3, 166, 90, 0.3);
+  border-color: #03a65a;
+}
+
+body.dark-mode .drop-space.incorrect-drop {
+  background-color: rgba(176, 0, 32, 0.3);
+  border-color: #B00020;
+}
+
+body.dark-mode .dropped-item {
+  color: #e2e8f0;
+}
+
+body.dark-mode .placeholder-text {
+  color: #a0aec0;
+}
+
+body.dark-mode .draggable-items {
+  background-color: #2d3748;
+}
+
+body.dark-mode .items-title {
+  color: #e2e8f0;
+}
+
+body.dark-mode .draggable-item {
+  background-color: #03a65a;
+}
+
+body.dark-mode .draggable-item:hover:not(.disabled) {
+  background-color: #047857;
+}
+
+body.dark-mode .correct-answer-display {
+  background-color: #2d3748;
+  border-left-color: #03a65a;
+}
+
+body.dark-mode .correct-answer-display h4 {
+  color: #e2e8f0;
+}
+
+body.dark-mode .correct-sentence {
+  color: #e2e8f0;
+}
+
+body.dark-mode .correct-word {
+  color: #03a65a;
+  background-color: rgba(3, 166, 90, 0.2);
+}
+
+/* Baixa Visão */
+body.baixa-visao .drag-drop-container {
+  width: 90%;
+}
+
+body.baixa-visao .question-with-blanks {
+  padding: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 2.2;
+}
+
+body.baixa-visao .drop-space {
+  min-width: 150px;
+  min-height: 50px;
+  padding: 12px 20px;
+  margin: 8px;
+}
+
+body.baixa-visao .draggable-items {
+  padding: 2rem;
+}
+
+body.baixa-visao .items-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+body.baixa-visao .draggable-item {
+  padding: 1.2rem 1.8rem;
+  font-size: 1.2rem;
+}
+
+body.baixa-visao .correct-answer-display {
+  padding: 2rem;
+}
+
+body.baixa-visao .correct-answer-display h4 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+body.baixa-visao .correct-sentence {
+  font-size: 1.5rem;
+  line-height: 2.2;
+}
+
+body.baixa-visao .correct-word {
+  padding: 8px 12px;
+  margin: 0 8px;
+}
+
+/* Daltonismo */
+body.daltonico .drop-space {
+  border-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .drop-space.correct-drop {
+  background-color: rgba(3, 166, 90, 0.2);
+  border-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .drop-space.incorrect-drop {
+  background-color: rgba(176, 0, 32, 0.2);
+  border-color: #B00020;
+}
+
+body.daltonico .correct-drop .feedback-icon {
+  color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .incorrect-drop .feedback-icon {
+  color: #B00020;
+}
+
+body.daltonico .draggable-item {
+  background-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .draggable-item:hover:not(.disabled) {
+  background-color: var(--color-action-primary-colorblind-hover);
+}
+
+body.daltonico .correct-answer-display {
+  border-left-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .correct-word {
+  color: var(--color-action-primary-colorblind);
+  background-color: rgba(3, 166, 90, 0.1);
+}

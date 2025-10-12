@@ -1,0 +1,344 @@
+.complete-answer-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--color-background-component);
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.complete-input {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-color: var(--color-background-component-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.complete-input:focus {
+  border-color: var(--color-action-primary);
+  background-color: var(--color-background-component-tertiary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(82, 216, 69, 0.2);
+}
+
+.complete-input::placeholder {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.complete-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.complete-input.correct-input {
+  border-color: var(--color-action-primary);
+  background-color: rgba(82, 216, 69, 0.1);
+  animation: correctInput 0.5s ease;
+}
+
+.complete-input.incorrect-input {
+  border-color: #C83030;
+  background-color: rgba(200, 48, 48, 0.1);
+  animation: incorrectInput 0.5s ease;
+}
+
+.input-feedback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.submit-answer-btn {
+  align-self: center;
+  margin-top: 0.5rem;
+}
+
+.feedback-icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.feedback-icon.correct {
+  color: var(--color-action-primary);
+}
+
+.feedback-icon.incorrect {
+  color: #C83030;
+}
+
+.answer-feedback {
+  background-color: var(--color-background-component);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease;
+}
+
+.correct-feedback {
+  border-left: 4px solid var(--color-action-primary);
+  padding-left: 1rem;
+}
+
+.incorrect-feedback {
+  border-left: 4px solid #C83030;
+  padding-left: 1rem;
+}
+
+.answer-feedback h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.correct-feedback h4 {
+  color: var(--color-action-primary);
+}
+
+.incorrect-feedback h4 {
+  color: #C83030;
+}
+
+.answer-feedback p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.answer-feedback strong {
+  font-weight: 700;
+}
+
+.correct-feedback strong {
+  color: var(--color-action-primary);
+}
+
+.incorrect-feedback strong {
+  color: #C83030;
+}
+
+@keyframes correctInput {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes incorrectInput {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slideDown {
+  0% { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media only screen and (max-width: 768px) {
+  .complete-answer-container {
+    width: 90%;
+  }
+  
+  .input-area {
+    padding: 0.8rem;
+  }
+  
+  .complete-input {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .input-feedback {
+    right: 1.2rem;
+  }
+  
+  .answer-feedback {
+    padding: 1.2rem;
+  }
+  
+  .answer-feedback h4 {
+    font-size: 1.1rem;
+  }
+  
+  .answer-feedback p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Dark Mode */
+body.dark-mode .input-area {
+  background-color: #2d3748;
+}
+
+body.dark-mode .complete-input {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-color: transparent;
+}
+
+body.dark-mode .complete-input:focus {
+  border-color: #03a65a;
+  background-color: #5a6579;
+  box-shadow: 0 4px 12px rgba(3, 166, 90, 0.2);
+}
+
+body.dark-mode .complete-input::placeholder {
+  color: #a0aec0;
+}
+
+body.dark-mode .complete-input.correct-input {
+  border-color: #03a65a;
+  background-color: rgba(3, 166, 90, 0.2);
+}
+
+body.dark-mode .complete-input.incorrect-input {
+  border-color: #B00020;
+  background-color: rgba(176, 0, 32, 0.2);
+}
+
+body.dark-mode .feedback-icon.correct {
+  color: #03a65a;
+}
+
+body.dark-mode .feedback-icon.incorrect {
+  color: #B00020;
+}
+
+body.dark-mode .answer-feedback {
+  background-color: #2d3748;
+}
+
+body.dark-mode .correct-feedback {
+  border-left-color: #03a65a;
+}
+
+body.dark-mode .incorrect-feedback {
+  border-left-color: #B00020;
+}
+
+body.dark-mode .correct-feedback h4 {
+  color: #03a65a;
+}
+
+body.dark-mode .incorrect-feedback h4 {
+  color: #B00020;
+}
+
+body.dark-mode .answer-feedback p {
+  color: #e2e8f0;
+}
+
+body.dark-mode .correct-feedback strong {
+  color: #03a65a;
+}
+
+body.dark-mode .incorrect-feedback strong {
+  color: #B00020;
+}
+
+/* Baixa Visão */
+body.baixa-visao .complete-answer-container {
+  width: 80%;
+}
+
+body.baixa-visao .input-area {
+  padding: 1.5rem;
+}
+
+body.baixa-visao .complete-input {
+  padding: 1.8rem 2rem;
+  font-size: 1.4rem;
+}
+
+body.baixa-visao .input-feedback {
+  right: 2rem;
+}
+
+body.baixa-visao .feedback-icon {
+  font-size: 2rem;
+}
+
+body.baixa-visao .answer-feedback {
+  padding: 2rem;
+}
+
+body.baixa-visao .answer-feedback h4 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
+body.baixa-visao .answer-feedback p {
+  font-size: 1.3rem;
+  margin: 1rem 0;
+}
+
+/* Daltonismo */
+body.daltonico .complete-input:focus {
+  border-color: var(--color-action-primary-colorblind);
+  box-shadow: 0 4px 12px rgba(3, 166, 90, 0.2);
+}
+
+body.daltonico .complete-input.correct-input {
+  border-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .complete-input.incorrect-input {
+  border-color: #B00020;
+}
+
+body.daltonico .feedback-icon.correct {
+  color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .feedback-icon.incorrect {
+  color: #B00020;
+}
+
+body.daltonico .correct-feedback {
+  border-left-color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .incorrect-feedback {
+  border-left-color: #B00020;
+}
+
+body.daltonico .correct-feedback h4 {
+  color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .incorrect-feedback h4 {
+  color: #B00020;
+}
+
+body.daltonico .correct-feedback strong {
+  color: var(--color-action-primary-colorblind);
+}
+
+body.daltonico .incorrect-feedback strong {
+  color: #B00020;
+}
