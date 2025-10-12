@@ -10,7 +10,6 @@ import TrueFalseAnswer from '@ui/components/TrueFalseAnswer/TrueFalseAnswer';
 import MatchColumnsAnswer from '@ui/components/MatchColumnsAnswer/MatchColumnsAnswer';
 import DragDropAnswer from '@ui/components/DragDropAnswer/DragDropAnswer';
 import CompleteAnswer from '@ui/components/CompleteAnswer/CompleteAnswer';
-import mockData from '@assets/palmeiras.json';
 import './Quiz.css';
 
 const Quiz = () => {
@@ -301,8 +300,6 @@ const Quiz = () => {
     const errou = jaRespondeu && !acertou;
 
     const renderAnswerComponent = () => {
-      // TODO: todas as perguntas do banco hoje sao do tipo true ou false, mas faltam a categoria e a explicaco. ENTAO, quando atualizar o banco,
-      // essa bosta abaixo vai sair e vai usar somente o TrueFalseAnswer
       if (!pergunta.categoria || pergunta.categoria === 'multipla-escolha') {
         return (
           <Answer
@@ -395,11 +392,6 @@ const Quiz = () => {
   useEffect(() => {
     const loadQuiz = async () => {
       try {
-        if (import.meta.env.VITE_MODE === 'development') {
-          setPerguntas(mockData);
-          return;
-        }
-
         const response = await fetch(
           `${API_BASE_URL}/api/quiz/${area}/${subtema}/${dificuldade}`,
         );
@@ -409,11 +401,9 @@ const Quiz = () => {
           setPerguntas(data);
         } else {
           console.error('Erro ao buscar o quiz');
-          setPerguntas(mockData);
         }
       } catch (error) {
         console.error('Erro na requisição:', error);
-        setPerguntas(mockData);
       }
     };
 
