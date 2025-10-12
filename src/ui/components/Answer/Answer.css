@@ -48,6 +48,21 @@
   box-shadow: 0 4px 12px rgba(82, 216, 69, 0.3);
 }
 
+.resposta-item:checked + label.resposta-incorreta {
+  background-color: var(--color-action-tertiary) !important;
+  color: white !important;
+  border: 2px solid #C83030 !important;
+  box-shadow: 0 4px 12px rgba(200, 48, 48, 0.3) !important;
+}
+
+.resposta-item:checked + label.resposta-incorreta:hover,
+.resposta-item:checked + label.resposta-incorreta:focus,
+.resposta-item:checked + label.resposta-incorreta:active {
+  background-color: var(--color-action-tertiary) !important;
+  color: white !important;
+  border: 2px solid #C83030 !important;
+}
+
 .resposta-selecionada {
   background-color: var(--color-action-primary) !important;
   color: white !important;
@@ -139,7 +154,15 @@ body.daltonico .answers-block label.resposta-correta {
   border-color: var(--color-action-primary-colorblind) !important;
 }
 
-body.daltonico .answers-block label.resposta-incorreta {
+body.daltonico .answers-block label.resposta-incorreta,
+body.daltonico .resposta-item:checked + label.resposta-incorreta {
+  background-color: #B00020 !important;
+  border-color: #B00020 !important;
+}
+
+body.daltonico .resposta-item:checked + label.resposta-incorreta:hover,
+body.daltonico .resposta-item:checked + label.resposta-incorreta:focus,
+body.daltonico .resposta-item:checked + label.resposta-incorreta:active {
   background-color: #B00020 !important;
   border-color: #B00020 !important;
 }
