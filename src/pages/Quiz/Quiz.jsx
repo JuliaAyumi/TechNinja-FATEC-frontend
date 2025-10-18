@@ -171,9 +171,23 @@ const Quiz = () => {
     }
   };
 
+  const calculatePoints = (level) => {
+    switch (level) {
+      case 'facil':
+        return 1;
+      case 'medio':
+        return 5;
+      case 'dificil':
+        return 10;
+      default:
+        return 0;
+    }
+  };
+
   const handleSair = () => {
     const acertos = calcularAcertos();
-    const pontos = acertos * 10;
+    const pontosporquestao = calculatePoints(dificuldade);
+    const pontos = acertos * pontosporquestao;
 
     navigate(`/quizzes/${area}/${subtema}/${dificuldade}/resultado`, {
       state: {
@@ -240,7 +254,8 @@ const Quiz = () => {
     setFinalizado(true);
 
     const acertos = calcularAcertos();
-    const points = acertos * 10;
+    const pontosporquestao = calculatePoints(dificuldade);
+    const points = acertos * pontosporquestao;
 
     toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
 
