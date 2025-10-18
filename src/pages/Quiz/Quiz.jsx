@@ -24,8 +24,12 @@ const Quiz = () => {
 
   const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
-  const { refetch } = useUserData(user);
   const navigate = useNavigate();
+
+  const tokenString = localStorage.getItem('user');
+  const tokenArray = JSON.parse(tokenString);
+  const token = tokenArray ? tokenArray[0] : null;
+  const { refetch } = useUserData(token);
 
   const API_BASE_URL =
     import.meta.env.VITE_MODE === 'development'
