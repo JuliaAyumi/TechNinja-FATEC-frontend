@@ -70,6 +70,7 @@ const Ranking = () => {
                   name={user.nome}
                   position={user.ranking}
                   badge={null}
+                  pontuacao={user.pontuacao}
                 />
               );
             }

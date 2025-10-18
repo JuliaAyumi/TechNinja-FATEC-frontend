@@ -1,7 +1,7 @@
 import './UserProfileIcon.css';
 import logo from '@assets/images/logoDark.png';
 
-const UserProfileIcon = ({ image, name, position, badge }) => {
+const UserProfileIcon = ({ image, name, position, badge, pontuacao }) => {
   const getBadgeForPosition = (pos) => {
     switch (pos) {
       case 1:
@@ -38,6 +38,9 @@ const UserProfileIcon = ({ image, name, position, badge }) => {
         )}
       </div>
       <p className='user-profile-icon-name'>{name}</p>
+      {pontuacao !== undefined && (
+        <p className='user-profile-icon-score'>{pontuacao} pontos</p>
+      )}
     </div>
   );
 };

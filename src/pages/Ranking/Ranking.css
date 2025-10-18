@@ -104,7 +104,6 @@
   .ranking-list > .ranking-user-card {
     grid-column: 1 / -1;
     justify-self: center;
-    margin-top: 1rem;
   }
 }
 
