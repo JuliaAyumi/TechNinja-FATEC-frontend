@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { JwtDecode } from 'jwt-js-decode';
 
 const useUserData = (token) => {
@@ -14,7 +14,7 @@ const useUserData = (token) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     if (!token) return;
 
     const decodedToken = new JwtDecode(token);
@@ -47,14 +47,13 @@ const useUserData = (token) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     fetchUserData();
-    setUserData(userData);
-  }, [token]);
+  }, [fetchUserData]);
 
-  return { userData, loading, error };
+  return { userData, loading, error, refetch: fetchUserData };
 };
 
 export default useUserData;

@@ -12,19 +12,32 @@ const Ranking = () => {
   const [loading, setLoading] = useState(true);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
+  const fetchRanking = async () => {
+    try {
+      const data = await getRanking();
+      setRanking(data || []);
+    } catch (error) {
+      console.error('Erro ao carregar ranking:', error);
+      setRanking([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchRanking = async () => {
-      try {
-        const data = await getRanking();
-        setRanking(data || []);
-      } catch (error) {
-        console.error('Erro ao carregar ranking:', error);
-        setRanking([]);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchRanking();
+  }, []);
+
+  useEffect(() => {
+    const handleUserDataUpdate = () => {
+      fetchRanking();
+    };
+
+    window.addEventListener('userDataUpdated', handleUserDataUpdate);
+
+    return () => {
+      window.removeEventListener('userDataUpdated', handleUserDataUpdate);
+    };
   }, []);
 
   if (loading) {

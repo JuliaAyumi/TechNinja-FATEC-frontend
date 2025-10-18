@@ -1,5 +1,6 @@
 import './Perfil.css';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import iconUsuario from '@assets/images/logoDark.png';
 import iconPodio from '@assets/icons/podio.png';
 import iconDiadema from '@assets/icons/coroa.png';
@@ -16,8 +17,20 @@ const Perfil = () => {
   const token = tokenArray[0];
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const { userData, loading } = useUserData(token);
+  const { userData, loading, refetch } = useUserData(token);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleUserDataUpdate = () => {
+      refetch();
+    };
+
+    window.addEventListener('userDataUpdated', handleUserDataUpdate);
+
+    return () => {
+      window.removeEventListener('userDataUpdated', handleUserDataUpdate);
+    };
+  }, [refetch]);
   return (
     <div>
       {isMobile ? <HeaderArrowBack to={'/home'} /> : <Sidebar to={'/home'} />}

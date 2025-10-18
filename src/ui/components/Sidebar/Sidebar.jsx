@@ -17,7 +17,7 @@ const Sidebar = ({ to }) => {
   const tokenString = localStorage.getItem('user');
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
-  const { userData } = useUserData(token);
+  const { userData, refetch } = useUserData(token);
 
   useEffect(() => {
     const savedStreak = localStorage.getItem('userStreak') || 0;
@@ -26,6 +26,18 @@ const Sidebar = ({ to }) => {
     setStreak(parseInt(savedStreak));
     setXp(parseInt(savedXp));
   }, []);
+
+  useEffect(() => {
+    const handleUserDataUpdate = () => {
+      refetch();
+    };
+
+    window.addEventListener('userDataUpdated', handleUserDataUpdate);
+
+    return () => {
+      window.removeEventListener('userDataUpdated', handleUserDataUpdate);
+    };
+  }, [refetch]);
 
   const isActive = (path) => {
     if (path === '/home') {

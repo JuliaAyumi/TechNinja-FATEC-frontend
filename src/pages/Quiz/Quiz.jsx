@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { useAuth } from '@hooks/AuthContext';
+import useUserData from '@hooks/UseUserData';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import Button from '@ui/components/Button/Button';
 import Question from '@ui/components/Question/Question';
@@ -23,6 +24,7 @@ const Quiz = () => {
 
   const { area, subtema, dificuldade } = useParams();
   const { user } = useAuth();
+  const { refetch } = useUserData(user);
   const navigate = useNavigate();
 
   const API_BASE_URL =
@@ -229,13 +231,20 @@ const Quiz = () => {
       return;
     }
 
+    if (finalizado) return;
+
+    setFinalizado(true);
+
     const acertos = calcularAcertos();
     const points = acertos * 10;
 
     toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
-    setFinalizado(true);
 
-    await Promise.all([updateScore(points), markQuizCompleted()]);
+    Promise.all([updateScore(points), markQuizCompleted()])
+      .then(() => refetch())
+      .then(() => {
+        window.dispatchEvent(new CustomEvent('userDataUpdated'));
+      });
   };
 
   const ProgressBar = () => (

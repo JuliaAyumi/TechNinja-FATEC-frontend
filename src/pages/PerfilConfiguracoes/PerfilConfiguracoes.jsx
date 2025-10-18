@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
@@ -15,7 +16,19 @@ const PerfilConfiguracoes = () => {
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
 
-  const { userData, loading } = useUserData(token);
+  const { userData, loading, refetch } = useUserData(token);
+
+  useEffect(() => {
+    const handleUserDataUpdate = () => {
+      refetch();
+    };
+
+    window.addEventListener('userDataUpdated', handleUserDataUpdate);
+
+    return () => {
+      window.removeEventListener('userDataUpdated', handleUserDataUpdate);
+    };
+  }, [refetch]);
 
   const {
     nome,
