@@ -92,18 +92,6 @@
   }
 }
 
-body.dark-mode .quiz-main {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-}
-
-body.dark-mode .progress-bar {
-  background-color: var(--color-background-primary);
-}
-
-body.dark-mode .progress-text {
-  color: var(--color-text-primary);
-}
-
 body.baixa-visao .progress-text {
   font-size: 1.2rem;
 }

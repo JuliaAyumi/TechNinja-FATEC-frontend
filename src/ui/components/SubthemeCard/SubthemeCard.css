@@ -106,24 +106,6 @@
   }
 }
 
-body.dark-mode .quiz {
-  color: white;
-  background-color: #3d444d;
-}
-
-body.dark-mode .quiz.subtema {
-  background: linear-gradient(to right, var(--color-action-primary) 35%, #2d3238 35%);
-}
-
-body.dark-mode .quiz.subtema h1 {
-  color: #ffffff;
-}
-
-body.dark-mode .quiz.completed {
-  background-color: green;
-  color: white;
-}
-
 body.daltonico .quiz.completed {
   background-color: var(--true-daltonico);
   color: white;

@@ -8,7 +8,6 @@ const App = () => {
   const location = useLocation();
 
   const applyAccessibilityMode = useCallback(() => {
-    const accessibilityMode = localStorage.getItem('accessibilityMode');
     const daltonico = localStorage.getItem('daltonicoMode');
     const baixaVisao = localStorage.getItem('baixaVisaoMode');
 
@@ -17,13 +16,8 @@ const App = () => {
     if (
       ['/', '/login', '/cadastrar', '/esqueceu'].includes(location.pathname)
     ) {
-      document.body.classList.remove('dark-mode', 'daltonico', 'baixa-visao');
+      document.body.classList.remove('daltonico', 'baixa-visao');
     } else {
-      if (accessibilityMode === 'dark-mode') {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
       if (daltonico === 'daltonico') {
         document.body.classList.add('daltonico');
       } else {

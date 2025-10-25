@@ -128,16 +128,6 @@
   }
 }
 
-body.dark-mode .answers-block label {
-  color: white;
-  background-color: #3d444d;
-}
-
-body.dark-mode .resposta-item:checked + label {
-  background-color: #03a65a;
-  font-weight: bold;
-}
-
 body.baixa-visao .answers-block {
   width: 60%;
   font-size: var(--texto-baixa-visao);

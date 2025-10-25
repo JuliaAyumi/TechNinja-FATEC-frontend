@@ -42,10 +42,6 @@
   }
 }
 
-body.dark-mode .loading-screen p {
-  color: #ccc;
-}
-
 body.baixa-visao .loading-screen p {
   font-size: 24px;
   font-weight: 600;

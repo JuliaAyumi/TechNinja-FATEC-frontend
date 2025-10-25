@@ -45,10 +45,6 @@
   background-color: var(--color-action-primary-hover);
 }
 
-body.dark-mode .area-conhecimento {
-  background-color: #03a65a;
-}
-
 body.daltonico .area-conhecimento {
   background-color: var(--true-daltonico);
   color: white;
