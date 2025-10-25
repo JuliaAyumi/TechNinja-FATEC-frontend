@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '@utils/apiUrl';
 
 const useResetPassword = (token) => {
   const navigate = useNavigate();
@@ -17,11 +18,7 @@ const useResetPassword = (token) => {
 
     try {
       const response = await fetch(
-        `${
-          import.meta.env.VITE_MODE === 'development'
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/users/recuperar/:${token}`,
+        `${apiUrl()}/api/users/recuperar/:${token}`,
         {
           method: 'POST',
           headers: {

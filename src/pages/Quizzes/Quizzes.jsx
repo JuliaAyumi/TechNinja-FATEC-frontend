@@ -1,15 +1,16 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import './Quizzes.css';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
 import { useAuth } from '@hooks/AuthContext';
 import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
-import logo from '@assets/images/logoDark.png';
 import { getLevels } from '@services/quiz';
+import { apiUrl } from '@utils/apiUrl';
+import Sidebar from '@ui/components/Sidebar/Sidebar';
+import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import useMediaQuery from '@hooks/UseMediaQuery';
 import LevelCard from '@ui/components/LevelCard/LevelCard';
+import logo from '@assets/images/logoDark.png';
+import './Quizzes.css';
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
@@ -51,19 +52,12 @@ const Quizzes = () => {
 
     const fetchQuizzesCompletados = async () => {
       try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_MODE === 'development'
-              ? `http://localhost:${import.meta.env.VITE_PORT}`
-              : import.meta.env.VITE_HEROKU_LINK
-          }/api/user-quizzes-completed`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${user}`,
-            },
+        const response = await fetch(`${apiUrl()}/api/user-quizzes-completed`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${user}`,
           },
-        );
+        });
         const data = await response.json();
         setQuizzesCompletados(data.quizzesCompletados);
       } catch (error) {

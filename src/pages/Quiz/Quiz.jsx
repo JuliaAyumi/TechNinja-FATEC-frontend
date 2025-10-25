@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { useAuth } from '@hooks/AuthContext';
+import { apiUrl } from '@utils/apiUrl';
 import useUserData from '@hooks/UseUserData';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import Button from '@ui/components/Button/Button';
@@ -30,11 +31,6 @@ const Quiz = () => {
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray ? tokenArray[0] : null;
   const { refetch } = useUserData(token);
-
-  const API_BASE_URL =
-    import.meta.env.VITE_MODE === 'development'
-      ? `http://localhost:${import.meta.env.VITE_PORT}`
-      : import.meta.env.VITE_HEROKU_LINK;
 
   const todasRespondidas = () => {
     return (
@@ -201,7 +197,7 @@ const Quiz = () => {
 
   const updateScore = async (points) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/update-score`, {
+      const response = await fetch(`${apiUrl()}/api/update-score`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -228,7 +224,7 @@ const Quiz = () => {
 
   const markQuizCompleted = async () => {
     try {
-      await fetch(`${API_BASE_URL}/api/mark-quiz-completed`, {
+      await fetch(`${apiUrl()}/api/mark-quiz-completed`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -421,7 +417,7 @@ const Quiz = () => {
     const loadQuiz = async () => {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/api/quiz/${area}/${subtema}/${dificuldade}`,
+          `${apiUrl()}/api/quiz/${area}/${subtema}/${dificuldade}`,
         );
 
         if (response.ok) {
@@ -436,7 +432,7 @@ const Quiz = () => {
     };
 
     loadQuiz();
-  }, [area, subtema, dificuldade, API_BASE_URL]);
+  }, [area, subtema, dificuldade]);
 
   return (
     <div>

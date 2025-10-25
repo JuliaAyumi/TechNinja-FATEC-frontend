@@ -2,6 +2,7 @@ import { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '@hooks/UseLocalStorage';
 import { toast } from 'react-hot-toast';
+import { apiUrl } from '@utils/apiUrl';
 
 const AuthContext = createContext();
 
@@ -11,20 +12,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (data) => {
     try {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_MODE === 'development'
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+      const response = await fetch(`${apiUrl()}/api/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(data),
+      });
 
       const resData = await response.json();
 
@@ -45,20 +39,13 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_MODE === 'development'
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/register`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
+      const response = await fetch(`${apiUrl()}/api/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(userData),
+      });
 
       const resData = await response.json();
       if (response.ok) {
