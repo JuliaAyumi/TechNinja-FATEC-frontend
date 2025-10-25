@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import './PerfilAcessibilidade.css';
 import PageLayout from '@ui/layout/PageLayout/PageLayout';
-import AccessibilityOption from '../../ui/components/AccessibilityOption/AccessibilityOption';
-import Button from '../../ui/components/Button/Button';
+import AccessibilityOption from '@ui/components/AccessibilityOption/AccessibilityOption';
+import Button from '@ui/components/Button/Button';
 import { toast } from 'react-hot-toast';
 
 const PerfilAcessibilidade = () => {

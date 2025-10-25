@@ -2,7 +2,7 @@ import IconLinguagemProgramacao from '@assets/icons/icon-linguagem-de-programaca
 import IconSistemasOperacionais from '@assets/icons/icon-sistemas-operacionais.svg';
 import IconModelagemDados from '@assets/icons/icon-modelagem-de-dados.svg';
 import PageLayout from '@ui/layout/PageLayout/PageLayout';
-import AreaConhecimentoCard from '../../ui/components/AreaConhecimentoCard/AreaConhecimentoCard';
+import AreaConhecimentoCard from '@ui/components/AreaConhecimentoCard/AreaConhecimentoCard';
 import './Home.css';
 
 const Home = () => {

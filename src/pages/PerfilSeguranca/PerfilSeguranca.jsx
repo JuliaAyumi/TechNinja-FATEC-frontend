@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { toast } from 'react-hot-toast';
 import PageLayout from '@ui/layout/PageLayout/PageLayout';
-import AccessibilityOption from '../../ui/components/AccessibilityOption/AccessibilityOption';
-import Button from '../../ui/components/Button/Button';
+import AccessibilityOption from '@ui/components/AccessibilityOption/AccessibilityOption';
+import Button from '@ui/components/Button/Button';
 import './PerfilSeguranca.css';
 
 const PerfilSeguranca = () => {

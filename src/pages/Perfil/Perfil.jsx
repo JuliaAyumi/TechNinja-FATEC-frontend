@@ -8,7 +8,7 @@ import iconLiteratura from '@assets/icons/taca-de-ouro.png';
 import useUserData from '@hooks/UseUserData';
 import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import Button from '@ui/components/Button/Button';
-import LoadingScreen from '../../ui/components/LoadingScreen/LoadingScreen';
+import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
 
 const Perfil = () => {
   const tokenString = localStorage.getItem('user');
