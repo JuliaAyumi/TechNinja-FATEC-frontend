@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { getRanking } from '@services/ranking';
 import UserProfileIcon from '@components/UserProfileIcon/UserProfileIcon';
 import RankingUserCard from '@components/RankingUserCard/RankingUserCard';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
 import useMediaQuery from '@hooks/UseMediaQuery';
+import Sidebar from '@ui/components/Sidebar/Sidebar';
 import './Ranking.css';
 
 const Ranking = () => {
@@ -44,7 +45,7 @@ const Ranking = () => {
     return (
       <div className='ranking-container'>
         <h1 className='ranking-title'>Ranking</h1>
-        <div className='ranking-loading'>Carregando ranking...</div>
+        <LoadingScreen />ß
       </div>
     );
   }

@@ -5,9 +5,9 @@ import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import useMediaQuery from '@hooks/UseMediaQuery';
 import { formatarTexto } from '@utils/formatarTexto';
-import logo from '@assets/images/logoDark.png';
 import { getSubThemes } from '@services/quiz';
 import SubthemeCard from '@ui/components/SubthemeCard/SubthemeCard';
+import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
 
 const Subtemas = () => {
   const { area } = useParams();
@@ -34,10 +34,7 @@ const Subtemas = () => {
     return (
       <div>
         {isMobile ? <HeaderArrowBack to={`/home`} /> : <Sidebar to={`/home`} />}
-        <div className='loading-screen'>
-          <img src={logo} alt='Logo TechNinja' className='logo-loading' />
-          <p>Carregando...</p>
-        </div>
+        <LoadingScreen />
       </div>
     );
   }

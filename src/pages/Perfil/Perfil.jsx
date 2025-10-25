@@ -10,6 +10,7 @@ import Sidebar from '../../ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import useMediaQuery from '@hooks/UseMediaQuery';
 import Button from '@ui/components/Button/Button';
+import LoadingScreen from '../../ui/components/LoadingScreen/LoadingScreen';
 
 const Perfil = () => {
   const tokenString = localStorage.getItem('user');
@@ -36,9 +37,7 @@ const Perfil = () => {
       {isMobile ? <HeaderArrowBack to={'/home'} /> : <Sidebar to={'/home'} />}
       <main className='main-perfil'>
         {loading ? (
-          <div className='loading-container'>
-            <p>Carregando...</p>
-          </div>
+          <LoadingScreen />
         ) : (
           <div className='perfil-container'>
             <div className='perfil-card'>

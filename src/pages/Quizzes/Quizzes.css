@@ -1,8 +1,3 @@
-* {
-  padding: 0;
-  margin: 0;
-}
-
 .body-quizzes {
   display: flex;
   flex-direction: column;
@@ -14,26 +9,4 @@
 .body-quizzes p {
   text-align: center;
 }
-
-
-.loading-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
-}
-
-.logo-loading {
-  width: 150px;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-.loading-screen p {
-  font-size: 18px;
-  color: #666;
-}
-
 

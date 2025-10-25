@@ -5,6 +5,7 @@ import { useAuth } from '@hooks/AuthContext';
 import { getQuiz, updateScore, markQuizCompleted } from '@services/quiz';
 import useUserData from '@hooks/UseUserData';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
 import Button from '@ui/components/Button/Button';
 import Question from '@ui/components/Question/Question';
 import Answer from '@ui/components/Answer/Answer';
@@ -442,7 +443,7 @@ const Quiz = () => {
             </div>
           </div>
         ) : (
-          <p>Carregando perguntas...</p>
+          <LoadingScreen message='Carregando perguntas...' />
         )}
       </main>
 

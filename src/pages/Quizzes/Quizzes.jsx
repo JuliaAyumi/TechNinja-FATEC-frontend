@@ -8,7 +8,7 @@ import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import useMediaQuery from '@hooks/UseMediaQuery';
 import LevelCard from '@ui/components/LevelCard/LevelCard';
-import logo from '@assets/images/logoDark.png';
+import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
 import './Quizzes.css';
 
 const Quizzes = () => {
@@ -71,10 +71,7 @@ const Quizzes = () => {
       )}
       <main className='body-quizzes'>
         {loading ? (
-          <div className='loading-screen'>
-            <img src={logo} alt='Logo TechNinja' className='logo-loading' />
-            <p>Carregando...</p>
-          </div>
+          <LoadingScreen />
         ) : dificuldades.length > 0 ? (
           dificuldades.map((dificuldade) => {
             const quizId = `${area}-${subtema}-${dificuldade}`;
