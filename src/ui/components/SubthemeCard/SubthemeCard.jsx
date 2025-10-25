@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { formatarTexto } from '@utils/formatarTexto';
 import subthemeIcon from '@assets/icons/subtheme.png';
+import Points from '@ui/components/Points/Points';
 import './SubthemeCard.css';
 
 const SubthemeCard = ({
   area,
   subtema,
+  points,
   dificuldade,
   isCompleted = false,
   onQuizClick,
@@ -34,6 +36,7 @@ const SubthemeCard = ({
         </div>
       )}
       <h1>{displayTitle}</h1>
+      <Points points={points} />
     </Link>
   );
 };

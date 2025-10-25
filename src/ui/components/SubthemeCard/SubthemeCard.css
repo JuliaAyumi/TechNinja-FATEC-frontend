@@ -27,6 +27,7 @@
   padding: 0;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .quiz-icon {
@@ -110,6 +111,14 @@ body.dark-mode .quiz {
   background-color: #3d444d;
 }
 
+body.dark-mode .quiz.subtema {
+  background: linear-gradient(to right, var(--color-action-primary) 35%, #2d3238 35%);
+}
+
+body.dark-mode .quiz.subtema h1 {
+  color: #ffffff;
+}
+
 body.dark-mode .quiz.completed {
   background-color: green;
   color: white;
@@ -120,6 +129,19 @@ body.daltonico .quiz.completed {
   color: white;
 }
 
+body.daltonico .quiz.subtema {
+  background: linear-gradient(to right, #4a90e2 35%, #f5f5f5 35%);
+}
+
+body.daltonico .quiz.subtema.completed {
+  background: linear-gradient(to right, #28a745 35%, #d4edda 35%);
+}
+
 body.baixa-visao .quiz h1 {
   font-size: 2.8em;
+}
+
+body.baixa-visao .quiz.subtema h1 {
+  font-size: 22px;
+  font-weight: 600;
 }

@@ -52,6 +52,7 @@ const Subtemas = () => {
               key={item.subtema}
               area={area}
               title={item.subtema ? formatarTexto(item.subtema) : 'Subtema'}
+              points={item.pontos}
               to={`/quizzes/${area}/${item.subtema}`}
               variant='subtema'
             />
