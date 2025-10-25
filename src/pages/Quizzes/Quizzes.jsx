@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@hooks/AuthContext';
 import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
-import { getLevels } from '@services/quiz';
-import { apiUrl } from '@utils/apiUrl';
+import { getLevels, getCompletedQuizzes } from '@services/quiz';
 import Sidebar from '@ui/components/Sidebar/Sidebar';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import useMediaQuery from '@hooks/UseMediaQuery';
@@ -52,13 +51,7 @@ const Quizzes = () => {
 
     const fetchQuizzesCompletados = async () => {
       try {
-        const response = await fetch(`${apiUrl()}/api/user-quizzes-completed`, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${user}`,
-          },
-        });
-        const data = await response.json();
+        const data = await getCompletedQuizzes(user);
         setQuizzesCompletados(data.quizzesCompletados);
       } catch (error) {
         console.error('Erro ao buscar quizzes completados:', error);

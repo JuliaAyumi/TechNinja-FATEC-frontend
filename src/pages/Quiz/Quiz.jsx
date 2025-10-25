@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { useAuth } from '@hooks/AuthContext';
-import { apiUrl } from '@utils/apiUrl';
+import { getQuiz, updateScore, markQuizCompleted } from '@services/quiz';
 import useUserData from '@hooks/UseUserData';
 import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
 import Button from '@ui/components/Button/Button';
@@ -195,43 +195,22 @@ const Quiz = () => {
     });
   };
 
-  const updateScore = async (points) => {
+  const handleUpdateScore = async (points) => {
     try {
-      const response = await fetch(`${apiUrl()}/api/update-score`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user}`,
-        },
-        body: JSON.stringify({ points }),
-      });
+      const data = await updateScore(user, points);
 
-      const resData = await response.json();
-
-      if (response.ok) {
-        setTimeout(() => {
-          toast.success(
-            `Pontuação atualizada! Nova pontuação: ${resData.newScore}`,
-          );
-        }, 2500);
-      } else {
-        toast.error(resData.message || 'Erro ao atualizar a pontuação');
-      }
+      setTimeout(() => {
+        toast.success(`Pontuação atualizada! Nova pontuação: ${data.newScore}`);
+      }, 2500);
     } catch (error) {
       console.error('Erro ao atualizar a pontuação:', error);
+      toast.error('Erro ao atualizar a pontuação');
     }
   };
 
-  const markQuizCompleted = async () => {
+  const handleMarkQuizCompleted = async () => {
     try {
-      await fetch(`${apiUrl()}/api/mark-quiz-completed`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user}`,
-        },
-        body: JSON.stringify({ area, subtema, dificuldade }),
-      });
+      await markQuizCompleted(user, area, subtema, dificuldade);
     } catch (error) {
       console.error('Erro ao marcar o quiz como completado:', error);
     }
@@ -255,7 +234,7 @@ const Quiz = () => {
 
     toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
 
-    Promise.all([updateScore(points), markQuizCompleted()])
+    Promise.all([handleUpdateScore(points), handleMarkQuizCompleted()])
       .then(() => refetch())
       .then(() => {
         window.dispatchEvent(new CustomEvent('userDataUpdated'));
@@ -416,18 +395,10 @@ const Quiz = () => {
   useEffect(() => {
     const loadQuiz = async () => {
       try {
-        const response = await fetch(
-          `${apiUrl()}/api/quiz/${area}/${subtema}/${dificuldade}`,
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setPerguntas(data);
-        } else {
-          console.error('Erro ao buscar o quiz');
-        }
+        const data = await getQuiz(area, subtema, dificuldade);
+        setPerguntas(data);
       } catch (error) {
-        console.error('Erro na requisição:', error);
+        console.error('Erro ao carregar o quiz:', error);
       }
     };
 

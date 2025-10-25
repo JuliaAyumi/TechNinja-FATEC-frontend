@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiUrl } from '@utils/apiUrl';
+import { requestPasswordReset } from '@services/user';
 
 const usePasswordReset = () => {
   const [loading, setLoading] = useState(false);
@@ -12,26 +12,13 @@ const usePasswordReset = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch(`${apiUrl()}/api/users/esqueceu`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSuccess(true);
-        alert('Email enviado com sucesso!!!!!!!!!');
-      } else {
-        setError(data.message || 'Erro ao enviar o e-mail');
-        alert('Erro ao enviar o email 1.');
-      }
+      await requestPasswordReset(email);
+      setSuccess(true);
+      alert('Email enviado com sucesso!');
     } catch (err) {
       console.error('Erro:', err);
-      setError('Erro ao enviar email 2.');
+      setError(err.message || 'Erro ao enviar email');
+      alert('Erro ao enviar o email.');
     } finally {
       setLoading(false);
     }

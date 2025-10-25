@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiUrl } from '@utils/apiUrl';
+import { resetPassword as resetPasswordService } from '@services/user';
 
 const useResetPassword = (token) => {
   const navigate = useNavigate();
@@ -17,26 +17,12 @@ const useResetPassword = (token) => {
     }
 
     try {
-      const response = await fetch(
-        `${apiUrl()}/api/users/recuperar/:${token}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ password: senha }),
-        },
-      );
-
-      if (response.ok) {
-        alert('Senha redefinida com sucesso!');
-        navigate('/login');
-      } else {
-        const data = await response.json();
-        setErro(data.message || 'Erro ao redefinir a senha');
-      }
+      await resetPasswordService(token, senha);
+      alert('Senha redefinida com sucesso!');
+      navigate('/login');
     } catch (error) {
-      setErro('Erro ao conectar ao servidor', error);
+      console.error(error);
+      setErro(error.message || 'Erro ao conectar ao servidor');
     }
   };
 

@@ -1,8 +1,11 @@
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '@hooks/UseLocalStorage';
 import { toast } from 'react-hot-toast';
-import { apiUrl } from '@utils/apiUrl';
+import {
+  login as loginService,
+  register as registerService,
+} from '@services/user';
 
 const AuthContext = createContext();
 
@@ -10,63 +13,56 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage('user', null);
   const navigate = useNavigate();
 
-  const login = async (data) => {
-    try {
-      const response = await fetch(`${apiUrl()}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  const login = useCallback(
+    async (data) => {
+      try {
+        const resData = await loginService(data);
 
-      const resData = await response.json();
+        if (resData.token) {
+          toast.success('Logado com sucesso!');
+          setUser(resData.token);
 
-      if (response.ok) {
-        toast.success('Logado com sucesso!');
-        setUser(resData.token);
-
-        setTimeout(() => {
-          navigate('/home');
-        }, 1500);
-      } else {
-        toast.error(resData.message || 'Erro ao fazer login');
+          setTimeout(() => {
+            navigate('/home');
+          }, 1500);
+        } else {
+          toast.error(resData.message || 'Erro ao fazer login');
+        }
+      } catch (error) {
+        toast.error('Erro ao fazer login');
+        console.error(error);
       }
-    } catch (error) {
-      toast.error('Erro ao fazer login', error);
-    }
-  };
+    },
+    [navigate, setUser],
+  );
 
-  const register = async (userData) => {
-    try {
-      const response = await fetch(`${apiUrl()}/api/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+  const register = useCallback(
+    async (userData) => {
+      try {
+        const resData = await registerService(userData);
 
-      const resData = await response.json();
-      if (response.ok) {
-        toast.success('Usuário registrado com sucesso!');
-        setUser(resData.token);
+        if (resData.token) {
+          toast.success('Usuário registrado com sucesso!');
+          setUser(resData.token);
 
-        setTimeout(() => {
-          navigate('/login');
-        }, 1500);
-      } else {
-        toast.error(resData.message || 'Erro ao registrar');
+          setTimeout(() => {
+            navigate('/login');
+          }, 1500);
+        } else {
+          toast.error(resData.message || 'Erro ao registrar');
+        }
+      } catch (error) {
+        toast.error('Erro ao registrar');
+        console.error(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    },
+    [navigate, setUser],
+  );
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
     navigate('/', { replace: true });
-  };
+  }, [navigate, setUser]);
 
   const value = useMemo(
     () => ({
@@ -75,7 +71,7 @@ export const AuthProvider = ({ children }) => {
       register,
       logout,
     }),
-    [user],
+    [user, login, register, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

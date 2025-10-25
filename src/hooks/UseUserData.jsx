@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { JwtDecode } from 'jwt-js-decode';
-import { apiUrl } from '@utils/apiUrl';
+import { getUserData } from '@services/user';
 
 const useUserData = (token) => {
   const [userData, setUserData] = useState({
@@ -22,19 +22,7 @@ const useUserData = (token) => {
     const userId = decodedToken.payload.id;
 
     try {
-      const response = await fetch(`${apiUrl()}/api/users/user/${userId}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao buscar os dados do usuário');
-      }
-
-      const data = await response.json();
+      const data = await getUserData(userId, token);
       setUserData(data);
     } catch (err) {
       setError(err.message);
