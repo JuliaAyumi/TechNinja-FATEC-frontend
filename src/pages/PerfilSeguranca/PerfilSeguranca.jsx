@@ -36,7 +36,7 @@ const PerfilSeguranca = () => {
 
   return (
     <PageLayout backTo='/configuracoes'>
-      <main className='main-seguranca'>
+      <main className='layout-app-page main-seguranca'>
         <div className='seguranca-container'>
           <AccessibilityOption
             option='Autenticação de dois fatores'

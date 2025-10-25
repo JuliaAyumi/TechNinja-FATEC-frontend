@@ -70,7 +70,7 @@ const PerfilAcessibilidade = () => {
 
   return (
     <PageLayout backTo='/configuracoes'>
-      <main className='main-acessibilidade'>
+      <main className='layout-app-page main-acessibilidade'>
         <div className='acessibilidade-container'>
           <AccessibilityOption
             option='Modo Daltônico'

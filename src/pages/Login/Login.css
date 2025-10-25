@@ -1,18 +1,5 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: var(--color-background-primary);
-  font-family: var(--font-family-primary);
-  margin: 0;
-  padding: 0;
-}
-
 .esqueceu {
-  text-decoration: none;
   color: var(--color-text-primary);
-  font-family: var(--font-family-primary);
 }
 
 .esqueceu-text {
@@ -27,11 +14,6 @@ body {
 }
 
 .main-login {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px);
   padding: 2rem 1rem;
   gap: 2rem;
 }

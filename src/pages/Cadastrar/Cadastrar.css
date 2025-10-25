@@ -1,25 +1,8 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: var(--color-background-primary);
-  font-family: var(--font-family-primary);
-  margin: 0;
-  padding: 0;
-}
-
 a {
-  text-decoration: none;
   color: var(--color-text-secondary);
 }
 
 .main-cadastrar {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 80px);
   padding: 2rem 1rem;
   gap: 2rem;
 }
@@ -52,12 +35,6 @@ a {
   padding: 2rem;
 }
 
-.main-image {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  object-fit: contain;
-}
 
 div > form > div {
   color: var(--color-action-tertiary);
@@ -83,7 +60,7 @@ div > form > div {
     order: 1;
   }
 
-  .main-image {
+  .layout-auth-image {
     max-width: 300px;
   }
 }
@@ -98,7 +75,7 @@ div > form > div {
     padding: 0.5rem;
   }
 
-  .main-image {
+  .layout-auth-image {
     max-width: 250px;
   }
 }

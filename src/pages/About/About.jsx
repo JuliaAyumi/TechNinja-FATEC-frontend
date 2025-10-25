@@ -4,7 +4,7 @@ import PageLayout from '@ui/layout/PageLayout/PageLayout';
 const About = () => {
   return (
     <PageLayout backTo='/configuracoes'>
-      <main className='main-about'>
+      <main className='layout-app-page main-about'>
         <div className='about-container'>
           <div className='about-header'>
             <h1 className='about-title'>Sobre o TechNinja</h1>

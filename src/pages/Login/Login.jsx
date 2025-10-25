@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <main className='main-login'>
+      <main className='layout-auth-page main-login'>
         <div className='left-column'>
           <img src={logo} alt='TechNinja logo' className='login-main-image' />
         </div>

@@ -1,3 +1,48 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-background-primary);
+  font-family: var(--font-family-primary);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.layout-app-page {
+  padding: 32px;
+  background-color: var(--color-background-primary);
+  min-height: 100vh;
+  font-family: var(--font-family-primary);
+}
+
+@media (min-width: 769px) {
+  .layout-app-page {
+    padding-left: 60px;
+  }
+}
+
+.layout-auth-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+}
+
+.layout-auth-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+}
+
 :root {
   --color-background-primary: #303841;
   --color-background-secondary: #010101;

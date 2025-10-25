@@ -10,7 +10,7 @@ const Configuracoes = () => {
 
   return (
     <PageLayout backTo='/home'>
-      <main className='main-configuracoes'>
+      <main className='layout-app-page main-configuracoes'>
         <div className='configuracoes-container'>
           <div className='configuracoes-section'>
             <h2 className='section-title'>Geral</h2>

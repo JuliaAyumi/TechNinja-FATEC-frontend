@@ -31,7 +31,7 @@ const Perfil = () => {
   }, [refetch]);
   return (
     <PageLayout backTo='/home'>
-      <main className='main-perfil'>
+      <main className='layout-app-page main-perfil'>
         {loading ? (
           <LoadingScreen />
         ) : (

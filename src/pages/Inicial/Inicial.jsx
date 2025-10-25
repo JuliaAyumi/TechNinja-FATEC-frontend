@@ -9,7 +9,7 @@ const Inicial = () => {
     <>
       <Header />
 
-      <main className='main-inicial'>
+      <main className='layout-auth-page main-inicial'>
         <div className='inicial-left-column'>
           <h1>Desafie seu conhecimento em tecnologia com o TechNinja</h1>
 
@@ -23,7 +23,7 @@ const Inicial = () => {
         </div>
 
         <div className='inicial-right-column'>
-          <img src={logo} alt='TechNinja logo' className='main-image' />
+          <img src={logo} alt='TechNinja logo' className='layout-auth-image' />
         </div>
       </main>
     </>
