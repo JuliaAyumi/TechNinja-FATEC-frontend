@@ -1,15 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import './PerfilAcessibilidade.css';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
-import AccessibilityOption from '../../ui/components/AccessibilityOption/AccessibilityOption';
-import Button from '../../ui/components/Button/Button';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
+import AccessibilityOption from '@ui/components/AccessibilityOption/AccessibilityOption';
+import Button from '@ui/components/Button/Button';
 import { toast } from 'react-hot-toast';
 
 const PerfilAcessibilidade = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
   const location = useLocation();
 
   const [toggles, setToggles] = useState({
@@ -72,13 +69,8 @@ const PerfilAcessibilidade = () => {
   };
 
   return (
-    <div>
-      {isMobile ? (
-        <HeaderArrowBack to={'/configuracoes'} />
-      ) : (
-        <Sidebar to={'/configuracoes'} />
-      )}
-      <main className='main-acessibilidade'>
+    <PageLayout backTo='/configuracoes'>
+      <main className='layout-app-page main-acessibilidade'>
         <div className='acessibilidade-container'>
           <AccessibilityOption
             option='Modo Daltônico'
@@ -97,7 +89,7 @@ const PerfilAcessibilidade = () => {
           />
         </div>
       </main>
-    </div>
+    </PageLayout>
   );
 };
 

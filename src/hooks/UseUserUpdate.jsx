@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { JwtDecode } from 'jwt-js-decode';
+import { updateUser } from '@services/user';
 import toast from 'react-hot-toast';
 
 const useUserUpdate = (userData, token) => {
@@ -33,23 +34,12 @@ const useUserUpdate = (userData, token) => {
     }
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_MODE === 'development' ? `http://localhost:${import.meta.env.VITE_PORT}` : import.meta.env.VITE_HEROKU_LINK}/api/users/update/${userId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(updatedUserData),
-        },
-      );
-
-      if (!response.ok) throw new Error('Erro ao atualizar dados do usuário');
+      await updateUser(userId, updatedUserData, token);
       toast.success('Dados atualizados com sucesso!');
       setSenha('');
     } catch (error) {
       console.error('Erro ao atualizar dados do usuário', error);
+      toast.error('Erro ao atualizar dados');
     }
   };
 

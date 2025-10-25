@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import Sidebar from '../../ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import Button from '@ui/components/Button/Button';
 import './FinishedQuiz.css';
 
@@ -11,7 +9,6 @@ const FinishedQuiz = () => {
   const { area, subtema, dificuldade } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const { acertos = 0, totalPerguntas = 0, pontos = 0 } = location.state || {};
 
@@ -99,85 +96,85 @@ const FinishedQuiz = () => {
   }, []);
 
   return (
-    <div className='finished-quiz-container'>
-      {isMobile ? <HeaderArrowBack to='/home' /> : <Sidebar to='/home' />}
-
-      <main className='finished-quiz-main'>
-        <div className={`ninja-avatar ${animationPhase}`}>
-          <div className='ninja-character'>
-            <div className='ninja-head'>
-              <div className='ninja-mask'></div>
-              <div className='ninja-eyes'>
-                <div className='eye left'></div>
-                <div className='eye right'></div>
+    <PageLayout backTo='/home'>
+      <div className='finished-quiz-container'>
+        <main className='finished-quiz-main'>
+          <div className={`ninja-avatar ${animationPhase}`}>
+            <div className='ninja-character'>
+              <div className='ninja-head'>
+                <div className='ninja-mask'></div>
+                <div className='ninja-eyes'>
+                  <div className='eye left'></div>
+                  <div className='eye right'></div>
+                </div>
+              </div>
+              <div className='ninja-body'>
+                <div className='ninja-arms'>
+                  <div className='arm left'></div>
+                  <div className='arm right'></div>
+                </div>
+                <div className='ninja-laptop'></div>
               </div>
             </div>
-            <div className='ninja-body'>
-              <div className='ninja-arms'>
-                <div className='arm left'></div>
-                <div className='arm right'></div>
+
+            <div className='particles'>
+              {[...Array(12)].map((_, i) => (
+                <div key={i} className={`particle particle-${i + 1}`}></div>
+              ))}
+            </div>
+          </div>
+
+          <div className={`motivational-message ${animationPhase}`}>
+            <h1>{getMotivationalMessage()}</h1>
+          </div>
+
+          <div className={`score-badge ${getBadgeColor()} ${animationPhase}`}>
+            <div className='badge-icon'>{getPerformanceIcon()}</div>
+            <div className='badge-points'>+{pontos}</div>
+          </div>
+
+          <div className={`quiz-stats ${animationPhase}`}>
+            <div className='stat-item'>
+              <div className='stat-label'>Você acertou</div>
+              <div className='stat-value'>
+                {acertos}/{totalPerguntas}
               </div>
-              <div className='ninja-laptop'></div>
+            </div>
+
+            <div className='performance-ring'>
+              <svg className='ring-svg' width='120' height='120'>
+                <circle cx='60' cy='60' r='50' className='ring-background' />
+                <circle
+                  cx='60'
+                  cy='60'
+                  r='50'
+                  className='ring-progress'
+                  style={{
+                    strokeDasharray: `${porcentagemAcerto * 3.14} 314`,
+                  }}
+                />
+              </svg>
+              <div className='ring-percentage'>
+                {Math.round(porcentagemAcerto)}%
+              </div>
             </div>
           </div>
 
-          <div className='particles'>
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className={`particle particle-${i + 1}`}></div>
-            ))}
+          <div className={`action-buttons ${animationPhase}`}>
+            <Button
+              type='secondary'
+              option='Refazer Quiz'
+              onClick={handleRefazer}
+            />
+            <Button
+              type='action'
+              option='Ir para o início'
+              onClick={handleVoltar}
+            />
           </div>
-        </div>
-
-        <div className={`motivational-message ${animationPhase}`}>
-          <h1>{getMotivationalMessage()}</h1>
-        </div>
-
-        <div className={`score-badge ${getBadgeColor()} ${animationPhase}`}>
-          <div className='badge-icon'>{getPerformanceIcon()}</div>
-          <div className='badge-points'>+{pontos}</div>
-        </div>
-
-        <div className={`quiz-stats ${animationPhase}`}>
-          <div className='stat-item'>
-            <div className='stat-label'>Você acertou</div>
-            <div className='stat-value'>
-              {acertos}/{totalPerguntas}
-            </div>
-          </div>
-
-          <div className='performance-ring'>
-            <svg className='ring-svg' width='120' height='120'>
-              <circle cx='60' cy='60' r='50' className='ring-background' />
-              <circle
-                cx='60'
-                cy='60'
-                r='50'
-                className='ring-progress'
-                style={{
-                  strokeDasharray: `${porcentagemAcerto * 3.14} 314`,
-                }}
-              />
-            </svg>
-            <div className='ring-percentage'>
-              {Math.round(porcentagemAcerto)}%
-            </div>
-          </div>
-        </div>
-
-        <div className={`action-buttons ${animationPhase}`}>
-          <Button
-            type='secondary'
-            option='Refazer Quiz'
-            onClick={handleRefazer}
-          />
-          <Button
-            type='action'
-            option='Ir para o início'
-            onClick={handleVoltar}
-          />
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </PageLayout>
   );
 };
 

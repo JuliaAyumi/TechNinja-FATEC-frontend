@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { JwtDecode } from 'jwt-js-decode';
+import { getUserData } from '@services/user';
 
 const useUserData = (token) => {
   const [userData, setUserData] = useState({
@@ -21,26 +22,7 @@ const useUserData = (token) => {
     const userId = decodedToken.payload.id;
 
     try {
-      const response = await fetch(
-        `${
-          import.meta.env.VITE_MODE === 'development'
-            ? `http://localhost:${import.meta.env.VITE_PORT}`
-            : import.meta.env.VITE_HEROKU_LINK
-        }/api/users/user/${userId}`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error('Erro ao buscar os dados do usuário');
-      }
-
-      const data = await response.json();
+      const data = await getUserData(userId, token);
       setUserData(data);
     } catch (err) {
       setError(err.message);

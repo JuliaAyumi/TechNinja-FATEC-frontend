@@ -34,19 +34,8 @@
   filter: invert(1);
 }
 
-.modo-escuro {
-  cursor: pointer;
-}
-
 .header-home-options img:hover {
   transform: scale(1.1);
-}
-
-body.dark-mode .header-home {
-  border-bottom: 0.08em;
-  border-style: none none solid none;
-  border-color: #656c76;
-  background-color: #010409;
 }
 
 body.baixa-visao .header-home {

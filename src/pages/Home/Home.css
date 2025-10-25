@@ -31,8 +31,3 @@ body.baixa-visao .main-home {
     padding: calc(4em + 16px) 16px 16px 16px;
   }
 }
-
-body.dark-mode {
-  background-color: #0d1117;
-  color: white;
-}

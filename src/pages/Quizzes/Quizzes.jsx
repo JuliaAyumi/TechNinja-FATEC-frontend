@@ -1,15 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import './Quizzes.css';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
 import { useAuth } from '@hooks/AuthContext';
 import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
-import logo from '@assets/images/logoDark.png';
-import { getLevels } from '@services/quiz';
+import { getLevels, getCompletedQuizzes } from '@services/quiz';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import LevelCard from '@ui/components/LevelCard/LevelCard';
+import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
+import './Quizzes.css';
 
 const Quizzes = () => {
   const { area, subtema } = useParams();
@@ -18,7 +16,6 @@ const Quizzes = () => {
   const [quizzesCompletados, setQuizzesCompletados] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleQuizClick = (event, isCompleted, subtema, dificuldade) => {
     if (isCompleted) {
@@ -51,20 +48,7 @@ const Quizzes = () => {
 
     const fetchQuizzesCompletados = async () => {
       try {
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_MODE === 'development'
-              ? `http://localhost:${import.meta.env.VITE_PORT}`
-              : import.meta.env.VITE_HEROKU_LINK
-          }/api/user-quizzes-completed`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${user}`,
-            },
-          },
-        );
-        const data = await response.json();
+        const data = await getCompletedQuizzes(user);
         setQuizzesCompletados(data.quizzesCompletados);
       } catch (error) {
         console.error('Erro ao buscar quizzes completados:', error);
@@ -76,18 +60,10 @@ const Quizzes = () => {
   }, [subtema, area, user]);
 
   return (
-    <div>
-      {isMobile ? (
-        <HeaderArrowBack to={`/quizzes/${area}`} />
-      ) : (
-        <Sidebar to={`/quizzes/${area}`} />
-      )}
+    <PageLayout backTo={`/quizzes/${area}`}>
       <main className='body-quizzes'>
         {loading ? (
-          <div className='loading-screen'>
-            <img src={logo} alt='Logo TechNinja' className='logo-loading' />
-            <p>Carregando...</p>
-          </div>
+          <LoadingScreen />
         ) : dificuldades.length > 0 ? (
           dificuldades.map((dificuldade) => {
             const quizId = `${area}-${subtema}-${dificuldade}`;
@@ -111,7 +87,7 @@ const Quizzes = () => {
         )}
       </main>
       <Toaster />
-    </div>
+    </PageLayout>
   );
 };
 

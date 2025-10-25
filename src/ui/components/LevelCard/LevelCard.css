@@ -67,10 +67,6 @@
   }
 }
 
-body.dark-mode .level-card {
-  color: var(--color-text-primary);
-}
-
 body.daltonico .level-card.easy {
   background-color: var(--color-action-primary-colorblind);
 }

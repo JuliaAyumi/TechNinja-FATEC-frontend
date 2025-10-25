@@ -147,26 +147,6 @@
   }
 }
 
-/* Dark Mode */
-body.dark-mode .true-false-block label {
-  color: white;
-  background-color: #3d444d;
-}
-
-body.dark-mode .resposta-item:checked + label {
-  background-color: #03a65a;
-  font-weight: bold;
-}
-
-body.dark-mode .explicacao-feedback {
-  background-color: #2d3748;
-  border-left-color: #03a65a;
-}
-
-body.dark-mode .explicacao-feedback p {
-  color: #e2e8f0;
-}
-
 /* Baixa Visão */
 body.baixa-visao .true-false-block {
   width: 90%;

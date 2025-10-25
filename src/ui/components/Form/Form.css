@@ -21,16 +21,6 @@
   color: #666;
 }
 
-body.dark-mode .form-input {
-  background-color: var(--color-background-component);
-  color: var(--color-text-primary);
-  border-color: #555;
-}
-
-body.dark-mode .form-input::placeholder {
-  color: #999;
-}
-
 body.baixa-visao .form-input {
   font-size: var(--font-size-text-low-vision);
   padding: 1rem 1.25rem;

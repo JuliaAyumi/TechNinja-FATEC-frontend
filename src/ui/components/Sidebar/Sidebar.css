@@ -272,10 +272,6 @@
   transform: none !important;
 }
 
-body.dark-mode .sidebar {
-  background: linear-gradient(180deg, var(--color-background-secondary) 0%, #0a0a0a 100%);
-}
-
 body.daltonico .sidebar-link:hover {
   background: var(--color-action-primary-colorblind);
   box-shadow: 0 8px 25px rgba(0, 0, 255, 0.3);

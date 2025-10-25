@@ -1,19 +1,10 @@
 import './About.css';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 
 const About = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
-
   return (
-    <div>
-      {isMobile ? (
-        <HeaderArrowBack to={'/configuracoes'} />
-      ) : (
-        <Sidebar to={'/configuracoes'} />
-      )}
-      <main className='main-about'>
+    <PageLayout backTo='/configuracoes'>
+      <main className='layout-app-page main-about'>
         <div className='about-container'>
           <div className='about-header'>
             <h1 className='about-title'>Sobre o TechNinja</h1>
@@ -61,7 +52,7 @@ const About = () => {
           </div>
         </div>
       </main>
-    </div>
+    </PageLayout>
   );
 };
 

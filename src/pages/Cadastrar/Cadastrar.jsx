@@ -43,7 +43,7 @@ const Cadastrar = () => {
   return (
     <div>
       <Header />
-      <main className='main-cadastrar'>
+      <main className='layout-auth-page main-cadastrar'>
         <div className='cadastrar-left-column'>
           <form
             id='register-form'
@@ -91,7 +91,7 @@ const Cadastrar = () => {
           </form>
         </div>
         <div className='cadastrar-right-column'>
-          <img src={logo} alt='TechNinja logo' className='main-image' />
+          <img src={logo} alt='TechNinja logo' className='layout-auth-image' />
         </div>
       </main>
       <Toaster />

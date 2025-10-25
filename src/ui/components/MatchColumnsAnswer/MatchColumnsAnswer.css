@@ -278,59 +278,6 @@
   }
 }
 
-/* Dark Mode */
-body.dark-mode .columns-wrapper {
-  background-color: #2d3748;
-}
-
-body.dark-mode .column-title {
-  color: #e2e8f0;
-  border-bottom-color: #03a65a;
-}
-
-body.dark-mode .left-item {
-  background-color: #4a5568;
-  border-color: #03a65a;
-  color: #e2e8f0;
-}
-
-body.dark-mode .right-item {
-  background-color: #4a5568;
-  color: #e2e8f0;
-}
-
-body.dark-mode .right-item:hover:not(.matched) {
-  background-color: #5a6579;
-  border-color: #03a65a;
-}
-
-body.dark-mode .right-item.matched {
-  background-color: #03a65a;
-  border-color: #03a65a;
-}
-
-body.dark-mode .matches-result {
-  background-color: #2d3748;
-}
-
-body.dark-mode .matches-result h4 {
-  color: #e2e8f0;
-}
-
-body.dark-mode .match-result.correct {
-  background-color: rgba(3, 166, 90, 0.2);
-  border-color: #03a65a;
-}
-
-body.dark-mode .match-result.incorrect {
-  background-color: rgba(176, 0, 32, 0.2);
-  border-color: #B00020;
-}
-
-body.dark-mode .arrow {
-  color: #e2e8f0;
-}
-
 /* Baixa Visão */
 body.baixa-visao .match-columns-container {
   width: 85%;

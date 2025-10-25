@@ -417,10 +417,6 @@
   }
 }
 
-body.dark-mode .finished-quiz-container {
-  background-color: var(--color-background-primary);
-}
-
 body.daltonico .ring-progress {
   stroke: var(--color-action-primary-colorblind);
 }

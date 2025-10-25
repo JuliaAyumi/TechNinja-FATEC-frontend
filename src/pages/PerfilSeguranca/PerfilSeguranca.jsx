@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { toast } from 'react-hot-toast';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
-import AccessibilityOption from '../../ui/components/AccessibilityOption/AccessibilityOption';
-import Button from '../../ui/components/Button/Button';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
+import AccessibilityOption from '@ui/components/AccessibilityOption/AccessibilityOption';
+import Button from '@ui/components/Button/Button';
 import './PerfilSeguranca.css';
 
 const PerfilSeguranca = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
-
   const [twoFactorAuth, setTwoFactorAuth] = useState(
     localStorage.getItem('twoFactorAuth') === 'enabled',
   );
@@ -39,13 +35,8 @@ const PerfilSeguranca = () => {
   };
 
   return (
-    <div>
-      {isMobile ? (
-        <HeaderArrowBack to={'/configuracoes'} />
-      ) : (
-        <Sidebar to={'/configuracoes'} />
-      )}
-      <main className='main-seguranca'>
+    <PageLayout backTo='/configuracoes'>
+      <main className='layout-app-page main-seguranca'>
         <div className='seguranca-container'>
           <AccessibilityOption
             option='Autenticação de dois fatores'
@@ -60,7 +51,7 @@ const PerfilSeguranca = () => {
         </div>
         <Toaster />
       </main>
-    </div>
+    </PageLayout>
   );
 };
 
