@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import useUserData from '@hooks/UseUserData';
 import useUserUpdate from '@hooks/UseUserUpdate';
 import Form from '@ui/components/Form/Form';
@@ -10,8 +8,6 @@ import Button from '@ui/components/Button/Button';
 import './PerfilConfiguracoes.css';
 
 const PerfilConfiguracoes = () => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
-
   const tokenString = localStorage.getItem('user');
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
@@ -53,12 +49,7 @@ const PerfilConfiguracoes = () => {
   };
 
   return (
-    <div>
-      {isMobile ? (
-        <HeaderArrowBack to={'/configuracoes'} />
-      ) : (
-        <Sidebar to={'/configuracoes'} />
-      )}
+    <PageLayout backTo='/configuracoes'>
       <main className='main-perfil-configuracoes'>
         <form
           className='perfil-configuracoes-container'
@@ -111,7 +102,7 @@ const PerfilConfiguracoes = () => {
         </form>
         <Toaster />
       </main>
-    </div>
+    </PageLayout>
   );
 };
 

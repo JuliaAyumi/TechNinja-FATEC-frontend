@@ -2,16 +2,13 @@ import { useEffect, useState } from 'react';
 import { getRanking } from '@services/ranking';
 import UserProfileIcon from '@components/UserProfileIcon/UserProfileIcon';
 import RankingUserCard from '@components/RankingUserCard/RankingUserCard';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
-import useMediaQuery from '@hooks/UseMediaQuery';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
 import './Ranking.css';
 
 const Ranking = () => {
   const [ranking, setRanking] = useState([]);
   const [loading, setLoading] = useState(true);
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const fetchRanking = async () => {
     try {
@@ -43,56 +40,55 @@ const Ranking = () => {
 
   if (loading) {
     return (
-      <div className='ranking-container'>
-        <h1 className='ranking-title'>Ranking</h1>
-        <LoadingScreen />ß
-      </div>
+      <PageLayout backTo='/configuracoes'>
+        <div className='ranking-container'>
+          <h1 className='ranking-title'>Ranking</h1>
+          <LoadingScreen />
+        </div>
+      </PageLayout>
     );
   }
 
   return (
-    <div className='ranking-container'>
-      {isMobile ? (
-        <HeaderArrowBack to={'/configuracoes'} />
-      ) : (
-        <Sidebar to={'/configuracoes'} />
-      )}
-      <h1 className='ranking-title'>Ranking</h1>
-      <div className='ranking-list'>
-        {ranking.length > 0 ? (
-          ranking.map((user) => {
-            const position = parseInt(user.ranking);
+    <PageLayout backTo='/configuracoes'>
+      <div className='ranking-container'>
+        <h1 className='ranking-title'>Ranking</h1>
+        <div className='ranking-list'>
+          {ranking.length > 0 ? (
+            ranking.map((user) => {
+              const position = parseInt(user.ranking);
 
-            if (position <= 3) {
+              if (position <= 3) {
+                return (
+                  <UserProfileIcon
+                    key={user._id}
+                    image={user.avatar}
+                    name={user.nome}
+                    position={user.ranking}
+                    badge={null}
+                    pontuacao={user.pontuacao}
+                  />
+                );
+              }
+
               return (
-                <UserProfileIcon
+                <RankingUserCard
                   key={user._id}
                   image={user.avatar}
                   name={user.nome}
                   position={user.ranking}
-                  badge={null}
                   pontuacao={user.pontuacao}
                 />
               );
-            }
-
-            return (
-              <RankingUserCard
-                key={user._id}
-                image={user.avatar}
-                name={user.nome}
-                position={user.ranking}
-                pontuacao={user.pontuacao}
-              />
-            );
-          })
-        ) : (
-          <div className='ranking-empty'>
-            <p>Nenhum usuário encontrado no ranking.</p>
-          </div>
-        )}
+            })
+          ) : (
+            <div className='ranking-empty'>
+              <p>Nenhum usuário encontrado no ranking.</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

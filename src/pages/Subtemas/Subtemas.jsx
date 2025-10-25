@@ -1,9 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Subtemas.css';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import { formatarTexto } from '@utils/formatarTexto';
 import { getSubThemes } from '@services/quiz';
 import SubthemeCard from '@ui/components/SubthemeCard/SubthemeCard';
@@ -13,7 +11,6 @@ const Subtemas = () => {
   const { area } = useParams();
   const [subtemas, setSubtemas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     const fetchSubtemas = async () => {
@@ -32,16 +29,14 @@ const Subtemas = () => {
 
   if (loading) {
     return (
-      <div>
-        {isMobile ? <HeaderArrowBack to={`/home`} /> : <Sidebar to={`/home`} />}
+      <PageLayout backTo='/home'>
         <LoadingScreen />
-      </div>
+      </PageLayout>
     );
   }
 
   return (
-    <div>
-      {isMobile ? <HeaderArrowBack to={`/home`} /> : <Sidebar to={`/home`} />}
+    <PageLayout backTo='/home'>
       <main className='body-subtemas'>
         {subtemas.length > 0 ? (
           subtemas.map((item) => (
@@ -58,7 +53,7 @@ const Subtemas = () => {
           <p>Nenhum subtema encontrado</p>
         )}
       </main>
-    </div>
+    </PageLayout>
   );
 };
 

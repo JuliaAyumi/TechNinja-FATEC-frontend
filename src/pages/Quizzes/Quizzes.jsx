@@ -4,9 +4,7 @@ import { useAuth } from '@hooks/AuthContext';
 import { showToast } from '@ui/components/ConfirmToast';
 import { Toaster } from 'react-hot-toast';
 import { getLevels, getCompletedQuizzes } from '@services/quiz';
-import Sidebar from '@ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import LevelCard from '@ui/components/LevelCard/LevelCard';
 import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
 import './Quizzes.css';
@@ -18,7 +16,6 @@ const Quizzes = () => {
   const [quizzesCompletados, setQuizzesCompletados] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleQuizClick = (event, isCompleted, subtema, dificuldade) => {
     if (isCompleted) {
@@ -63,12 +60,7 @@ const Quizzes = () => {
   }, [subtema, area, user]);
 
   return (
-    <div>
-      {isMobile ? (
-        <HeaderArrowBack to={`/quizzes/${area}`} />
-      ) : (
-        <Sidebar to={`/quizzes/${area}`} />
-      )}
+    <PageLayout backTo={`/quizzes/${area}`}>
       <main className='body-quizzes'>
         {loading ? (
           <LoadingScreen />
@@ -95,7 +87,7 @@ const Quizzes = () => {
         )}
       </main>
       <Toaster />
-    </div>
+    </PageLayout>
   );
 };
 

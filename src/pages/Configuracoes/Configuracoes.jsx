@@ -1,20 +1,15 @@
 import './Configuracoes.css';
 import { useAuth } from '@hooks/AuthContext';
 import { Toaster } from 'react-hot-toast';
-import Sidebar from '../../ui/components/Sidebar/Sidebar';
-import HeaderArrowBack from '@ui/layout/HeaderArrowBack/HeaderArrowBack';
-import useMediaQuery from '@hooks/UseMediaQuery';
+import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import SettingsOption from '@ui/components/SettingsOption/SettingsOption';
 import Button from '@ui/components/Button/Button';
 
 const Configuracoes = () => {
   const { logout } = useAuth();
-  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <div>
-      {isMobile ? <HeaderArrowBack to={'/home'} /> : <Sidebar to={'/home'} />}
-
+    <PageLayout backTo='/home'>
       <main className='main-configuracoes'>
         <div className='configuracoes-container'>
           <div className='configuracoes-section'>
@@ -47,7 +42,7 @@ const Configuracoes = () => {
         </div>
         <Toaster />
       </main>
-    </div>
+    </PageLayout>
   );
 };
 
