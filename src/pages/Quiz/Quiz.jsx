@@ -209,9 +209,18 @@ const Quiz = () => {
     }
   };
 
-  const handleMarkQuizCompleted = async () => {
+  const handleMarkQuizCompleted = async (acertos, totalPerguntas) => {
     try {
-      await markQuizCompleted(user, area, subtema, dificuldade);
+      const isPerfect = acertos === totalPerguntas;
+      const data = await markQuizCompleted(
+        user,
+        area,
+        subtema,
+        dificuldade,
+        isPerfect,
+      );
+
+      return data;
     } catch (error) {
       console.error('Erro ao marcar o quiz como completado:', error);
     }
@@ -235,7 +244,10 @@ const Quiz = () => {
 
     toast.success(`Você acertou ${acertos} de ${perguntas.length} perguntas!`);
 
-    Promise.all([handleUpdateScore(points), handleMarkQuizCompleted()])
+    Promise.all([
+      handleUpdateScore(points),
+      handleMarkQuizCompleted(acertos, perguntas.length),
+    ])
       .then(() => refetch())
       .then(() => {
         window.dispatchEvent(new CustomEvent('userDataUpdated'));

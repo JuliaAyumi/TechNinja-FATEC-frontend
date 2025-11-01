@@ -1,14 +1,17 @@
-import './Perfil.css';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import iconUsuario from '@assets/images/logoDark.png';
-import iconPodio from '@assets/icons/podio.png';
-import iconDiadema from '@assets/icons/coroa.png';
-import iconLiteratura from '@assets/icons/taca-de-ouro.png';
+import badgePrimeiroQuizLinguagem from '@assets/icons/primeiro_quiz_linguagem-programacao.png';
+import badgePrimeiroQuizLogica from '@assets/icons/primeiro_quiz_logica-programacao.png';
+import badgePrimeiroQuizModelagem from '@assets/icons/primeiro_quiz_modelagem-dados.png';
+import badgeQuizPerfeito from '@assets/icons/quiz_perfeito.png';
+import badgePerfilFoto from '@assets/icons/perfil_foto.png';
 import useUserData from '@hooks/UseUserData';
 import PageLayout from '@ui/layout/PageLayout/PageLayout';
 import Button from '@ui/components/Button/Button';
 import LoadingScreen from '@ui/components/LoadingScreen/LoadingScreen';
+import AchievementsView from '@ui/components/AchievementsView/AchievementsView';
+import './Perfil.css';
 
 const Perfil = () => {
   const tokenString = localStorage.getItem('user');
@@ -17,6 +20,25 @@ const Perfil = () => {
 
   const { userData, loading, refetch } = useUserData(token);
   const navigate = useNavigate();
+
+  const badgeImages = useMemo(
+    () => ({
+      'primeiro_quiz_linguagem-programacao': badgePrimeiroQuizLinguagem,
+      'primeiro_quiz_logica-programacao': badgePrimeiroQuizLogica,
+      'primeiro_quiz_modelagem-dados': badgePrimeiroQuizModelagem,
+      quiz_perfeito: badgeQuizPerfeito,
+      perfil_foto: badgePerfilFoto,
+    }),
+    [],
+  );
+
+  const userBadgeImages = useMemo(() => {
+    if (!userData.badges || !Array.isArray(userData.badges)) return [];
+
+    return userData.badges
+      .map((badgeName) => badgeImages[badgeName])
+      .filter((img) => img !== undefined);
+  }, [userData.badges, badgeImages]);
 
   useEffect(() => {
     const handleUserDataUpdate = () => {
@@ -72,18 +94,7 @@ const Perfil = () => {
             <div className='conquistas-section'>
               <h2 className='conquistas-title'>Conquistas</h2>
               <div className='conquistas-content'>
-                <div className='conquistas-grid'>
-                  <div className='conquista-item'>
-                    <img src={iconPodio} alt='Conquista Pódio' />
-                  </div>
-                  <div className='conquista-item'>
-                    <img src={iconDiadema} alt='Conquista Diadema' />
-                  </div>
-                  <div className='conquista-item'>
-                    <img src={iconLiteratura} alt='Conquista Literatura' />
-                  </div>
-                </div>
-                <button className='ver-mais-btn'>Ver mais</button>
+                <AchievementsView badges={userBadgeImages} />
               </div>
             </div>
           </div>

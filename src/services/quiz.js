@@ -69,14 +69,25 @@ export async function updateScore(user, points) {
   return response.json();
 }
 
-export async function markQuizCompleted(user, area, subtheme, level) {
+export async function markQuizCompleted(
+  user,
+  area,
+  subtheme,
+  level,
+  isPerfect,
+) {
   const response = await fetch(`${apiUrl()}/api/mark-quiz-completed`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${user}`,
     },
-    body: JSON.stringify({ area, subtheme, level }),
+    body: JSON.stringify({
+      area,
+      subtema: subtheme,
+      dificuldade: level,
+      isPerfect,
+    }),
   });
   return response.json();
 }
