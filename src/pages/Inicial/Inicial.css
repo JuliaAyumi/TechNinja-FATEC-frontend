@@ -48,13 +48,9 @@
   }
 
   .inicial-right-column {
-    padding: 1rem;
-    order: -1;
+    display: none;
   }
 
-  .layout-auth-image {
-    max-width: 300px;
-  }
 
   .inicial-left-column h1 {
     font-size: clamp(1.5rem, 4vw, var(--font-size-title));
@@ -64,14 +60,5 @@
 @media only screen and (max-width: 480px) {
   .main-inicial {
     padding: 0.5rem;
-  }
-
-  .inicial-left-column,
-  .inicial-right-column {
-    padding: 0.5rem;
-  }
-
-  .layout-auth-image {
-    max-width: 250px;
   }
 }

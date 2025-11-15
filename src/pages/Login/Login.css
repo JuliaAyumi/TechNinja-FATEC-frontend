@@ -70,20 +70,28 @@ body.baixa-visao .esqueceu-text {
     min-height: calc(100vh - 60px);
     padding: 1rem;
     gap: 1rem;
+    justify-content: center;
+    align-items: center;
   }
 
   .left-column {
-    padding: 1rem;
-    order: 1;
-  }
-
-  .right-column {
-    padding: 1rem;
-    order: 2;
+    display: none !important;
+    flex: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
   }
 
   .login-main-image {
-    max-width: 300px;
+    display: none !important;
+  }
+
+  .right-column {
+    flex: 0;
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
   }
 }
 
@@ -92,12 +100,7 @@ body.baixa-visao .esqueceu-text {
     padding: 0.5rem;
   }
 
-  .left-column,
   .right-column {
     padding: 0.5rem;
-  }
-
-  .login-main-image {
-    max-width: 250px;
   }
 }

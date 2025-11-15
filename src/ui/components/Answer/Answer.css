@@ -124,12 +124,12 @@
 
 @media only screen and (max-width: 700px) {
   .answers-block {
-    width: 60%;
+    width: 80%;
   }
 }
 
 body.baixa-visao .answers-block {
-  width: 60%;
+  width: 80%;
   font-size: var(--texto-baixa-visao);
 }
 

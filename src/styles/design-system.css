@@ -36,6 +36,14 @@ a {
   min-height: calc(100vh - 80px);
 }
 
+@media only screen and (max-width: 768px) {
+  .layout-auth-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .layout-auth-image {
   width: 100%;
   max-width: 400px;

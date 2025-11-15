@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './HeaderHome.css';
 import iconPerfil from '@assets/icons/icon-profile-white.png';
 import iconConfig from '@assets/icons/icon-configuracoes.png';
+import iconRanking from '@assets/icons/icon-ranking.png';
 
 const HeaderHome = () => {
   return (
@@ -12,7 +13,13 @@ const HeaderHome = () => {
           <Link to='/perfil'>
             <img src={iconPerfil} title='Perfil' alt='Icone Meu Perfil' />
           </Link>
-
+          <Link to='/ranking'>
+            <img
+              src={iconRanking}
+              title='Ranking'
+              alt='Icone de ranking para ir para Ranking'
+            />
+          </Link>
           <Link to='/configuracoes'>
             <img
               src={iconConfig}
