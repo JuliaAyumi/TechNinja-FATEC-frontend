@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import RankingIcon from '@assets/icons/icon-ranking.png';
 import ProfileIcon from '@assets/icons/icon-profile.png';
 import SettingsIcon from '@assets/icons/icon-configuracoes.png';
@@ -11,21 +11,11 @@ import './Sidebar.css';
 
 const Sidebar = ({ to }) => {
   const location = useLocation();
-  const [streak, setStreak] = useState(0);
-  const [xp, setXp] = useState(0);
 
   const tokenString = localStorage.getItem('user');
   const tokenArray = JSON.parse(tokenString);
   const token = tokenArray[0];
   const { userData, refetch } = useUserData(token);
-
-  useEffect(() => {
-    const savedStreak = localStorage.getItem('userStreak') || 0;
-    const savedXp = localStorage.getItem('userXp') || 0;
-
-    setStreak(parseInt(savedStreak));
-    setXp(parseInt(savedXp));
-  }, []);
 
   useEffect(() => {
     const handleUserDataUpdate = () => {
@@ -91,21 +81,6 @@ const Sidebar = ({ to }) => {
           <img src={logo} alt='Logo TechNinja' className='sidebar-logo-img' />
         )}
       </div>
-
-      {
-        <div className='sidebar-stats'>
-          <div className='stat-item'>
-            <span className='stat-icon'>🔥</span>
-            <span className='stat-value'>{streak}</span>
-          </div>
-          <div className='xp-bar'>
-            <div
-              className='xp-progress'
-              style={{ width: `${xp % 100}%` }}
-            ></div>
-          </div>
-        </div>
-      }
 
       <div className='sidebar-links'>
         {menuItems.map((item) => (

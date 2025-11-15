@@ -39,14 +39,6 @@
   transform: scale(1.1) rotate(5deg);
 }
 
-
-.sidebar-stats {
-  margin-bottom: 30px;
-  text-align: center;
-  width: 100%;
-  padding: 0 20px;
-}
-
 .stat-item {
   display: flex;
   align-items: center;
@@ -295,10 +287,6 @@ body.baixa-visao .sidebar-logo-img {
   width: 100px;
 }
 
-body.baixa-visao .sidebar-back {
-  width: 100px;
-}
-
 body.baixa-visao .sidebar-link {
   width: 64px;
   height: 64px;
@@ -342,10 +330,6 @@ body.baixa-visao .badge-icon {
   .sidebar-back {
     width: 32px;
   }
-
-  .sidebar-stats {
-    display: none;
-  }
   
   .sidebar-link {
     width: 40px;
@@ -384,10 +368,6 @@ body.baixa-visao .badge-icon {
     width: 40px;
   }
 
-  body.baixa-visao .sidebar-back {
-    width: 40px;
-  }
-
   body.baixa-visao .sidebar-link {
     width: 48px;
     height: 48px;
@@ -396,11 +376,6 @@ body.baixa-visao .badge-icon {
   body.baixa-visao .sidebar-icon {
     width: 24px;
     height: 24px;
-  }
-
-  body.baixa-visao .sidebar-stats {
-    display: block;
-    padding: 0 8px;
   }
 
   body.baixa-visao .sidebar-footer {
