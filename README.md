@@ -8,7 +8,7 @@ Sistema que visa oferecer uma plataforma educacional interativa para usuários
 interessados em aprender programação através de quizzes.
 
 <div align="center">
-  <img src="https://github.com/matheusduartedevs/3-semestre-projeto-integrador/assets/127058626/e70ded39-9a2b-415f-8725-e6ac5ef8df0d" alt='LogoWhite' />
+  <img width="655" height="565" alt="LogoWhite" src="https://github.com/user-attachments/assets/c9b541a2-5bb6-4206-a174-e6edbe58b0d1" />
 </div>
 
 ### Time de Desenvolvimento
@@ -20,10 +20,9 @@ interessados em aprender programação através de quizzes.
 
 ## Metas
 
-- Reunir materiais educativos em um único ambiente.​
-- Facilitar o acesso para qualquer tipo de usuário.​
-- Criar um sistema intuitivo e amigável.​
-- Garantir que os usuários possam encontrar informações rapidamente.
+- Centralizar recursos educativos em um ambiente único e organizado.
+- Garantir acessibilidade para usuários de diferentes perfis, dispositivos e necessidades.
+- Oferecer uma experiência intuitiva, com navegação simples e interface amigável.
 
 ## Requisitos Funcionais
 
@@ -39,14 +38,40 @@ interessados em aprender programação através de quizzes.
 
 ## Funcionalidades
 
+### Autenticação e Perfil
 - Criação de perfil
-- Realizar Quizzes
-- Progresso do Usuário
+- Login, registro e logout
+- Edição de informações pessoais
+- Upload de foto de perfil
+- Preferências salvas (tema, acessibilidade, etc.)
+
+### Quizzes Interativos
+- Perguntas categorizadas por temas e níveis
+- Feedback imediato de respostas
+- Relatório de desempenho por quiz
+- Pontuação dinâmica
+
+### Gamificação
+- Sistema de badges
+- Ranking geral entre usuários
+- Conquistas automáticas por performance
+
+### Acessibilidade
+- Modo daltônico
+- Modo baixa visão
+- Interface adaptativa e responsiva
 
 ## Caso de Uso
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/42eb6b05-92d4-43eb-8758-7e788d08ffb2" alt='Imagem do caso de uso geral da aplicação' />
+</div>
+
+## Preview
+<div style="display: flex; gap: 10px; margin-bottom: 10px;">
+  <img width="1925" height="967" alt="Captura de Tela 2025-11-15 às 20 35 23" src="https://github.com/user-attachments/assets/7b99fdee-2800-4404-b296-f9d97b8977ab" />
+  <img width="1919" height="967" alt="Captura de Tela 2025-11-15 às 20 36 19" src="https://github.com/user-attachments/assets/aec97dbe-9f13-46ee-ba59-41eea4c4b01a" />
+  <img width="1899" height="969" alt="Captura de Tela 2025-11-15 às 20 36 30" src="https://github.com/user-attachments/assets/ba030db3-1806-4662-86c6-5276051b2a79" />
 </div>
 
 ## Stack utilizada
