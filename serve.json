@@ -1,0 +1,11 @@
+{
+  "public": "dist",
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "**",
+      "destination": "/index.html"
+    }
+  ]
+}
+

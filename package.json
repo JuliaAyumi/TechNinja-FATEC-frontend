@@ -8,13 +8,12 @@
     "build": "vite build",
     "lint": "eslint --fix",
     "preview": "vite preview",
-    "start": "serve -s dist"
+    "start": "serve"
   },
   "engines": {
-    "node": "18.14.0"
+    "node": "20.19"
   },
   "dependencies": {
-    "client": "file:",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-js-decode": "^1.9.0",
@@ -22,7 +21,7 @@
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.26.1",
-    "serve": "^10.0.2"
+    "serve": "^14.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -43,7 +42,6 @@
     "ajv": "^6.12.3",
     "cross-spawn": "^7.0.5",
     "minimatch": "^3.0.5",
-    "on-headers": "^1.1.0",
-    "path-to-regexp": "^6.3.0"
+    "on-headers": "^1.1.0"
   }
 }

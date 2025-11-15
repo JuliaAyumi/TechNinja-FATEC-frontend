@@ -1,18 +1,21 @@
 import './UserProfileIcon.css';
 import logo from '@assets/images/logoDark.png';
+import goldenBadge from '@assets/icons/golden.png';
+import silverBadge from '@assets/icons/silver.png';
+import bronzeBadge from '@assets/icons/bronze.png';
 
 const UserProfileIcon = ({ image, name, position, badge, pontuacao }) => {
   const getBadgeForPosition = (pos) => {
     switch (pos) {
       case 1:
       case '1':
-        return '/src/assets/icons/golden.png';
+        return goldenBadge;
       case 2:
       case '2':
-        return '/src/assets/icons/silver.png';
+        return silverBadge;
       case 3:
       case '3':
-        return '/src/assets/icons/bronze.png';
+        return bronzeBadge;
       default:
         return badge;
     }
